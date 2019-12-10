@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layoutDirection="ltr"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_100sdp">
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_100sdp"
+      android:scaleType="fitXY"
+      android:src="@drawable/navigationheader"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingLeft="@dimen/_20sdp"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                app:cardCornerRadius="@dimen/_20sdp"
+                app:cardElevation="@dimen/_5sdp"
+                android:elevation="@dimen/_5sdp"
+                app:cardMaxElevation="@dimen/_5sdp"
+                android:layout_margin="@dimen/_7sdp"
+                app:cardPreventCornerOverlap="true"
+                android:backgroundTint="@color/fcolor"
+                android:layout_gravity="center">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/imgUser"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/sidemenuuser"/>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60sdp"
+                android:text="@string/username"
+                android:id="@+id/username"
+                android:paddingRight="@dimen/_20sdp"
+                android:gravity="center|left"
+                android:textSize="@dimen/_10ssp"
+                android:textColor="@android:color/white"
+                android:paddingLeft="@dimen/_10sdp"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

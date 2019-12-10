@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layoutDirection="ltr"
+    android:layout_height="@dimen/_30sdp">
+ <TextView
+     android:layout_width="match_parent"
+     android:layout_height="@dimen/_29sdp"
+     android:text="@string/reject"
+     android:id="@+id/saved_place"
+     android:gravity="center|left"
+     android:textSize="@dimen/_11ssp"
+     android:paddingLeft="@dimen/_10ssp"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:src="#EFF7F7"/>
+
+</LinearLayout>

@@ -1,0 +1,79 @@
+package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SideMenuScenarios.Patterns;
+
+import android.content.Context;
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+
+import java.util.ArrayList;
+
+import hatelyoriginal.besolutions.com.hatleyoriginal.R;
+import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SideMenuScenarios.Models.your_order_list;
+import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.TinyDB;
+import hatelyoriginal.besolutions.com.hatleyoriginal.jupiterchat.Activites.NewChatActivity;
+
+public class your_order_adapter extends RecyclerView.Adapter<your_order_adapter.your_order> {
+    Context context;
+    ArrayList<your_order_list>mylist;
+
+    TinyDB tinyDB;
+
+    public your_order_adapter(Context context, ArrayList<your_order_list> mylist) {
+        this.context = context;
+        this.mylist = mylist;
+    }
+
+    @NonNull
+    @Override
+    public your_order onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view= LayoutInflater.from(context).inflate(R.layout.your_order_item,parent,false);
+        tinyDB = new TinyDB(context);
+        your_order available_order=new your_order(view);
+        return available_order;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull your_order holder, int position) {
+          holder.name.setText(mylist.get(position).getOrder_name().toString());
+          holder.date.setText(mylist.get(position).getDate());
+          holder.ratings.setRating(mylist.get(position).getstars());
+          holder.location.setText(mylist.get(position).getLocation());
+          holder.order_item.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+
+                      tinyDB.putString("reciverName",mylist.get(position).getClient_name());
+
+                      context.startActivity(new Intent(context,NewChatActivity.class));
+
+              }
+          });
+    }
+
+    @Override
+    public int getItemCount() {
+        return mylist.size();
+    }
+
+    public class your_order extends RecyclerView.ViewHolder {
+         TextView name,date,location;
+         RatingBar ratings;
+         LinearLayout order_item;
+        public your_order(@NonNull View itemView) {
+            super(itemView);
+            name=(TextView)itemView.findViewById(R.id.order_name);
+            date=(TextView)itemView.findViewById(R.id.date);
+            ratings=(RatingBar)itemView.findViewById(R.id.ratings);
+            location=(TextView)itemView.findViewById(R.id.location);
+            order_item=(LinearLayout)itemView.findViewById(R.id.order_item);
+        }
+    }
+}

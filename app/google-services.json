@@ -1,0 +1,135 @@
+{
+  "project_info": {
+    "project_number": "883293381058",
+    "firebase_url": "https://hatley2.firebaseio.com",
+    "project_id": "hatley2",
+    "storage_bucket": "hatley2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883293381058:android:9eea8b035bdc2d519c365b",
+        "android_client_info": {
+          "package_name": "com.besolution.hatley"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883293381058-6ggr0t154oof2hnu0d2k3lnnitde90pe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKRGQ-kdq6FdfTIoSzA4ElUT9k8TAkO2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883293381058-6ggr0t154oof2hnu0d2k3lnnitde90pe.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "883293381058-g6a6npi183v3kt3vh5gc943e8ordkd4i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.amirahmed.HatleyOriginal"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883293381058:android:55fc0fd3502daeb59c365b",
+        "android_client_info": {
+          "package_name": "hatelyoriginal.besolutions.com.hatleyoriginal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883293381058-6ggr0t154oof2hnu0d2k3lnnitde90pe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKRGQ-kdq6FdfTIoSzA4ElUT9k8TAkO2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883293381058-6ggr0t154oof2hnu0d2k3lnnitde90pe.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "883293381058-g6a6npi183v3kt3vh5gc943e8ordkd4i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.amirahmed.HatleyOriginal"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883293381058:android:b59c876b1bc856a69c365b",
+        "android_client_info": {
+          "package_name": "www.besolution.hatley"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883293381058-mg9dor0h2tv9jtf2ha77fa3i5uuio3ah.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "www.besolution.hatley",
+            "certificate_hash": "e5b61228440b756f4639fabe71194f688586e242"
+          }
+        },
+        {
+          "client_id": "883293381058-9gbmnfo9kc8m1jo91hc61e69f7jlpl9e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "www.besolution.hatley",
+            "certificate_hash": "2e3cb6132447183b7144e7a7d0ef24274487a2d2"
+          }
+        },
+        {
+          "client_id": "883293381058-6ggr0t154oof2hnu0d2k3lnnitde90pe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKRGQ-kdq6FdfTIoSzA4ElUT9k8TAkO2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883293381058-6ggr0t154oof2hnu0d2k3lnnitde90pe.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "883293381058-g6a6npi183v3kt3vh5gc943e8ordkd4i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.amirahmed.HatleyOriginal"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
