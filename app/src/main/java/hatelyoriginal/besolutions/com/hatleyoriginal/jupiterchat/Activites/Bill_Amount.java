@@ -71,7 +71,6 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
 
         context = getActivity();
 
-        //SupportMapFragment supportMapFragment = (SupportMapFragment) ((AppCompatActivity) context).getSupportFragmentManager().findFragmentById(R.id.map);
         SupportMapFragment supportMapFragment  = (SupportMapFragment) Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.map);
         assert supportMapFragment != null;
         supportMapFragment.getMapAsync(this);
@@ -82,9 +81,10 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
                 pd = new ProgressDialog(context);
                 pd.setMessage("Loading...");
                 pd.show();
-                if (editPrice.getText().toString().equals("")) {
+                if (editPrice.getText().toString().equals("") || editPrice.getText().toString().isEmpty()) {
 
                     Toasty.error(context, "You Must Enter a Price", Toast.LENGTH_SHORT).show();
+
                 } else {
 
                     new Apicalls(context, Bill_Amount.this).bill_amount(tinyDB.getString("orderID"), editPrice.getText().toString());

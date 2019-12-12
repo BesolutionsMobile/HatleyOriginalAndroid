@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.TinyDB;
 
@@ -164,7 +165,7 @@ class APIRouter {
         };
         sr.setShouldCache(false);
         sr.setRetryPolicy(new DefaultRetryPolicy(
-                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2,
+                0,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestHandler.getInstance(context).addToRequestQueue(sr);

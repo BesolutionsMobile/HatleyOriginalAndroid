@@ -121,10 +121,17 @@ public class NewChatActivity extends AppCompatActivity {
         userName = tinyDB.getString("userName");
         receiverName = tinyDB.getString("reciverName");
 
-        //check(userName+"-"+receiverName);
-
         senderImage = "mahmoud";
         receiverImage = "samer";
+
+        setUpRecyclerView();
+
+       // ConstructChat(userName+"-"+receiverName);
+
+        sendMessage("Hello " + receiverName + " are you here ?");
+
+        RealtimeRate();
+
 
         aboutalayout.setVisibility(View.VISIBLE);
         chatlayout.setVisibility(View.GONE);
@@ -143,9 +150,6 @@ public class NewChatActivity extends AppCompatActivity {
         });
 
 
-
-        setUpRecyclerView();
-
         sendbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,27 +161,9 @@ public class NewChatActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView.setOnTouchListener(new OnSwipeTouchListener(NewChatActivity.this) {
-            public void onSwipeTop() {
-            }
-            public void onSwipeRight() {
-            }
-            public void onSwipeLeft() {
-             //   evaluate_star evaluate_star=new evaluate_star();
-              //  evaluate_star.dialog(NewChatActivity.this,R.layout.evaluate_star,.90,userName,receiverName);
-            }
-            public void onSwipeBottom() {
-            }
-
-        });
-
         aboutalayout.setVisibility(View.GONE);
         chatlayout.setVisibility(View.VISIBLE);
 
-        // Just if i want to chat with someone for the first time
-        addChat();
-
-        RealtimeRate();
 
     }
 
@@ -270,7 +256,7 @@ public class NewChatActivity extends AppCompatActivity {
     }
 
 
-    private void check(String docId)
+    private void ConstructChat(String docId)
     {
 
         DocumentReference docIdRef = db.collection("Conversations").document(docId);
@@ -280,11 +266,29 @@ public class NewChatActivity extends AppCompatActivity {
                 assert document != null;
                 if (document.exists()) {
 
-                    db.collection("Conversations").document(docId).delete();
+                    Log.d("", "Document exist and deleted");
+
+                    db.collection("Conversations").document(docId).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            // Just if i want to chat with someone for the first time
+                            //addChat();
+
+                            sendMessage("Hello " + receiverName + " are you here ?");
+
+                            RealtimeRate();
+                        }
+                    });
 
                 } else {
 
-                    Log.d("", "Document does not exist!");
+                    // Just if i want to chat with someone for the first time
+                    //addChat();
+
+                    sendMessage("Hello " + receiverName + " are you here ?");
+
+                    RealtimeRate();
 
                 }
             } else {
@@ -298,7 +302,6 @@ public class NewChatActivity extends AppCompatActivity {
     private void setUpRecyclerView() {
 
         Query query3 = db.collection("Conversations").document(userName +"-"+receiverName).collection("Messages").orderBy("timeStamp", Query.Direction.ASCENDING);
-
 
 
         FirestoreRecyclerOptions<ChatMessage> options = new FirestoreRecyclerOptions.Builder<ChatMessage>()
@@ -355,13 +358,20 @@ public class NewChatActivity extends AppCompatActivity {
             if (documentSnapshot != null) {
                 String group = (String) documentSnapshot.get("starFinish");
                 assert group != null;
-                if(group.equals("Yes"))
-                {
-                    FragmentManager fm = getSupportFragmentManager();
-                    evaluate_star addCommentFragment = new evaluate_star();
+                try {
+                    if(group.equals("Yes"))
+                    {
+                        FragmentManager fm = getSupportFragmentManager();
+                        evaluate_star addCommentFragment = new evaluate_star();
 
-                    addCommentFragment.show(fm,"TV_tag");
+                        addCommentFragment.show(fm,"TV_tag");
+                    }
+                }catch (Exception m)
+                {
+                    //Toast.makeText(this, m.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
                 }
+
             } else {
                 Toast.makeText(this, "Current data: null", Toast.LENGTH_SHORT).show();
             }

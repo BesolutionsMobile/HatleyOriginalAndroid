@@ -105,11 +105,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         initPlaces();
         setupPlaceAutoComplete();
-        getDeviceLocation();
         onClick();
 
         //IF NO GBS
         statusCheck();
+
+        getDeviceLocation();
 
         menu = Objects.requireNonNull(getActivity()).findViewById(R.id.menu);
 
@@ -151,7 +152,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
             @Override
             public void onError(@NonNull Status status) {
-                Toasty.error(Objects.requireNonNull(getActivity()), "" + status.getStatusMessage(), Toast.LENGTH_LONG).show();
+                //Toasty.error(Objects.requireNonNull(getActivity()), "" + status.getStatusMessage(), Toast.LENGTH_LONG).show();
 
             }
         });
@@ -182,6 +183,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     //GET CURRENT LOCATION
     private void getDeviceLocation() {
+
         FusedLocationProviderClient mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(Objects.requireNonNull(getActivity()));
         try {
             if (mLocationPermissionsGranted) {
@@ -279,20 +281,29 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         confirm.setOnClickListener(view -> {
 
-            tinyDB.putDouble("orderLat",lat);
-            tinyDB.putDouble("orderLong",lng);
-            tinyDB.putString("orderPlace",place_name);
+            if(!place_name.isEmpty())
+            {
+                tinyDB.putDouble("orderLat",lat);
+                tinyDB.putDouble("orderLong",lng);
+                tinyDB.putString("orderPlace",place_name);
 
 
-            final DeliveryPlaceFragment card = new DeliveryPlaceFragment();
+                final DeliveryPlaceFragment card = new DeliveryPlaceFragment();
 
-            FragmentManager fragmentManager = getFragmentManager();
-            assert fragmentManager != null;
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container ,card);
-            fragmentTransaction.commit();
+                FragmentManager fragmentManager = getFragmentManager();
+                assert fragmentManager != null;
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container ,card);
+                fragmentTransaction.commit();
 
-            Toasty.success(getActivity(),"Added Successfully",Toast.LENGTH_LONG).show();
+                Toasty.success(getActivity(),"Added Successfully",Toast.LENGTH_LONG).show();
+            }else
+                {
+                    Toasty.error(getActivity(),"Select a Place First",Toast.LENGTH_LONG).show();
+
+                }
+
+
 
         });
     }
@@ -344,6 +355,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void statusCheck() {
+
         final LocationManager manager = (LocationManager) Objects.requireNonNull(getActivity()).getSystemService(Context.LOCATION_SERVICE);
 
         assert manager != null;

@@ -35,6 +35,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginRight="@dimen/_20sdp"
             android:onClick="onChooseFile"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_image" />
 
 

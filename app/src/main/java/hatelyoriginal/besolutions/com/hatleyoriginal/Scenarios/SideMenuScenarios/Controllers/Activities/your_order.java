@@ -90,8 +90,8 @@ public class your_order extends AppCompatActivity implements NetworkInterface {
             JSONArray jsonArray = model.getJsonObject().getJSONArray("orders");
             for (int index = 0; index < jsonArray.length(); index++) {
                 JSONObject object = jsonArray.getJSONObject(index);
-                JSONObject order_client=object.getJSONObject("order_client");
-                JSONObject order_star=object.getJSONObject("order_star");
+                JSONObject order_client = object.getJSONObject("order_client");
+                JSONObject order_star = object.getJSONObject("order_star");
                 JSONObject order=object.getJSONObject("order");
                 JSONObject status=order.getJSONObject("status");
 

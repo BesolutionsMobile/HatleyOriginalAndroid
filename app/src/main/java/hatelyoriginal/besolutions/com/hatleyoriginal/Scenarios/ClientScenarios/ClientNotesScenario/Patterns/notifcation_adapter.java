@@ -68,19 +68,23 @@ public class notifcation_adapter extends RecyclerView.Adapter<notifcation_adapte
 
                      Intent intent=new Intent(context, ContinueChatActivity.class);
 
-                     tinyDB.putString("orderID",String.valueOf(mylist.get(position).getOrderID()));
-
-                     if(mylist.get(position).getSenderPhone() == null)
+                     if(mylist.get(position).getNotificationType().equals("accept_offer"))
                      {
-                         tinyDB.putString("chatPhone","0000");
-                     }else
+                         tinyDB.putString("orderID",String.valueOf(mylist.get(position).getOrderID()));
+
+                         if(mylist.get(position).getSenderPhone() == null)
+                         {
+                             tinyDB.putString("chatPhone","0000");
+                         }else
                          {
                              tinyDB.putString("chatPhone",mylist.get(position).getSenderPhone());
                          }
 
-                     tinyDB.putString("reciverName",mylist.get(position).getSenderName());
+                         tinyDB.putString("reciverName",mylist.get(position).getSenderName());
 
-                     context.startActivity(intent);
+                         context.startActivity(intent);
+                     }
+
                  }
              });
          }

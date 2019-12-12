@@ -1,6 +1,7 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SharedScenarios.AuthScenario.Controllers.Activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,8 +10,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.bumptech.glide.Glide;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
@@ -19,6 +32,12 @@ import com.google.gson.Gson;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Arrays;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
@@ -28,7 +47,6 @@ import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.ResponseModel;
 import hatelyoriginal.besolutions.com.hatleyoriginal.R;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SharedScenarios.AuthScenario.Models.LoginResponse;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SharedScenarios.AuthScenario.Models.User;
-import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SharedScenarios.AuthScenario.Tools.LoginLoading;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SharedScenarios.AuthScenario.Tools.RegistrationLoading;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.TinyDB;
 
@@ -44,6 +62,8 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
     EditText coPassword;
     @BindView(R.id.regist)
     Button regist;
+    @BindView(R.id.facebookkkk)
+    Button facebook;
     @BindView(R.id.policy)
     TextView policy;
     @BindView(R.id.termsser)
@@ -55,6 +75,9 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
     String token;
 
     TinyDB tinyDB;
+    
+    String imageURL;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +94,8 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
                 // send it to server
             }
         });
+
+
 
         //REGIST
         regist.setOnClickListener(new View.OnClickListener() {
@@ -120,11 +145,13 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
                             .playOn(findViewById(R.id.co_password));
                 }
                 else {
+
                     //DIALOG PROGRESS
                     pd = new ProgressDialog(RegistrationActivity.this);
                     pd.setMessage("Loading...");
                     pd.show();
                     //CALL API
+                    imageURL = "image";
                     new Apicalls(RegistrationActivity.this,RegistrationActivity.this).insertUser(username.getText().toString()
                             ,email.getText().toString(),password.getText().toString(),coPassword.getText().toString(),token);
                 }
@@ -148,6 +175,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
     @Override
     public void OnResponse(ResponseModel model) {
 
+
         Gson gson = new Gson();
         LoginResponse loginResponse = gson.fromJson(model.getResponse(), LoginResponse.class);
 
@@ -159,10 +187,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
 
         User user = loginResponse.getUser();
 
-        //Toast.makeText(this, user.getEmail(), Toast.LENGTH_SHORT).show();
-
         //Save User Info
-
         tinyDB.putString("userName",user.getName());
         tinyDB.putString("userEmail",user.getEmail());
         tinyDB.putString("userPhone",String.valueOf(user.getPhone()));
@@ -177,24 +202,25 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
                 tinyDB.putString("userimage",user.getImageId().toString());
             }else
             {
-                tinyDB.putString("userImage","image");
+                tinyDB.putString("userImage",imageURL);
             }
         }
         catch (Exception ignored)
 
         {
-            tinyDB.putString("userImage","image");
+            tinyDB.putString("userImage",imageURL);
         }
 
         //GO TO MAIN
-        RegistrationLoading LoginLoading = new RegistrationLoading();
-        LoginLoading.dialog(RegistrationActivity.this,R.layout.loading,.80);
+        RegistrationLoading loading = new RegistrationLoading();
+        loading.dialog(RegistrationActivity.this,R.layout.loading,.80);
 
         pd.cancel();
     }
 
     @Override
     public void OnError(VolleyError error) {
+
         Toasty.error(this,"Email already exist",Toast.LENGTH_LONG).show();
         pd.cancel();
     }

@@ -68,10 +68,12 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:background="@drawable/editbg3"
-                android:layout_marginLeft="40dp"
+                android:layout_marginStart="40dp"
+                android:maxLines="1"
+                android:inputType="numberDecimal"
                 android:hint="Price"
                 android:gravity="center"
-                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:textColor="@color/colorDarkerGray2"
                 android:textColorHint="@color/colorDarkerGray2"/>
 

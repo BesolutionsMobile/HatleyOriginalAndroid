@@ -2,6 +2,7 @@ package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.ClientScenarios.
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,9 +77,10 @@ public class OffersFragment extends Fragment implements NetworkInterface {
 
         @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.offers, null, false);
 
-
         return view;
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -119,10 +121,11 @@ public class OffersFragment extends Fragment implements NetworkInterface {
         }
 
 
+        cancelLayout.setVisibility(View.INVISIBLE);
 
         //SET VISIBALITY GONE
-        if (tinyDB.getString("orderID").equals("0")) {
-            cancelLayout.setVisibility(View.GONE);
+        if (tinyDB.getString("orderID").equals("0") || tinyDB.getString("orderID").isEmpty()) {
+            cancelLayout.setVisibility(View.INVISIBLE);
         }else
             {
                 cancelLayout.setVisibility(View.VISIBLE);
@@ -162,6 +165,7 @@ public class OffersFragment extends Fragment implements NetworkInterface {
     @Override
     public void OnStart() {
 
+        cancelLayout.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -247,11 +251,18 @@ public class OffersFragment extends Fragment implements NetworkInterface {
 
         //Toasty.success(Objects.requireNonNull(getActivity()), error.toString(), Toast.LENGTH_LONG).show();
 
-        pd.cancel();
-        String no_data = this.getString(R.string.no_data);
-        nodata.setText(no_data);
-        cancelLayout.setVisibility(View.GONE);
-        loading.setVisibility(View.GONE);
+        try
+        {
+            pd.cancel();
+            String no_data = this.getString(R.string.no_data);
+            nodata.setText(no_data);
+            cancelLayout.setVisibility(View.GONE);
+            loading.setVisibility(View.GONE);
+        }catch (Exception e)
+        {
+
+        }
+
     }
 
 }

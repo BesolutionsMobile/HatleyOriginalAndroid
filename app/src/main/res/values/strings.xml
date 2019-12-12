@@ -104,5 +104,9 @@
         <string name="cancel_order11">Cancel Order</string>
 
 
+    <string name="facebook_app_id">1773872226252815</string>
+    <string name="fb_login_protocol_scheme">fb1773872226252815</string>
+
+
 
 </resources>

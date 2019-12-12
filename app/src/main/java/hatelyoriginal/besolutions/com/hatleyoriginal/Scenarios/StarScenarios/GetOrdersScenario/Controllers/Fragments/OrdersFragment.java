@@ -96,76 +96,93 @@ public class OrdersFragment extends Fragment implements NetworkInterface {
     @Override
     public void OnResponse(ResponseModel model) {
 
-        TextView no_orders = Objects.requireNonNull(getActivity()).findViewById(R.id.nodata);
+        try
+        {
 
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.create();
+            TextView no_orders = Objects.requireNonNull(getActivity()).findViewById(R.id.nodata);
 
-        ArrayList<OrderItem> order_lists = new ArrayList<>();
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.create();
 
-        Orders orders = gson.fromJson(model.getJsonObject().toString(),Orders.class);
+            ArrayList<OrderItem> order_lists = new ArrayList<>();
 
-        try {
-            JSONArray orderss = model.getJsonObject().getJSONArray("orders");
-            if(orderss.length()==0)
-            {
+            Orders orders = gson.fromJson(model.getJsonObject().toString(),Orders.class);
 
-                no_orders.setVisibility(View.VISIBLE);
-                loading.setVisibility(View.GONE);
-            }
-            else {
+            try {
+                JSONArray orderss = model.getJsonObject().getJSONArray("orders");
+                if(orderss.length()==0)
+                {
 
-                nodata.setText("");
+                    no_orders.setVisibility(View.VISIBLE);
+                    loading.setVisibility(View.GONE);
+                }
+                else {
+
+                    nodata.setText("");
 
 
-                for (int index = 0; index < orders.getOrders().size(); index++) {
+                    for (int index = 0; index < orders.getOrders().size(); index++) {
 
-                    OrderItem item = new OrderItem();
+                        OrderItem item = new OrderItem();
 
-                    item.setOrderID(orders.getOrders().get(index).getId());
-                    item.setOrderClientName(orders.getOrders().get(index).getOrderDetails().getOrderClient().getName());
-                    item.setOrderTo(orders.getOrders().get(index).getOrderDetails().getOrderTo());
-                    item.setOrderFrom(orders.getOrders().get(index).getOrderDetails().getOrderFrom());
-                    item.setClientLocationlat(orders.getOrders().get(index).getOrderDetails().getClientLocationLat());
-                    item.setClientLocationLong(orders.getOrders().get(index).getOrderDetails().getClientLocationLong());
-                    item.setOrderDeliveryTime(orders.getOrders().get(index).getDeliveryTime());
-                    item.setOrderMinVal(orders.getOrders().get(index).getOrderFinance().getMinimumValue());
-                    item.setOrderDetails(orders.getOrders().get(index).getOrderDetails().getOrderDetails());
-                    item.setOrderLocationlat(orders.getOrders().get(index).getOrderDetails().getOrderLocationLat());
-                    item.setOrderLocationLong(orders.getOrders().get(index).getOrderDetails().getOrderLocationLong());
-                    item.setOrderClientOrdersCount(orders.getOrders().get(index).getOrderDetails().getOrderClient().getTotalUserOrders().getOrdersCount());
-                    item.setOrderClientImage(orders.getOrders().get(index).getOrderDetails().getOrderClient().getImageId());
-                    item.setOrderClientID(orders.getOrders().get(index).getOrderDetails().getOrderClient().getId());
-                    item.setOrderClientRating(orders.getOrders().get(index).getOrderDetails().getOrderClient().getTotalUserOrders().getOverAllRate());
+                        item.setOrderID(orders.getOrders().get(index).getId());
+                        item.setOrderClientName(orders.getOrders().get(index).getOrderDetails().getOrderClient().getName());
+                        item.setOrderTo(orders.getOrders().get(index).getOrderDetails().getOrderTo());
+                        item.setOrderFrom(orders.getOrders().get(index).getOrderDetails().getOrderFrom());
+                        item.setClientLocationlat(orders.getOrders().get(index).getOrderDetails().getClientLocationLat());
+                        item.setClientLocationLong(orders.getOrders().get(index).getOrderDetails().getClientLocationLong());
+                        item.setOrderDeliveryTime(orders.getOrders().get(index).getDeliveryTime());
+                        item.setOrderMinVal(orders.getOrders().get(index).getOrderFinance().getMinimumValue());
+                        item.setOrderDetails(orders.getOrders().get(index).getOrderDetails().getOrderDetails());
+                        item.setOrderLocationlat(orders.getOrders().get(index).getOrderDetails().getOrderLocationLat());
+                        item.setOrderLocationLong(orders.getOrders().get(index).getOrderDetails().getOrderLocationLong());
+                        item.setOrderClientOrdersCount(orders.getOrders().get(index).getOrderDetails().getOrderClient().getTotalUserOrders().getOrdersCount());
+                        item.setOrderClientImage(orders.getOrders().get(index).getOrderDetails().getOrderClient().getImageId());
+                        item.setOrderClientID(orders.getOrders().get(index).getOrderDetails().getOrderClient().getId());
+                        item.setOrderClientRating(orders.getOrders().get(index).getOrderDetails().getOrderClient().getTotalUserOrders().getOverAllRate());
 
-                    order_lists.add(item);
+                        order_lists.add(item);
+
+                    }
+
+
+                    utils_adapter utils_adapter = new utils_adapter();
+                    utils_adapter.Adapter(availableOrderlist, new available_order_adapter(getActivity(), order_lists), getActivity());
+
+                    //DISMISS LOADING
+                    no_orders.setVisibility(View.INVISIBLE);
+                    loading.setVisibility(View.GONE);
+
+
 
                 }
-
-
-                utils_adapter utils_adapter = new utils_adapter();
-                utils_adapter.Adapter(availableOrderlist, new available_order_adapter(getActivity(), order_lists), getActivity());
-
-                //DISMISS LOADING
-                no_orders.setVisibility(View.INVISIBLE);
-                loading.setVisibility(View.GONE);
-
-
-
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
+
+        }catch (Exception e)
+        {
+
         }
+
+
 
     }
 
     @Override
     public void OnError(VolleyError error) {
 
-        loading.setVisibility(View.GONE);
-        TextView no_orders = Objects.requireNonNull(getActivity()).findViewById(R.id.nodata);
-        no_orders.setVisibility(View.VISIBLE);
-        pd.cancel();
+       try {
+
+           loading.setVisibility(View.GONE);
+           TextView no_orders = Objects.requireNonNull(getActivity()).findViewById(R.id.nodata);
+           no_orders.setVisibility(View.VISIBLE);
+           pd.cancel();
+
+       }catch (Exception e)
+       {
+
+       }
 
     }
 }

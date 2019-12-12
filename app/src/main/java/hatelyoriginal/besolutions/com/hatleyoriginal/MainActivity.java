@@ -1,6 +1,7 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
     @BindView(R.id.settingbutton)
     LinearLayout settingbutton;
 
+    private ProgressDialog pd;
 
 
     @Override
@@ -320,10 +322,18 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
                 startActivity(new Intent(this, your_places.class));
                 break;
             case 7:
+                pd = new ProgressDialog(this);
+                pd.setMessage("Loading...");
+                pd.setCancelable(false);
+                pd.show();
                 x = 1;
                 new Apicalls(this, this).switch_user();
                 break;
             case 8:
+                pd = new ProgressDialog(this);
+                pd.setMessage("Loading...");
+                pd.setCancelable(false);
+                pd.show();
                 x = 2;
                 new Apicalls(this, this).Logout();
                 break;
@@ -424,7 +434,10 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
     @Override
     public void OnResponse(ResponseModel model) {
 
+        pd.cancel();
+
         if (x == 1) {
+            tinyDB.putString("userType","2");
             startActivity(new Intent(this, StarActivity.class));
         } else {
             tinyDB.putBoolean("isLoggedIn", false);

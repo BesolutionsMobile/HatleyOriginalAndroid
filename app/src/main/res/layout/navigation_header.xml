@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layoutDirection="ltr"
-    android:layout_height="wrap_content">
+    android:layout_height="@dimen/_120sdp">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_100sdp">
+        android:layout_height="@dimen/_120sdp">
+
   <ImageView
       android:layout_width="match_parent"
-      android:layout_height="@dimen/_100sdp"
+      android:layout_height="@dimen/_120sdp"
       android:scaleType="fitXY"
       android:src="@drawable/navigationheader"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:paddingLeft="@dimen/_20sdp"
-            android:orientation="horizontal">
+            android:paddingStart="@dimen/_20sdp"
+            android:orientation="horizontal"
+            tools:ignore="RtlSymmetry">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="@dimen/_40sdp"
@@ -33,7 +38,6 @@
                 android:layout_gravity="center">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/imgUser"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -47,12 +51,15 @@
                 android:layout_height="@dimen/_60sdp"
                 android:text="@string/username"
                 android:id="@+id/username"
-                android:paddingRight="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
                 android:gravity="center|left"
                 android:textSize="@dimen/_10ssp"
                 android:textColor="@android:color/white"
-                android:paddingLeft="@dimen/_10sdp"
-                />
+                android:paddingStart="@dimen/_10sdp"
+                tools:ignore="RtlHardcoded" />
+
         </LinearLayout>
+
     </RelativeLayout>
+
 </LinearLayout>

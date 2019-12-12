@@ -63,7 +63,8 @@ public class your_places extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                onBackPressed();
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
             }
         });
 

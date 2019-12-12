@@ -5,6 +5,7 @@ public class NotificationItem {
     int notificationID;
     String notificationTitle;
     String notificationData;
+    String notificationType;
 
     int orderID;
     String senderPhone;
@@ -32,6 +33,14 @@ public class NotificationItem {
 
     public void setNotificationData(String notificationData) {
         this.notificationData = notificationData;
+    }
+
+    public String getNotificationType() {
+        return notificationType;
+    }
+
+    public void setNotificationType(String notificationType) {
+        this.notificationType = notificationType;
     }
 
     public int getOrderID() {

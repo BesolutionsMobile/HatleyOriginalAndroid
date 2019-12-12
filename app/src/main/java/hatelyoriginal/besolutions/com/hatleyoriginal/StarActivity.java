@@ -1,6 +1,7 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.ClientScenarios.M
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SharedScenarios.AuthScenario.Controllers.Activities.LoginActivity;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SideMenuScenarios.Controllers.Activities.payments;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SideMenuScenarios.Controllers.Activities.personal_info;
+import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SideMenuScenarios.Controllers.Activities.your_order;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.StarScenarios.GetOrdersScenario.Controllers.Fragments.OrdersFragment;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.AddButtonClick;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.TinyDB;
@@ -67,6 +69,8 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
 
     int x = 0;
 
+    private ProgressDialog pd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,8 +91,6 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
 
         // Set up the drawer.
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, findViewById(R.id.drawer), mToolbar);
-
-
 
 
         final OrdersFragment map = new OrdersFragment();
@@ -245,10 +247,21 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
                 startActivity(new Intent(this, payments.class));
                 break;
             case 2:
+                startActivity(new Intent(this, your_order.class));
+                break;
+            case 3:
+                pd = new ProgressDialog(this);
+                pd.setMessage("Loading...");
+                pd.setCancelable(false);
+                pd.show();
                 x = 1;
                 new Apicalls(this, this).switch_user();
                 break;
-            case 3:
+            case 4:
+                pd = new ProgressDialog(this);
+                pd.setMessage("Loading...");
+                pd.setCancelable(false);
+                pd.show();
                 x = 2;
                 new Apicalls(this,this).Logout();
                 break;
@@ -262,7 +275,7 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
         if (mNavigationDrawerFragment.isDrawerOpen())
             mNavigationDrawerFragment.closeDrawer();
         else
-            super.onBackPressed();
+            moveTaskToBack(true);
     }
 
     private TextView getActionBarTextView() {
@@ -289,8 +302,11 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
     @Override
     public void OnResponse(ResponseModel model) {
 
+        pd.cancel();
+
         if(x == 1)
         {
+            tinyDB.putString("userType","1");
             startActivity(new Intent(this, MainActivity.class));
         }else
             {

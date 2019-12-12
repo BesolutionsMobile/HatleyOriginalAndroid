@@ -25,7 +25,7 @@ public class RegistrationLoading {
         dialog.getWindow().setLayout(width, height);
         dialog.show();
 
-        TextView txt_msg=(TextView)dialog.findViewById(R.id.popup_msg);
+        TextView txt_msg = dialog.findViewById(R.id.popup_msg);
         txt_msg.setText("Registered Successfully...");
 
 

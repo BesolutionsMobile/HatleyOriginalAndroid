@@ -108,8 +108,8 @@ public class personal_info extends AppCompatActivity {
         linearphoto = findViewById(R.id.linChangePhoto);
         linearpass = findViewById(R.id.linChangePass);
         userimage = findViewById(R.id.imgUser);
-        name= findViewById(R.id.name);
-        email= findViewById(R.id.email);
+        name = findViewById(R.id.name);
+        email = findViewById(R.id.email);
 
         FirebaseApp.initializeApp(this);
 
@@ -136,9 +136,6 @@ public class personal_info extends AppCompatActivity {
 
                 Change_photo change_photo = new Change_photo();
                 change_photo.dialog(personal_info.this,R.layout.change_photo,.90);
-
-
-
             }
         });
 
@@ -228,6 +225,7 @@ public class personal_info extends AppCompatActivity {
 
             if (resultCode == RESULT_OK){
 
+                assert result != null;
                 selectedImage = result.getUri();
                 InputStream imageStream = null;
                 try {
@@ -243,7 +241,7 @@ public class personal_info extends AppCompatActivity {
                 firebase_storage.uploadImage(selectedImage,personal_info.this,true);
 
                 //SET IMAGE
-                Change_photo change_photo=new Change_photo();
+                Change_photo change_photo = new Change_photo();
                 change_photo.set_image(bitmaps,firebase_storage.uploadImage(selectedImage,personal_info.this,true));
 
             }

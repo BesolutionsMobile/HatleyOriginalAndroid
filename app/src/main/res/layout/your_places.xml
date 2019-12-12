@@ -20,7 +20,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="@dimen/_150sdp"
-        android:layout_marginLeft="@dimen/_20ssp"
+        android:layout_marginStart="@dimen/_10ssp"
+        android:layout_marginEnd="@dimen/_10ssp"
+        android:scrollbars="vertical"
         android:layout_marginTop="@dimen/_5ssp"
         android:id="@+id/places_list"/>
         <TextView

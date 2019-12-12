@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -37,6 +40,7 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -48,6 +52,7 @@ import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.NetworkInterfa
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.ResponseModel;
 import hatelyoriginal.besolutions.com.hatleyoriginal.R;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.ClientScenarios.MainScenario.Tools.RequestLoading;
+import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SideMenuScenarios.Controllers.Activities.personal_info;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.AddButtonClick;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.TinyDB;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.utils;
@@ -95,7 +100,13 @@ public class RequestOrderFragment extends Fragment implements NetworkInterface {
         final utils utils = new utils(getActivity());
 
         //upload image
-        uploadImg.setOnClickListener(view1 -> utils.upload_image(getActivity(), 1));
+        uploadImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                choosePhotoFromGallary(getActivity());
+            }
+        });
 
 
         //SET ON DIALOG Delivery time
@@ -116,6 +127,7 @@ public class RequestOrderFragment extends Fragment implements NetworkInterface {
 
                 pd = new ProgressDialog(getActivity());
                 pd.setMessage("Loading...");
+                pd.setCancelable(false);
                 pd.show();
 
                 //GET DATA
@@ -163,12 +175,12 @@ public class RequestOrderFragment extends Fragment implements NetworkInterface {
 
     }
 
-    public static String formatDateFromDateString(String inputDateFormat, String outputDateFormat, String inputDate) throws ParseException {
+    private static String formatDateFromDateString(String inputDate) throws ParseException {
 
         Date mParsedDate;
         String mOutputDateString;
-        SimpleDateFormat mInputDateFormat = new SimpleDateFormat(inputDateFormat, java.util.Locale.getDefault());
-        SimpleDateFormat mOutputDateFormat = new SimpleDateFormat(outputDateFormat, java.util.Locale.getDefault());
+        SimpleDateFormat mInputDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault());
+        SimpleDateFormat mOutputDateFormat = new SimpleDateFormat("hh:mm a", java.util.Locale.getDefault());
         mParsedDate = mInputDateFormat.parse(inputDate);
         assert mParsedDate != null;
         mOutputDateString = mOutputDateFormat.format(mParsedDate);
@@ -185,8 +197,10 @@ public class RequestOrderFragment extends Fragment implements NetworkInterface {
             Uri selectedImage = data.getData();
             InputStream imageStream = null;
             try {
+
                 assert selectedImage != null;
                 imageStream = Objects.requireNonNull(getActivity()).getContentResolver().openInputStream(selectedImage);
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -194,13 +208,13 @@ public class RequestOrderFragment extends Fragment implements NetworkInterface {
             Bitmap selectedPhoto = BitmapFactory.decodeStream(imageStream);
             Bitmap bitmaps = Bitmap.createScaledBitmap(selectedPhoto, 300, 300, true);
             uploadImg.setImageBitmap(bitmaps);
-            //CONVERT IMAGE TO STRING BASE 64
-            ByteArrayOutputStream os = new ByteArrayOutputStream();
-            bitmaps.compress(Bitmap.CompressFormat.PNG, 100, os);
-            byte[] b = os.toByteArray();
-            //String image = Base64.encodeToString(b, Base64.DEFAULT);
 
         }
+    }
+
+    public void choosePhotoFromGallary(Context context) {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        ((AppCompatActivity)context).startActivityForResult(galleryIntent,72);
     }
 
     //GET DATE PICKER
@@ -225,6 +239,7 @@ public class RequestOrderFragment extends Fragment implements NetworkInterface {
             }
         }, mYear, mMonth, mDay);
         mDatePicker.setTitle("Select Date");
+        mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         mDatePicker.show();
     }
 
@@ -240,7 +255,7 @@ public class RequestOrderFragment extends Fragment implements NetworkInterface {
         mTimePicker = new TimePickerDialog(getActivity(), R.style.DialogTheme, (timePicker, selectedHour, selectedMinute) -> {
             try {
                 end = selectedyear + "-" + selectedmonth + "-" + selectedday + " " + selectedHour + ":" + selectedMinute + ":" + "00";
-                deliveryTime.setText(formatDateFromDateString("yyyy-MM-dd HH:mm:ss","hh:mm a",end));
+                deliveryTime.setText(formatDateFromDateString(end));
             } catch (ParseException e) {
                 e.printStackTrace();
             }

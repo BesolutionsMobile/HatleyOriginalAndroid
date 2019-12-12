@@ -18,6 +18,7 @@ import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.NetworkInterfa
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.ResponseModel;
 import hatelyoriginal.besolutions.com.hatleyoriginal.R;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SideMenuScenarios.Controllers.Fragments.change_phone;
+import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.TinyDB;
 
 public class Change_phone implements NetworkInterface {
 
@@ -26,6 +27,9 @@ public class Change_phone implements NetworkInterface {
     Dialog dialog;
 
     EditText editphone;
+
+    TinyDB tinyDB;
+
 
     public void dialog(final Context context, int resource, double widthh) {
         this.context = context;
@@ -41,6 +45,15 @@ public class Change_phone implements NetworkInterface {
         editphone = dialog.findViewById(R.id.editPhone);
 
         btnsave = dialog.findViewById(R.id.phoneSave);
+
+        tinyDB = new TinyDB(context);
+
+        editphone = dialog.findViewById(R.id.editPhone);
+
+        if (!tinyDB.getString("userPhone").equals("0000") || tinyDB.getString("userPhone") != null)
+        {
+            editphone.setText(tinyDB.getString("userPhone"));
+        }
 
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +90,7 @@ public class Change_phone implements NetworkInterface {
 
         try {
             Toasty.success(context, ""+model.getJsonObject().getString("message"), Toast.LENGTH_SHORT).show();
+            tinyDB.putString("userPhone",editphone.getText().toString());
             dialog.dismiss();
         } catch (JSONException e) {
             e.printStackTrace();

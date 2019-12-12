@@ -110,6 +110,7 @@ public class ClientNotificationsFragment extends Fragment implements NetworkInte
                         item.setNotificationID(notifications.getNotifications().get(index).getId());
                         item.setNotificationTitle(notifications.getNotifications().get(index).getTitle());
                         item.setNotificationData(notifications.getNotifications().get(index).getData());
+                        item.setNotificationType(notifications.getNotifications().get(index).getNotifiableType());
                         item.setOrderID(notifications.getNotifications().get(index).getOrderId());
                         item.setSenderName(notifications.getNotifications().get(index).getSentFrom().getName());
                         item.setSenderPhone(notifications.getNotifications().get(index).getSentFrom().getPhone());

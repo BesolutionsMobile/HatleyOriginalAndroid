@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
@@ -21,6 +23,8 @@ import org.greenrobot.eventbus.EventBus;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
@@ -41,6 +45,9 @@ import hatelyoriginal.besolutions.com.hatleyoriginal.jupiterchat.Activites.NewCh
 public class ReactOfferPopUpFragment extends DialogFragment implements NetworkInterface {
 
     int x = 0;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     TinyDB tinyDB;
 
@@ -95,7 +102,7 @@ public class ReactOfferPopUpFragment extends DialogFragment implements NetworkIn
 
         hours.setText(tinyDB.getString("offerTime"));
 
-
+        updateChat();
 
         approve.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +133,18 @@ public class ReactOfferPopUpFragment extends DialogFragment implements NetworkIn
         });
 
         return rootView;
+    }
+
+    private void updateChat() {
+        Map<String, Object> conversation = new HashMap<>();
+        conversation.put("name",  tinyDB.getString("userName")+"-"+tinyDB.getString("starName"));
+        conversation.put("sender", tinyDB.getString("userName"));
+        conversation.put("receiver",  tinyDB.getString("starName"));
+        conversation.put("receiverImage", "");
+        conversation.put("lastMessage", "");
+        conversation.put("starFinish", "No");
+        conversation.put("timeStamp", FieldValue.serverTimestamp());
+        db.collection("Conversations").document( tinyDB.getString("userName")+"-"+ tinyDB.getString("starName")).set(conversation);
     }
 
     /*@Override

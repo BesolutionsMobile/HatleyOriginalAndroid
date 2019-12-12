@@ -23,6 +23,7 @@
             android:orientation="vertical"
             android:gravity="center">
     <ImageView
+        android:id="@+id/imagehatly"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_70sdp"
         android:layout_gravity="center"
@@ -71,7 +72,7 @@
 
             <CheckBox
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textColor="@color/quantum_white_text"
@@ -82,7 +83,7 @@
 
             <CheckBox
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:id="@+id/finger_print"
                 android:textColor="@color/quantum_white_text"
@@ -129,13 +130,28 @@
                     android:layout_height="@dimen/_1sdp"
                     android:background="#bfbaba"/>
             </LinearLayout>
+
+
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/fb_login"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_10ssp"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:layout_marginRight="@dimen/_25sdp"
+                android:layout_gravity="center_horizontal"/>
+
+
             <Button
+                android:id="@+id/facebook"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginTop="@dimen/_10ssp"
                 android:layout_marginLeft="@dimen/_25sdp"
                 android:layout_marginRight="@dimen/_25sdp"
-                android:text="Sign In with Facebook"
+                android:text="Sign in with Facebook"
                 android:textAllCaps="false"
                 android:textSize="@dimen/_13ssp"
                 android:textColor="@android:color/white"

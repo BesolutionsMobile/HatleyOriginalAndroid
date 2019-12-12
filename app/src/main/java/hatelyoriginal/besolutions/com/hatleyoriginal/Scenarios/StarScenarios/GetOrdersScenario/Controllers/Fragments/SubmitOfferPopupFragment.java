@@ -202,7 +202,7 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
         StringWriter errors = new StringWriter();
         error.printStackTrace(new PrintWriter(errors));
 
-        Toasty.error(getActivity(), "Offer Not Sent." + " " + errors.toString(), Toast.LENGTH_LONG).show();
+        Toasty.error(getActivity(), "Offer Not Sent.", Toast.LENGTH_LONG).show();
 
     }
 
@@ -250,6 +250,7 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
             get_time_picker(selectedyear, selectedmonth, selectedday, arrival_time);
         }, mYear, mMonth, mDay);
         mDatePicker.setTitle("Select Date");
+        mDatePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         mDatePicker.show();
     }
 

@@ -29,9 +29,12 @@ public class change_phone implements NetworkInterface {
 
     private EditText editphone;
 
+    TinyDB tinyDB;
+
     public void dialog(final Context context, int resource, double widthh) {
+
         this.context = context;
-         dialog = new Dialog(context);
+        dialog = new Dialog(context);
         Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(resource);
@@ -40,14 +43,17 @@ public class change_phone implements NetworkInterface {
         dialog.getWindow().setLayout(width, height);
         //dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
-        TinyDB tinyDB = new TinyDB(context);
+        tinyDB = new TinyDB(context);
 
         editphone = dialog.findViewById(R.id.editPhone);
 
-        if (!tinyDB.getString("chatPhone").equals("0000") || !tinyDB.getString("chatPhone").isEmpty())
+        if (!tinyDB.getString("userPhone").equals("0000") || !tinyDB.getString("userPhone").isEmpty())
         {
             editphone.setText(tinyDB.getString("userPhone"));
         }
+
+        Toasty.success(context, tinyDB.getString("userPhone"), Toast.LENGTH_SHORT).show();
+
 
 
         Button btnsave = dialog.findViewById(R.id.phoneSave);
@@ -59,6 +65,7 @@ public class change_phone implements NetworkInterface {
 
              }
              else if(editphone.getText().toString().length()>=16){
+
                  editphone.setError("Phone must be less than 16 digits");
              }
              else {
@@ -84,6 +91,7 @@ public class change_phone implements NetworkInterface {
 
         try {
             Toasty.success(context, ""+model.getJsonObject().getString("message"), Toast.LENGTH_SHORT).show();
+            tinyDB.putString("userPhone",editphone.getText().toString());
             dialog.dismiss();
         } catch (JSONException e) {
             e.printStackTrace();

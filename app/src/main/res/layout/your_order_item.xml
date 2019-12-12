@@ -33,10 +33,9 @@
                 android:weightSum="1">
 
                 <ImageView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/_10sdp"
                     android:layout_height="@dimen/_10sdp"
                     android:layout_gravity="center"
-                    android:layout_weight=".05"
                     android:background="@drawable/order_item_point" />
 
 
@@ -49,7 +48,8 @@
                     android:maxLines="1"
                     android:paddingLeft="@dimen/_10sdp"
                     android:paddingRight="@dimen/_5sdp"
-                    android:text="Two Burger"
+                    android:text="Two Burgers"
+                    android:gravity="left"
                     android:textColor="@color/fcolor"
                     android:textSize="@dimen/_12ssp"
                     android:textStyle="bold" />
@@ -64,12 +64,10 @@
                 android:weightSum="1">
 
                 <ImageView
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/_10sdp"
                     android:layout_height="@dimen/_10sdp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_weight=".05"
-                    android:background="@drawable/ringgreen1" />
+                    android:layout_marginTop="@dimen/_5sdp" android:background="@drawable/ringgreen1" />
 
                 <TextView
                     android:id="@+id/location"
@@ -83,6 +81,7 @@
                     android:paddingRight="@dimen/_5sdp"
                     android:singleLine="true"
                     android:text="From Buffalo"
+                    android:gravity="left"
                     android:textColor="@color/fcolor"
                     android:textSize="@dimen/_12ssp"
                     android:textStyle="bold" />
