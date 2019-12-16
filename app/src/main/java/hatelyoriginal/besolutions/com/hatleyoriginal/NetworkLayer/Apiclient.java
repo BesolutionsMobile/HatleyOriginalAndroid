@@ -17,19 +17,19 @@ public enum Apiclient {
      */
 
     LOGIN_USER("auth/login", Arrays.asList("email", "password","mobile_token")),
-    INSERT_USER("auth/register", Arrays.asList("name","email","password","password_confirmation","mobile_token")),
+    INSERT_USER("auth/register", Arrays.asList("name","email","password","password_confirmation","mobile_token","image_id")),
     INSERT_ORDER("store-order", Arrays.asList("order_description","image","distance","duration","promo_code","delivery_time","order_from_location"
-            ,"order_to_location","client_location_lat","client_location_long","order_location_lat", "order_location_long")),
-    ACCEPT_OFFER("accept-offer", Collections.singletonList("offer_id")),
+            ,"order_to_location","client_location_lat","client_location_long","order_location_lat", "order_location_long","mobile_token")),
+    ACCEPT_OFFER("accept-offer", Arrays.asList("offer_id","mobile_token")),
     REJECT_OFFER("reject-offer", Collections.singletonList("offer_id")),
-    SUBMIT_OFFER("submit-offer", Arrays.asList("star_id","order_id","expected_delivery_time","offer_value")),
+    SUBMIT_OFFER("submit-offer", Arrays.asList("star_id","order_id","expected_delivery_time","offer_value","mobile_token")),
     SET_RATE("rate", Arrays.asList("order_id","rate","note_id")),
     SET_COMPLAINT("make-complaint", Arrays.asList("order_id","complaint_type_id","complaint")),
     CANCEL_ORDER("cancel-order", Collections.singletonList("order_id")),
     NOTIFCATION("my-notifications", null),
     MY_ORDERS("my-orders", null),
     GET_COMPLAINT_TYPE("get-complaint-type", null),
-    ORDERS("show-orders", null),
+    ORDERS("show-orders", Arrays.asList("starLat","starLong","mobile_token")),
     OFFERS("order-offers/", null),
     SWITCH("switch-user", null),
     GET_BALANCE("get-balance", null),
@@ -37,7 +37,7 @@ public enum Apiclient {
     CHANGE_PASS("change-password", Arrays.asList("password","password_confirmation")),
     CHANGE_PHOTO("update-personal-image", Collections.singletonList("image_url")),
     ADD_PROMO_CODE("add-promocode", Collections.singletonList("promo_code")),
-    BILL_AMOUNT("finish-order", Arrays.asList("order_id","bill_amount")),
+    BILL_AMOUNT("finish-order", Arrays.asList("order_id","bill_amount","mobile_token")),
     LOGOUT("logout",null);
 
 

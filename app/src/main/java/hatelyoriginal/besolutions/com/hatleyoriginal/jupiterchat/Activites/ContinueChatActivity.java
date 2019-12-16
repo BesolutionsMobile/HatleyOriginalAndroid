@@ -112,7 +112,7 @@ public class ContinueChatActivity extends AppCompatActivity {
 
         setUpRecyclerView();
 
-        //   RealtimeSeen();
+        // RealtimeSeen();
 
         sendbutton.setOnClickListener(new View.OnClickListener() {
             @Override

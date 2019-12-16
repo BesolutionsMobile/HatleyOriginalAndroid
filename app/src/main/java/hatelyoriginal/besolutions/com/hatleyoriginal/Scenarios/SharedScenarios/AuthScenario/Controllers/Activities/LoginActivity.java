@@ -43,6 +43,7 @@ import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import co.infinum.goldfinger.Goldfinger;
 import es.dmoral.toasty.Toasty;
 import hatelyoriginal.besolutions.com.hatleyoriginal.MainActivity;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.Apicalls;
@@ -52,6 +53,7 @@ import hatelyoriginal.besolutions.com.hatleyoriginal.R;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SharedScenarios.AuthScenario.Models.LoginResponse;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SharedScenarios.AuthScenario.Models.User;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SharedScenarios.AuthScenario.Tools.LoginLoading;
+import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SharedScenarios.AuthScenario.Tools.RegistrationLoading;
 import hatelyoriginal.besolutions.com.hatleyoriginal.StarActivity;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.TinyDB;
 import hatelyoriginal.besolutions.com.hatleyoriginal.fingerprint;
@@ -75,6 +77,8 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
     @BindView(R.id.imagehatly)
     ImageView image;
 
+    Goldfinger goldfinger;
+
     ProgressDialog pd;
 
     String token;
@@ -83,6 +87,8 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
 
     String imageURL;
 
+    String phone = "";
+
     CallbackManager callbackManager;
 
     @Override
@@ -90,6 +96,8 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         ButterKnife.bind(this);
+
+        goldfinger= new Goldfinger.Builder(LoginActivity.this).build();
 
         tinyDB = new TinyDB(getApplicationContext());
 
@@ -148,6 +156,8 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
 
                     imageURL = "image";
 
+
+
                     new Apicalls(LoginActivity.this, LoginActivity.this).loginUser(username.getText().toString(), password.getText().toString(), token);
                 }
             }
@@ -184,14 +194,22 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
 
     }
 
-
-    private void login(String email,String password,String userImage)
+    private void registration(String username,String email,String password,String userImage)
     {
-
         pd = new ProgressDialog(LoginActivity.this);
         pd.setMessage("Loading...");
         pd.setCancelable(false);
         pd.show();
+
+        imageURL = userImage;
+
+        new Apicalls(LoginActivity.this,LoginActivity.this).insertUser(username
+                ,email,password,password,token,userImage);
+    }
+
+
+    private void login(String email,String password,String userImage)
+    {
 
         imageURL = userImage;
 
@@ -214,11 +232,37 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
                     finish();
                 }
             } else if (tinyDB.getString("userType").equals("2")) {
-                startActivity(new Intent(this, StarActivity.class));
-                finish();
+                if(tinyDB.getBoolean("fingerprint"))
+                {
+                    startActivity(new Intent(this, fingerprint.class));
+                    finish();
+                }else
+                    {
+                        startActivity(new Intent(this, StarActivity.class));
+                        finish();
+                    }
+
             }
 
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (!goldfinger.hasFingerprintHardware()) {
+
+            fingerPrint.setVisibility(View.GONE);
+
+        }
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        goldfinger.cancel();
     }
 
     @Override
@@ -234,54 +278,76 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
     @Override
     public void OnResponse(ResponseModel model) {
 
-        Gson gson = new Gson();
-        LoginResponse loginResponse = gson.fromJson(model.getResponse(), LoginResponse.class);
+            Gson gson = new Gson();
+            LoginResponse loginResponse = gson.fromJson(model.getResponse(), LoginResponse.class);
 
-        //SAVE token IN LOCAL
+            //SAVE token IN LOCAL
 
-        tinyDB.putBoolean("isLoggedIn",true);
+            tinyDB.putBoolean("isLoggedIn",true);
 
-        tinyDB.putString("userToken",loginResponse.getToken());
+            tinyDB.putString("userToken",loginResponse.getToken());
 
-        User user = loginResponse.getUser();
+            User user = loginResponse.getUser();
 
-        //Save User Info
+            //Save User Info
 
-        tinyDB.putString("userName",user.getName());
-        tinyDB.putString("userEmail",user.getEmail());
-        tinyDB.putString("userPhone",String.valueOf(user.getPhone()));
-        tinyDB.putString("userID",String.valueOf(user.getId()));
-        tinyDB.putString("userType",String.valueOf(user.getUserTypeId()));
-        tinyDB.putString("userCode",user.getCode());
+            tinyDB.putString("userName",user.getName());
+            tinyDB.putString("userEmail",user.getEmail());
+            try {
+                if(!user.getPhone().equals("null") || user.getPhone() != null)
+                {
+                    tinyDB.putString("userPhone",String.valueOf(user.getPhone()));
 
-        //send to save image
-        try {
-            if(user.getImageId().toString()!=null)
+                }
+            }catch (Exception ignored)
             {
-                tinyDB.putString("userImage",user.getImageId().toString());
-            }else
+                tinyDB.putString("userPhone",phone);
+            }
+
+            tinyDB.putString("userID",String.valueOf(user.getId()));
+            tinyDB.putString("userType",String.valueOf(user.getUserTypeId()));
+            tinyDB.putString("userCode",user.getCode());
+
+            //send to save image
+            try {
+                if(user.getImageId().toString()!=null)
+                {
+                    tinyDB.putString("userImage",user.getImageId().toString());
+                }else
                 {
                     tinyDB.putString("userImage",imageURL);
                 }
-        }
-        catch (Exception ignored)
+            }
+            catch (Exception ignored)
 
-        {
-            tinyDB.putString("userImage",imageURL);
-        }
+            {
+                tinyDB.putString("userImage",imageURL);
+            }
 
-        //GO TO MAIN
-        LoginLoading loading = new LoginLoading();
-        loading.dialog(LoginActivity.this,R.layout.loading,.80,String.valueOf(user.getUserTypeId()));
+            //GO TO MAIN
+            LoginLoading loading = new LoginLoading();
+            loading.dialog(LoginActivity.this,R.layout.loading,.80,String.valueOf(user.getUserTypeId()));
 
-        pd.cancel();
+            pd.cancel();
+
+
 
     }
 
     @Override
     public void OnError(VolleyError error) {
-        Toasty.error(this,"Wrong User Name Or Password", Toast.LENGTH_LONG,true).show();
-        pd.cancel();
+
+        if(error.networkResponse.statusCode == 401)
+        {
+            Toasty.error(this,"Wrong User Name Or Password", Toast.LENGTH_LONG,true).show();
+            pd.cancel();
+        }else
+            {
+                login(tinyDB.getString("facebookEmail"),tinyDB.getString("facebookPassword"),tinyDB.getString("facebookUserImage"));
+
+            }
+
+
     }
 
 
@@ -296,6 +362,8 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
+
+                        loadUserProfile(loginResult.getAccessToken());
                     }
 
                     @Override
@@ -334,25 +402,27 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+
     }
 
     AccessTokenTracker tokenTracker = new AccessTokenTracker() {
+
         @Override
         protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken)
         {
             AccessToken.setCurrentAccessToken(null);
             Profile.setCurrentProfile(null);
             if(currentAccessToken==null)
-            {
-            }
-            else
-                loadUserProfile(currentAccessToken);
+            {}
+           // else
+               // loadUserProfile(currentAccessToken);
         }
     };
 
     private void loadUserProfile(AccessToken newAccessToken)
     {
         GraphRequest request = GraphRequest.newMeRequest(newAccessToken, new GraphRequest.GraphJSONObjectCallback() {
+
             @Override
             public void onCompleted(JSONObject object, GraphResponse response)
             {
@@ -363,7 +433,12 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
                     String email = object.getString("email");
                     String userImage = "https://graph.facebook.com/"+object.getString("id")+"/picture";
 
-                    login(email,id,userImage);
+                    tinyDB.putString("facebookUsername",first_name + " " + last_name);
+                    tinyDB.putString("facebookPassword",id);
+                    tinyDB.putString("facebookEmail",email);
+                    tinyDB.putString("facebookUserImage",userImage);
+
+                    registration(first_name +" " + last_name,email,id,userImage);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

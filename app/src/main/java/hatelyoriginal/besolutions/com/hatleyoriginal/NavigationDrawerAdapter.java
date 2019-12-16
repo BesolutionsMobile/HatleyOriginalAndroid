@@ -1,6 +1,7 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal;
 
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Locale;
 
 
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.ViewHolder> {
@@ -15,9 +17,10 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     private List<NavigationItem> mData;
     private NavigationDrawerCallbacks mNavigationDrawerCallbacks;
     private View mSelectedView;
-    //private int mSelectedPosition;
 
-    public NavigationDrawerAdapter(List<NavigationItem> data) {
+    public static String sDefSystemLanguage;
+
+    NavigationDrawerAdapter(List<NavigationItem> data) {
         mData = data;
     }
 
@@ -25,15 +28,20 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         return mNavigationDrawerCallbacks;
     }
 
-    public void setNavigationDrawerCallbacks(NavigationDrawerCallbacks navigationDrawerCallbacks) {
+    void setNavigationDrawerCallbacks(NavigationDrawerCallbacks navigationDrawerCallbacks) {
         mNavigationDrawerCallbacks = navigationDrawerCallbacks;
     }
 
+    @NonNull
     @Override
     public NavigationDrawerAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.drawer_row, viewGroup, false);
         final ViewHolder viewHolder = new ViewHolder(v);
         viewHolder.itemView.setClickable(true);
+
+        sDefSystemLanguage = Locale.getDefault().getLanguage();
+
+
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                                                    @Override
                                                    public void onClick(View v) {
@@ -55,24 +63,21 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     @Override
     public void onBindViewHolder(NavigationDrawerAdapter.ViewHolder viewHolder, int i) {
         viewHolder.textView.setText(mData.get(i).getText());
-        viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(mData.get(i).getDrawable(), null, null, null);
-//        if (mSelectedPosition == i) {
-//            if (mSelectedView != null) {
-//                mSelectedView.setSelected(false);
-//            }
-//            mSelectedPosition = i;
-//            mSelectedView = viewHolder.itemView;
-//            mSelectedView.setSelected(true);
-//        } else {
-//            if (mSelectedView != null) {
-//                mSelectedView.setSelected(false);
-//            }
-//        }
+
+        if(sDefSystemLanguage.equals("ar"))
+        {
+            viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, mData.get(i).getDrawable(), null);
+
+        }else
+        {
+            viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(mData.get(i).getDrawable(), null, null, null);
+
+        }
+
     }
 
 
-    public void selectPosition(int position) {
-       // mSelectedPosition = position;
+    void selectPosition(int position) {
         notifyItemChanged(position);
     }
 
@@ -86,7 +91,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
         public ViewHolder(View itemView) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(R.id.item_name);
+            textView = itemView.findViewById(R.id.item_name);
         }
     }
 }

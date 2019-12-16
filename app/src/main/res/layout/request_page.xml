@@ -86,6 +86,7 @@
                     android:layout_height="@dimen/_90sdp"
                     android:layout_marginLeft="@dimen/_15sdp"
                     android:id="@+id/upload_img"
+                    android:padding="@dimen/_5sdp"
                     android:background="@drawable/descripition_bg"
                     />
                 <LinearLayout

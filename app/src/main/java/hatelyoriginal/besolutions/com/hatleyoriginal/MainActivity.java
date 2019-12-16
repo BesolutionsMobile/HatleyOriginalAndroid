@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 
@@ -17,7 +18,9 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.Field;
+import java.util.Locale;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -25,6 +28,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.Apicalls;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.NetworkInterface;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.ResponseModel;
@@ -86,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
 
     private ProgressDialog pd;
 
+    public static String sDefSystemLanguage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,8 +100,19 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
 
         tinyDB = new TinyDB(this);
 
+        sDefSystemLanguage = Locale.getDefault().getLanguage();
+
         mToolbar = findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
+
+        if(sDefSystemLanguage.equals("ar"))
+        {
+            mToolbar.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+        }else
+            {
+                mToolbar.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+            }
+
 
         getActionBarTextView().setVisibility(View.GONE);
 
@@ -441,6 +457,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
             startActivity(new Intent(this, StarActivity.class));
         } else {
             tinyDB.putBoolean("isLoggedIn", false);
+            tinyDB.putBoolean("fingerprint",false);
             startActivity(new Intent(this, LoginActivity.class));
         }
     }

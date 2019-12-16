@@ -20,6 +20,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -59,6 +62,8 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
 
     ProgressDialog pd;
 
+    String token;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -71,6 +76,14 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
 
         context = getActivity();
 
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                token = instanceIdResult.getToken();
+                // send it to server
+            }
+        });
+
         SupportMapFragment supportMapFragment  = (SupportMapFragment) Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.map);
         assert supportMapFragment != null;
         supportMapFragment.getMapAsync(this);
@@ -80,14 +93,16 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
             public void onClick(View v) {
                 pd = new ProgressDialog(context);
                 pd.setMessage("Loading...");
+                pd.setCancelable(false);
                 pd.show();
                 if (editPrice.getText().toString().equals("") || editPrice.getText().toString().isEmpty()) {
 
                     Toasty.error(context, "You Must Enter a Price", Toast.LENGTH_SHORT).show();
+                    pd.cancel();
 
                 } else {
 
-                    new Apicalls(context, Bill_Amount.this).bill_amount(tinyDB.getString("orderID"), editPrice.getText().toString());
+                    new Apicalls(context, Bill_Amount.this).bill_amount(tinyDB.getString("orderID"), editPrice.getText().toString(),token);
                 }
 
             }
@@ -136,10 +151,19 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
     public void OnError(VolleyError error) {
         pd.cancel();
         if (error.networkResponse.statusCode == 400) {
+
             Toasty.error(context, "Order Already Finished", Toast.LENGTH_SHORT).show();
+
         } else if ((error.networkResponse.statusCode == 500)) {
 
-            Toasty.success(context, "Order Failed With 500", Toast.LENGTH_LONG).show();
+           // Toasty.success(context, "Order Failed With 500", Toast.LENGTH_LONG).show();
+
+            pd.cancel();
+
+            Toasty.success(context, "Order has Finished Successfully", Toast.LENGTH_LONG).show();
+
+            EventBus.getDefault().post(new AddButtonClick("Finished"));
+            dismiss();
 
            // EventBus.getDefault().post(new AddButtonClick("Finished"));
            // dismiss();

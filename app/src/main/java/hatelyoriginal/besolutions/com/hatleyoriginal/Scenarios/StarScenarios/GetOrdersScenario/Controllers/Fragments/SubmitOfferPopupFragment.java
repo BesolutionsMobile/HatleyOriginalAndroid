@@ -21,6 +21,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -84,83 +87,110 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
 
     String end;
 
+    String token;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.order_info, container);
+        try
+        {
+            rootView = inflater.inflate(R.layout.order_info, container);
 
-        tinyDB = new TinyDB(getActivity());
+            tinyDB = new TinyDB(getActivity());
 
-        unbinder = ButterKnife.bind(this, rootView);
+            FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+                @Override
+                public void onSuccess(InstanceIdResult instanceIdResult) {
+                    token = instanceIdResult.getToken();
+                    // send it to server
+                }
+            });
 
-
-        supportMapFragment = (SupportMapFragment) Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.map2);
-        assert supportMapFragment != null;
-        supportMapFragment.getMapAsync(this);
-
-
-        username.setText(tinyDB.getString("clientName"));
-        //SET RATING
-
-        float rate = (float) tinyDB.getDouble("clientRating", 0.0);
-        ratings.setRating(rate);
-        //ORDERS COUNT
-
-        orderscount.setText(String.valueOf(tinyDB.getInt("clientOrdersCount")));
-        //SET ORDER NAME
-
-        orderName.setText(tinyDB.getString("orderTitle"));
-        //SET FROM
-
-        from.setText(tinyDB.getString("orderFrom"));
-        //SET TO
-
-        to.setText(tinyDB.getString("orderTo"));
+            unbinder = ButterKnife.bind(this, rootView);
 
 
-        //SEND OFFER
+            supportMapFragment = (SupportMapFragment) Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.map2);
+            assert supportMapFragment != null;
+            supportMapFragment.getMapAsync(this);
 
-        createOffer.setOnClickListener(view -> {
 
-            if (expectedArrivalTime.getText().toString().equals("")) {
+            username.setText(tinyDB.getString("clientName"));
+            //SET RATING
 
-                Toasty.error(getActivity(), "Please enter delivery time", Toast.LENGTH_LONG).show();
+            float rate = (float) tinyDB.getDouble("clientRating", 0.0);
+            ratings.setRating(rate);
+            //ORDERS COUNT
 
-            } else if (expectedPrice.getText().toString().equals("")) {
+            orderscount.setText(String.valueOf(tinyDB.getInt("clientOrdersCount")));
+            //SET ORDER NAME
 
-                Toasty.error(getActivity(), "Please enter expected price", Toast.LENGTH_LONG).show();
+            orderName.setText(tinyDB.getString("orderTitle"));
+            //SET FROM
 
-            } else {
+            from.setText(tinyDB.getString("orderFrom"));
+            //SET TO
 
-                new Apicalls(getActivity(), SubmitOfferPopupFragment.this).Submit_Offer("0", String.valueOf(tinyDB.getInt("orderSubmitID")),
-                        end, expectedPrice.getText().toString());
+            to.setText(tinyDB.getString("orderTo"));
 
-                pd = new ProgressDialog(getActivity());
-                pd.setMessage("Loading...");
-                pd.show();
-            }
 
-        });
+            //SEND OFFER
 
-        //CLOSE OFFER
+            createOffer.setOnClickListener(view -> {
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dismiss();
-            }
-        });
+                if (expectedArrivalTime.getText().toString().equals("")) {
 
-        //ARRIVAL TIME
-        expectedArrivalTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                    Toasty.error(getActivity(), "Please enter delivery time", Toast.LENGTH_LONG).show();
 
-                get_date_picker(expectedArrivalTime);
-            }
-        });
+                } else if (expectedPrice.getText().toString().equals("")) {
+
+                    Toasty.error(getActivity(), "Please enter expected price", Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    new Apicalls(getActivity(), SubmitOfferPopupFragment.this).Submit_Offer("0", String.valueOf(tinyDB.getInt("orderSubmitID")),
+                            end, expectedPrice.getText().toString(),token);
+
+                    pd = new ProgressDialog(getActivity());
+                    pd.setMessage("Loading...");
+                    pd.show();
+                }
+
+            });
+
+            //CLOSE OFFER
+
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dismiss();
+                }
+            });
+
+            //ARRIVAL TIME
+            expectedArrivalTime.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
+                    Calendar mcurrentDate = Calendar.getInstance();
+                    int mYear = mcurrentDate.get(Calendar.YEAR);
+                    int mMonth = mcurrentDate.get(Calendar.MONTH);
+                    int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+                    int selectedmonth = mMonth + 1;
+                    get_time_picker(mYear,selectedmonth,mDay,expectedArrivalTime);
+
+                    //get_date_picker(expectedArrivalTime);
+                }
+            });
+        }catch (Exception e)
+        {
+
+        }
+
+
 
 
         return rootView;
@@ -196,13 +226,21 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
 
     @Override
     public void OnError(VolleyError error) {
+
         pd.cancel();
 
+        if(error.networkResponse.statusCode == 500)
+        {
+            StringWriter errors = new StringWriter();
+            error.printStackTrace(new PrintWriter(errors));
 
-        StringWriter errors = new StringWriter();
-        error.printStackTrace(new PrintWriter(errors));
+            Toasty.error(getActivity(), "Offer Not Sent." + " with " + "500", Toast.LENGTH_LONG).show();
+        }else if(error.networkResponse.statusCode == 400)
+        {
+            Toasty.error(getActivity(), "Offer Not Sent." + " with " + "400", Toast.LENGTH_LONG).show();
+        }
 
-        Toasty.error(getActivity(), "Offer Not Sent.", Toast.LENGTH_LONG).show();
+
 
     }
 
@@ -246,6 +284,7 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
             // TODO Auto-generated method stub
             /*      Your code   to get date and time    */
             selectedmonth = selectedmonth + 1;
+
             //GET TIME PICKER
             get_time_picker(selectedyear, selectedmonth, selectedday, arrival_time);
         }, mYear, mMonth, mDay);
@@ -277,15 +316,21 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
     public void onDestroyView() {
         super.onDestroyView();
 
+        try
+        {
+            assert getFragmentManager() != null;
+            Fragment fragment = (getFragmentManager().findFragmentById(R.id.map2));
+            FragmentTransaction ft = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+            assert fragment != null;
+            ft.remove(fragment);
+            ft.commit();
 
-        assert getFragmentManager() != null;
-        Fragment fragment = (getFragmentManager().findFragmentById(R.id.map2));
-        FragmentTransaction ft = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-        assert fragment != null;
-        ft.remove(fragment);
-        ft.commit();
+            unbinder.unbind();
 
+        }catch (Exception e)
+        {
 
-        unbinder.unbind();
+        }
+
     }
 }

@@ -38,10 +38,11 @@ public class fingerprint extends AppCompatActivity {
     }
 
     private void authenticateUserFingerprint() {
-        final ImageView finger = (ImageView)findViewById(R.id.finger);
+
         goldfinger.authenticate(new Goldfinger.Callback() {
             @Override
             public void onError(Error error) {
+
                 Toasty.error(fingerprint.this, "Not Match", Toast.LENGTH_LONG).show();
 
             }
@@ -49,7 +50,7 @@ public class fingerprint extends AppCompatActivity {
             @Override
             public void onSuccess(String value) {
                 //login.setEnabled(true);
-                Toasty.success(fingerprint.this, "Successfully", Toast.LENGTH_LONG).show();
+                //Toasty.success(fingerprint.this, "Successfully", Toast.LENGTH_LONG).show();
 
                 if(tinyDB.getString("userType").equals("1"))
                 {
@@ -58,7 +59,6 @@ public class fingerprint extends AppCompatActivity {
                     {
                         startActivity(new Intent(fingerprint.this, StarActivity.class));
                     }
-
 
                 finish();
             }

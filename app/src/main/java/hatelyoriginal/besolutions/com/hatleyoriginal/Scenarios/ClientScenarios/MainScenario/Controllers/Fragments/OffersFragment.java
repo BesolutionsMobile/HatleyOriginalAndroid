@@ -2,7 +2,6 @@ package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.ClientScenarios.
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,18 +12,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.VolleyError;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -32,6 +19,17 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
@@ -39,11 +37,9 @@ import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.Apicalls;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.NetworkInterface;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.ResponseModel;
 import hatelyoriginal.besolutions.com.hatleyoriginal.R;
-import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.ClientScenarios.GetOffersScenario.Models.MainOffersResponse;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.ClientScenarios.GetOffersScenario.Models.Offer;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.ClientScenarios.GetOffersScenario.Models.Offers;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.ClientScenarios.GetOffersScenario.Patterns.available_offer_adapter;
-import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.ClientScenarios.OrderingScenario.Models.Orders;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.TinyDB;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.utils_adapter;
 
@@ -100,6 +96,7 @@ public class OffersFragment extends Fragment implements NetworkInterface {
         cancel.setOnClickListener(view1 -> {
 
             pd.setMessage("Loading...");
+            pd.setCancelable(false);
             pd.show();
             cancel_order_num = 2;
             new Apicalls(getActivity(), OffersFragment.this).cancel_order(tinyDB.getString("orderID"));
@@ -124,11 +121,21 @@ public class OffersFragment extends Fragment implements NetworkInterface {
         cancelLayout.setVisibility(View.INVISIBLE);
 
         //SET VISIBALITY GONE
-        if (tinyDB.getString("orderID").equals("0") || tinyDB.getString("orderID").isEmpty()) {
+        /*if (tinyDB.getString("orderID").equals("0") || tinyDB.getString("orderID").isEmpty()) {
             cancelLayout.setVisibility(View.INVISIBLE);
         }else
             {
                 cancelLayout.setVisibility(View.VISIBLE);
+            }*/
+
+        if(tinyDB.getString("orderActive").equals("True"))
+        {
+            cancelLayout.setVisibility(View.VISIBLE);
+
+        }else
+            {
+                cancelLayout.setVisibility(View.INVISIBLE);
+
             }
 
         //SWIPE REFRESH
@@ -145,6 +152,16 @@ public class OffersFragment extends Fragment implements NetworkInterface {
             new Apicalls(getActivity(), OffersFragment.this).Get_data(tinyDB.getString("orderID"));
 
             swipNotif.setRefreshing(false);
+
+            if(tinyDB.getString("orderActive").equals("True"))
+            {
+                cancelLayout.setVisibility(View.VISIBLE);
+
+            }else
+            {
+                cancelLayout.setVisibility(View.INVISIBLE);
+
+            }
 
         });
     }
@@ -179,6 +196,8 @@ public class OffersFragment extends Fragment implements NetworkInterface {
 
             tinyDB.putString("orderID", "0");
 
+            tinyDB.putString("orderActive","False");
+
             // Should Refresh
 
             final OffersFragment card = new OffersFragment();
@@ -203,9 +222,13 @@ public class OffersFragment extends Fragment implements NetworkInterface {
 
             if (offerss.getOffers().size() == 0) {
 
-                String no_data = this.getString(R.string.no_data);
-                nodata.setText(no_data);
-                loading.setVisibility(View.GONE);
+                try
+                {
+                    String no_data = this.getString(R.string.no_data);
+                    nodata.setText(no_data);
+                    loading.setVisibility(View.GONE);
+                }catch (Exception e){}
+
 
             } else {
 
@@ -258,7 +281,7 @@ public class OffersFragment extends Fragment implements NetworkInterface {
             nodata.setText(no_data);
             cancelLayout.setVisibility(View.GONE);
             loading.setVisibility(View.GONE);
-        }catch (Exception e)
+        }catch (Exception ignored)
         {
 
         }

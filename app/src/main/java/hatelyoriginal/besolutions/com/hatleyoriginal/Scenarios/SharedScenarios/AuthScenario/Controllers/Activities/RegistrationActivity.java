@@ -75,7 +75,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
     String token;
 
     TinyDB tinyDB;
-    
+
     String imageURL;
 
 
@@ -153,7 +153,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
                     //CALL API
                     imageURL = "image";
                     new Apicalls(RegistrationActivity.this,RegistrationActivity.this).insertUser(username.getText().toString()
-                            ,email.getText().toString(),password.getText().toString(),coPassword.getText().toString(),token);
+                            ,email.getText().toString(),password.getText().toString(),coPassword.getText().toString(),token,imageURL);
                 }
 
             }

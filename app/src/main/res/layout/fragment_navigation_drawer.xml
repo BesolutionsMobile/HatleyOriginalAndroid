@@ -8,13 +8,13 @@
     <include layout="@layout/navigation_header"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/drawerList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/myDrawerBackground"
         android:clickable="true"
         android:fitsSystemWindows="true"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:focusable="true" />
 
 </LinearLayout>

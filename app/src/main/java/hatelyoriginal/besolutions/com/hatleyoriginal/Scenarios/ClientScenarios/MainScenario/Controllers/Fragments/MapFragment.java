@@ -168,6 +168,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, (float) 15.0));
     }
 
+
     //IF GRANTED PREMISSION DONE GET CURRENT LOCATION
     private void getloca() {
         if (mLocationPermissionsGranted) {
@@ -180,6 +181,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
         }
     }
+
 
     //GET CURRENT LOCATION
     private void getDeviceLocation() {
@@ -237,25 +239,25 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         mLocationPermissionsGranted = false;
 
-        switch (requestCode) {
-            case LOCATION_PERMISSION_REQUEST_CODE: {
-                if (grantResults.length > 0) {
-                    for (int i = 0; i < grantResults.length; i++) {
-                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                            mLocationPermissionsGranted = false;
-                            return;
-                        }
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0) {
+                for (int grantResult : grantResults) {
+                    if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                        mLocationPermissionsGranted = false;
+                        return;
                     }
-                    mLocationPermissionsGranted = true;
-                    //initialize our map
                 }
+                mLocationPermissionsGranted = true;
+                //initialize our map
             }
         }
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -281,8 +283,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         confirm.setOnClickListener(view -> {
 
-            if(!place_name.isEmpty())
-            {
+
+            try {
+
                 tinyDB.putDouble("orderLat",lat);
                 tinyDB.putDouble("orderLong",lng);
                 tinyDB.putString("orderPlace",place_name);
@@ -297,13 +300,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 fragmentTransaction.commit();
 
                 Toasty.success(getActivity(),"Added Successfully",Toast.LENGTH_LONG).show();
-            }else
-                {
-                    Toasty.error(getActivity(),"Select a Place First",Toast.LENGTH_LONG).show();
 
-                }
+            }catch (Exception e)
+            {
+                Toasty.error(getActivity(),"Select Order Place First",Toast.LENGTH_LONG).show();
 
-
+            }
 
         });
     }
@@ -353,6 +355,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         final AlertDialog alert = builder.create();
         alert.show();
     }
+
 
     private void statusCheck() {
 

@@ -93,7 +93,7 @@ public class splash_screen extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 // start HomeActivity
-                Intent intent=new Intent(context, second_class);
+                Intent intent = new Intent(context, second_class);
                 context.startActivity(intent);
                 ((AppCompatActivity)context).finish();
             }

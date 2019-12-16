@@ -18,6 +18,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.Field;
+import java.util.Locale;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -71,6 +72,9 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
 
     private ProgressDialog pd;
 
+    public static String sDefSystemLanguage;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,8 +83,18 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
 
         tinyDB = new TinyDB(this);
 
+        sDefSystemLanguage = Locale.getDefault().getLanguage();
+
         mToolbar = findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
+
+        if(sDefSystemLanguage.equals("ar"))
+        {
+            mToolbar.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+        }else
+        {
+            mToolbar.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+        }
 
         getActionBarTextView().setVisibility(View.GONE);
 
@@ -311,6 +325,7 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
         }else
             {
                 tinyDB.putBoolean("isLoggedIn",false);
+                tinyDB.putBoolean("fingerprint",false);
                 startActivity(new Intent(this, LoginActivity.class));
             }
 

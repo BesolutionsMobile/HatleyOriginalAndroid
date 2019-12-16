@@ -4,7 +4,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layoutDirection="ltr"
     android:orientation="vertical"
     tools:context=".Scenarios.SideMenuScenarios.Controllers.Activities.personal_info">
 
@@ -13,9 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/_10sdp"
-        android:gravity="center|left"
-        >
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:gravity="center">
+
         <ImageView
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_20sdp"
@@ -25,18 +25,19 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="left|center"
+            android:gravity="center_vertical"
             android:id="@+id/name"
-            android:paddingLeft="@dimen/_3sdp"
-            />
+            android:paddingStart="@dimen/_3sdp"
+            android:paddingEnd="@dimen/_3sdp"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/linChangeEmail"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/_10sdp"
-        android:gravity="center|left"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:gravity="center"
         >
         <ImageView
             android:layout_width="@dimen/_30sdp"
@@ -47,9 +48,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="left|center"
+            android:gravity="center_vertical"
             android:id="@+id/email"
-            android:paddingLeft="@dimen/_3sdp"
+            android:paddingStart="@dimen/_3sdp"
+            android:paddingEnd="@dimen/_3sdp"
             />
     </LinearLayout>
     <LinearLayout
@@ -57,8 +59,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/_10sdp"
-        android:gravity="center|left"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:gravity="center"
         >
         <ImageView
             android:layout_width="@dimen/_30sdp"
@@ -68,8 +71,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="left|center"
-            android:paddingLeft="@dimen/_3sdp"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/_3sdp"
+            android:paddingEnd="@dimen/_3sdp"
             android:text="@string/changepass"
             />
     </LinearLayout>
@@ -78,8 +82,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/_10sdp"
-        android:gravity="center|left"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:gravity="center"
         >
         <ImageView
             android:layout_width="@dimen/_30sdp"
@@ -89,9 +94,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="left|center"
+            android:gravity="center_vertical"
             android:text="@string/addphone"
-            android:paddingLeft="@dimen/_3sdp"
+            android:paddingStart="@dimen/_3sdp"
+            android:paddingEnd="@dimen/_3sdp"
             />
     </LinearLayout>
     <LinearLayout
@@ -99,21 +105,24 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/_10sdp"
-        android:gravity="center|left"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:gravity="center"
         >
         <ImageView
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_20sdp"
             android:src="@drawable/nationalid"
+            android:layout_gravity="center"
             android:padding="@dimen/_3sdp"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="left|center"
+            android:gravity="center_vertical"
             android:text="@string/nationalid"
-            android:paddingLeft="@dimen/_3sdp"
+            android:paddingStart="@dimen/_3sdp"
+            android:paddingEnd="@dimen/_3sdp"
             />
     </LinearLayout>
     <LinearLayout
@@ -121,8 +130,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/_10sdp"
-        android:gravity="center|left"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:gravity="center"
         >
         <ImageView
             android:layout_width="@dimen/_30sdp"
@@ -133,9 +143,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="left|center"
+            android:gravity="center_vertical"
             android:text="@string/addphoto"
-            android:paddingLeft="@dimen/_3sdp"
+            android:paddingStart="@dimen/_3sdp"
+            android:paddingEnd="@dimen/_3sdp"
             />
     </LinearLayout>
 </LinearLayout>

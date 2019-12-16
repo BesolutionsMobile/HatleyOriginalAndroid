@@ -1,5 +1,6 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.ClientScenarios.MainScenario.Controllers.Fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,8 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
@@ -48,6 +52,7 @@ public class ReactOfferPopUpFragment extends DialogFragment implements NetworkIn
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    private ProgressDialog pd;
 
     TinyDB tinyDB;
 
@@ -73,11 +78,21 @@ public class ReactOfferPopUpFragment extends DialogFragment implements NetworkIn
     @BindView(R.id.dismiss)
     Button dismiss;
 
+    String token;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.star_info, container);
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                token = instanceIdResult.getToken();
+                // send it to server
+            }
+        });
 
         context = getActivity();
 
@@ -108,7 +123,11 @@ public class ReactOfferPopUpFragment extends DialogFragment implements NetworkIn
             @Override
             public void onClick(View view) {
                 x = 1;
-                new Apicalls(getActivity(), ReactOfferPopUpFragment.this).AcceptOffer(String.valueOf(tinyDB.getInt("offerID")));
+                pd = new ProgressDialog(getActivity());
+                pd.setMessage("Loading...");
+                pd.setCancelable(false);
+                pd.show();
+                new Apicalls(getActivity(), ReactOfferPopUpFragment.this).AcceptOffer(String.valueOf(tinyDB.getInt("offerID")),token);
             }
         });
         //REJECT BUTTON
@@ -117,6 +136,10 @@ public class ReactOfferPopUpFragment extends DialogFragment implements NetworkIn
             @Override
             public void onClick(View view) {
                 x = 2;
+                pd = new ProgressDialog(getActivity());
+                pd.setMessage("Loading...");
+                pd.setCancelable(false);
+                pd.show();
                 new Apicalls(getActivity(), ReactOfferPopUpFragment.this).RejectOffer(String.valueOf(tinyDB.getInt("offerID")));
 
                 dismiss();
@@ -160,6 +183,8 @@ public class ReactOfferPopUpFragment extends DialogFragment implements NetworkIn
     @Override
     public void OnResponse(ResponseModel model) {
 
+        pd.cancel();
+
         if (x == 1) {
 
             Toasty.success(Objects.requireNonNull(getActivity()), "Offer Accepted Successfully", Toast.LENGTH_LONG).show();
@@ -195,7 +220,9 @@ public class ReactOfferPopUpFragment extends DialogFragment implements NetworkIn
     @Override
     public void OnError(VolleyError error) {
 
-        Toasty.success(getActivity(), "Offer AlReady Accepted", Toast.LENGTH_LONG).show();
+        pd.cancel();
+
+        Toasty.success(context, "Offer AlReady Accepted", Toast.LENGTH_LONG).show();
     }
 
     @Override

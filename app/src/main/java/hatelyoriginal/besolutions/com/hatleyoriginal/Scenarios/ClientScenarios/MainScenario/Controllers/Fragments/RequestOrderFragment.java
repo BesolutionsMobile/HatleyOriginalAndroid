@@ -1,15 +1,22 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.ClientScenarios.MainScenario.Controllers.Fragments;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +27,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -30,17 +40,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -80,6 +94,8 @@ public class RequestOrderFragment extends Fragment implements NetworkInterface {
 
     String end;
 
+    String token;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -97,20 +113,49 @@ public class RequestOrderFragment extends Fragment implements NetworkInterface {
 
         tinyDB = new TinyDB(getActivity());
 
-        final utils utils = new utils(getActivity());
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                token = instanceIdResult.getToken();
+                // send it to server
+            }
+        });
 
         //upload image
         uploadImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                choosePhotoFromGallary(getActivity());
+                if(ActivityCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                {
+                    requestPermissions(
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            2000);
+                }
+                else {
+                    choosePhotoFromGallary(getActivity());
+                }
             }
         });
 
 
         //SET ON DIALOG Delivery time
-        deliveryTime.setOnClickListener(view12 -> get_date_picker());
+       // deliveryTime.setOnClickListener(view12 -> get_date_picker());
+
+        deliveryTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Calendar mcurrentDate = Calendar.getInstance();
+                int mYear = mcurrentDate.get(Calendar.YEAR);
+                int mMonth = mcurrentDate.get(Calendar.MONTH);
+                int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+                int selectedmonth = mMonth + 1;
+                get_time_picker(mYear,selectedmonth,mDay);
+            }
+        });
 
         //ORDER
         order.setOnClickListener(view13 -> {
@@ -153,7 +198,7 @@ public class RequestOrderFragment extends Fragment implements NetworkInterface {
                 //CALL API
                 new Apicalls(getActivity(), RequestOrderFragment.this).Insert_Order(descripition.getText().toString(), "data:image/jpeg;base64", String.valueOf(cal_distance(lat_f, lng_f, lat_f2, lng_f2))
                         , dur, code.getText().toString(), end, place_name, user_place,
-                        String.valueOf(lat2), String.valueOf(lng2), String.valueOf(lat), String.valueOf(lng));
+                        String.valueOf(lat2), String.valueOf(lng2), String.valueOf(lat), String.valueOf(lng),token);
             }
         });
 
@@ -189,36 +234,37 @@ public class RequestOrderFragment extends Fragment implements NetworkInterface {
     }
 
     @Override
-    public void startActivityForResult(Intent data, int requestCode) {
-        super.startActivityForResult(data, requestCode);
-
-        if (requestCode == RESULT_OK) {
-
-            Uri selectedImage = data.getData();
-            InputStream imageStream = null;
-            try {
-
-                assert selectedImage != null;
-                imageStream = Objects.requireNonNull(getActivity()).getContentResolver().openInputStream(selectedImage);
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //super method removed
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1000) {
+                Uri returnUri = data.getData();
+                Bitmap bitmapImage = null;
+                try {
+                    bitmapImage = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getActivity()).getContentResolver(), returnUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                uploadImg.setImageBitmap(bitmapImage);
             }
+        }
+    }
+        //Uri returnUri;
+        //returnUri = data.getData();
 
-            Bitmap selectedPhoto = BitmapFactory.decodeStream(imageStream);
-            Bitmap bitmaps = Bitmap.createScaledBitmap(selectedPhoto, 300, 300, true);
-            uploadImg.setImageBitmap(bitmaps);
+    private void choosePhotoFromGallary(Context context) {
 
+        Intent cameraIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        if (cameraIntent.resolveActivity(context.getPackageManager()) != null) {
+            startActivityForResult(cameraIntent, 1000);
         }
     }
 
-    public void choosePhotoFromGallary(Context context) {
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        ((AppCompatActivity)context).startActivityForResult(galleryIntent,72);
-    }
 
     //GET DATE PICKER
     private void get_date_picker() {
+
+
         // TODO Auto-generated method stub
         //To show current date in the datepicker
         Calendar mcurrentDate = Calendar.getInstance();
@@ -325,6 +371,8 @@ public class RequestOrderFragment extends Fragment implements NetworkInterface {
 
             //SAVE DELIVERY TIME
             tinyDB.putString("deliveryTime", end);
+
+            tinyDB.putString("orderActive","True");
 
 
             RequestLoading loading = new RequestLoading();

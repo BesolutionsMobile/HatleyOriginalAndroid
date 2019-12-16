@@ -50,7 +50,7 @@ public class Change_phone implements NetworkInterface {
 
         editphone = dialog.findViewById(R.id.editPhone);
 
-        if (!tinyDB.getString("userPhone").equals("0000") || tinyDB.getString("userPhone") != null)
+        if (!tinyDB.getString("userPhone").equals("0000") || !tinyDB.getString("userPhone").equals("null") || tinyDB.getString("userPhone") != null)
         {
             editphone.setText(tinyDB.getString("userPhone"));
         }

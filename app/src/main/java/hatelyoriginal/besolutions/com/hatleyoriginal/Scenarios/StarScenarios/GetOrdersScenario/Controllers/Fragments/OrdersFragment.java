@@ -1,15 +1,32 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.StarScenarios.GetOrdersScenario.Controllers.Fragments;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -21,11 +38,14 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.Apicalls;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.NetworkInterface;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.ResponseModel;
@@ -33,6 +53,7 @@ import hatelyoriginal.besolutions.com.hatleyoriginal.R;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.ClientScenarios.OrderingScenario.Models.OrderItem;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.ClientScenarios.OrderingScenario.Models.Orders;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.ClientScenarios.OrderingScenario.Patterns.available_order_adapter;
+import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.GPSTracker;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.utils_adapter;
 
 public class OrdersFragment extends Fragment implements NetworkInterface {
@@ -46,6 +67,9 @@ public class OrdersFragment extends Fragment implements NetworkInterface {
     private TextView nodata;
 
     private ProgressDialog pd;
+
+
+    String token;
 
     @Nullable
     @Override
@@ -63,13 +87,38 @@ public class OrdersFragment extends Fragment implements NetworkInterface {
 
         ButterKnife.bind(this, view);
 
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                token = instanceIdResult.getToken();
+                // send it to server
+            }
+        });
+
         availableOrderlist = Objects.requireNonNull(getActivity()).findViewById(R.id.available_orderlist);
         nodata = getActivity().findViewById(R.id.nodata);
         loading = getActivity().findViewById(R.id.loading);
 
+        // check if GPS enabled
+        GPSTracker gpsTracker = new GPSTracker(getActivity(),getActivity());
+
+        double current_lat;
+        double current_lng;
+        if (gpsTracker.canGetLocation())
+        {
+            current_lat = gpsTracker.getLatitude();
+            current_lng = gpsTracker.getLongitude();
+
+        }else
+        {
+            current_lat = 30.068558;
+            current_lng = 31.336427;
+            gpsTracker.showSettingsAlert();
+        }
+
         swipe_refresh();
 
-        new Apicalls(getActivity(), OrdersFragment.this).Get_order_data();
+        new Apicalls(getActivity(), OrdersFragment.this).Get_order_data("30.068558","31.336427",token);
 
     }
 
@@ -82,7 +131,7 @@ public class OrdersFragment extends Fragment implements NetworkInterface {
         SwipeRefreshLayout swipNotif = Objects.requireNonNull(getActivity()).findViewById(R.id.swipe);
         swipNotif.setOnRefreshListener(() -> {
 
-            new Apicalls(getActivity(), OrdersFragment.this).Get_order_data();
+            new Apicalls(getActivity(), OrdersFragment.this).Get_order_data("30.068558","31.336427",token);
             swipNotif.setRefreshing(false);
         });
     }
@@ -185,4 +234,6 @@ public class OrdersFragment extends Fragment implements NetworkInterface {
        }
 
     }
+
+
 }
