@@ -3,10 +3,13 @@ package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.StarScenarios.Ge
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -53,9 +56,9 @@ import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.TinyDB;
 
 public class SubmitOfferPopupFragment extends DialogFragment implements NetworkInterface, OnMapReadyCallback {
 
-    TinyDB tinyDB;
+    private TinyDB tinyDB;
 
-    ProgressDialog pd;
+    private ProgressDialog pd;
 
     @BindView(R.id.cancel)
     ImageView cancel;
@@ -78,16 +81,13 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
     @BindView(R.id.create_offer)
     Button createOffer;
 
-    Unbinder unbinder;
+    private Unbinder unbinder;
 
-    SupportMapFragment supportMapFragment;
+    private View rootView;
 
-    View rootView;
+    private String end;
 
-
-    String end;
-
-    String token;
+    private String token;
 
 
     @Nullable
@@ -111,7 +111,7 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
             unbinder = ButterKnife.bind(this, rootView);
 
 
-            supportMapFragment = (SupportMapFragment) Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.map2);
+            SupportMapFragment supportMapFragment = (SupportMapFragment) Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.map2);
             assert supportMapFragment != null;
             supportMapFragment.getMapAsync(this);
 
@@ -191,6 +191,12 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
         }
 
 
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
 
 
         return rootView;
@@ -218,6 +224,8 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
 
         Toasty.success(getActivity(), "Offer Submitted Successfully", Toast.LENGTH_LONG).show();
 
+       // Toasty.success(getActivity(), model.getJsonObject().toString(), Toast.LENGTH_LONG).show();
+
         //Rejected
         EventBus.getDefault().post(new AddButtonClick("Submitted"));
 
@@ -234,7 +242,10 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
             StringWriter errors = new StringWriter();
             error.printStackTrace(new PrintWriter(errors));
 
-            Toasty.error(getActivity(), "Offer Not Sent." + " with " + "500", Toast.LENGTH_LONG).show();
+            //Toasty.error(getActivity(), "Offer Not Sent." + " with " + "500", Toast.LENGTH_LONG).show();
+
+            Toasty.error(getActivity(), "Connection Error, Offer not Sent", Toast.LENGTH_LONG).show();
+
         }else if(error.networkResponse.statusCode == 400)
         {
             Toasty.error(getActivity(), "Offer Not Sent." + " with " + "400", Toast.LENGTH_LONG).show();
@@ -244,7 +255,7 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
 
     }
 
-    public static String formatDateFromDateString(String inputDateFormat, String outputDateFormat, String inputDate) throws ParseException {
+    private static String formatDateFromDateString(String inputDateFormat, String outputDateFormat, String inputDate) throws ParseException {
 
         Date mParsedDate;
         String mOutputDateString;
@@ -327,7 +338,7 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
 
             unbinder.unbind();
 
-        }catch (Exception e)
+        }catch (Exception ignored)
         {
 
         }

@@ -4,11 +4,15 @@ package hatelyoriginal.besolutions.com.hatleyoriginal.jupiterchat.Activites;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,6 +30,7 @@ import com.google.firebase.iid.InstanceIdResult;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
@@ -102,6 +107,12 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
 
                 } else {
 
+                    Log.i("orderID" , tinyDB.getString("orderID"));
+                    Log.i("BillAmount" , editPrice.getText().toString());
+                    Log.i("FirebaseToken" , token);
+                    Log.i("UserToken" , tinyDB.getString("userToken"));
+
+
                     new Apicalls(context, Bill_Amount.this).bill_amount(tinyDB.getString("orderID"), editPrice.getText().toString(),token);
                 }
 
@@ -123,6 +134,13 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
         });
 
 
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
+
         return rootView;
 
     }
@@ -141,6 +159,8 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
 
         Toasty.success(context, "Order has Finished Successfully", Toast.LENGTH_LONG).show();
 
+        //Toasty.success(context, model.getJsonObject().toString(), Toast.LENGTH_LONG).show();
+
         EventBus.getDefault().post(new AddButtonClick("Finished"));
         dismiss();
 
@@ -150,6 +170,7 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
     @Override
     public void OnError(VolleyError error) {
         pd.cancel();
+
         if (error.networkResponse.statusCode == 400) {
 
             Toasty.error(context, "Order Already Finished", Toast.LENGTH_SHORT).show();
@@ -160,13 +181,13 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
 
             pd.cancel();
 
+            //Toasty.success(context, "Order has Finished Successfully with 500", Toast.LENGTH_LONG).show();
             Toasty.success(context, "Order has Finished Successfully", Toast.LENGTH_LONG).show();
 
             EventBus.getDefault().post(new AddButtonClick("Finished"));
             dismiss();
 
-           // EventBus.getDefault().post(new AddButtonClick("Finished"));
-           // dismiss();
+
         }
 
     }

@@ -1,17 +1,8 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.StarScenarios.GetOrdersScenario.Controllers.Fragments;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +10,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.android.volley.VolleyError;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.Gson;
@@ -36,13 +29,6 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
@@ -68,8 +54,7 @@ public class OrdersFragment extends Fragment implements NetworkInterface {
 
     private ProgressDialog pd;
 
-
-    String token;
+    private String token;
 
     @Nullable
     @Override
@@ -91,16 +76,22 @@ public class OrdersFragment extends Fragment implements NetworkInterface {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
                 token = instanceIdResult.getToken();
+
+                new Apicalls(getActivity(), OrdersFragment.this).Get_order_data("30.068558","31.336427",token);
+
                 // send it to server
             }
         });
+
+        pd = new ProgressDialog(getActivity());
+        pd.setMessage("Loading...");
 
         availableOrderlist = Objects.requireNonNull(getActivity()).findViewById(R.id.available_orderlist);
         nodata = getActivity().findViewById(R.id.nodata);
         loading = getActivity().findViewById(R.id.loading);
 
         // check if GPS enabled
-        GPSTracker gpsTracker = new GPSTracker(getActivity(),getActivity());
+       /* GPSTracker gpsTracker = new GPSTracker(getActivity(),getActivity());
 
         double current_lat;
         double current_lng;
@@ -116,16 +107,13 @@ public class OrdersFragment extends Fragment implements NetworkInterface {
             gpsTracker.showSettingsAlert();
         }
 
-        swipe_refresh();
+        swipe_refresh();*/
 
-        new Apicalls(getActivity(), OrdersFragment.this).Get_order_data("30.068558","31.336427",token);
 
     }
 
     private void swipe_refresh()
     {
-        pd = new ProgressDialog(getActivity());
-        pd.setMessage("Loading...");
 
         /// swipe Refresh
         SwipeRefreshLayout swipNotif = Objects.requireNonNull(getActivity()).findViewById(R.id.swipe);
@@ -209,7 +197,7 @@ public class OrdersFragment extends Fragment implements NetworkInterface {
                 e.printStackTrace();
             }
 
-        }catch (Exception e)
+        }catch (Exception ignored)
         {
 
         }
@@ -228,7 +216,7 @@ public class OrdersFragment extends Fragment implements NetworkInterface {
            no_orders.setVisibility(View.VISIBLE);
            pd.cancel();
 
-       }catch (Exception e)
+       }catch (Exception ignored)
        {
 
        }

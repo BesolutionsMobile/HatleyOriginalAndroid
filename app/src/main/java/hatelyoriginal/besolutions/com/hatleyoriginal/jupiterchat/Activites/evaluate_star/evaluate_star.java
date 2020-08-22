@@ -76,7 +76,7 @@ public class evaluate_star extends DialogFragment implements NetworkInterface {
     TextView txtNote3;
     @BindView(R.id.viewswitch2)
     ViewSwitcher viewswitch2;
-    Unbinder unbinder;
+    private Unbinder unbinder;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
