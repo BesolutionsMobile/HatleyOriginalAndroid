@@ -1,5 +1,8 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal.Utils;
 
+/**
+ * upload image to firebase
+ */
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -27,9 +30,11 @@ public class firebase_storage {
 
     public String uploadImage(Uri customfilepath, final Context context,Boolean isEnglish) {
 
+        //FIREBASE STORGE
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
 
+        //TINY DB
         tinyDB = new TinyDB(context);
 
         final String uploading,done,failed;
@@ -48,10 +53,12 @@ public class firebase_storage {
 
         if(customfilepath != null)
         {
+            //start progress dialog
             final ProgressDialog progressDialog = new ProgressDialog(context);
             progressDialog.setTitle(uploading);
             progressDialog.show();
 
+            //firebase storage event listner
             final StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
             ref.putFile(customfilepath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -63,6 +70,7 @@ public class firebase_storage {
                                 @Override
                                 public void onSuccess(Uri uri) {
 
+                                    //dismiss dialog
                                     progressDialog.dismiss();
 
                                     Toasty.success(context, done, Toast.LENGTH_LONG).show();

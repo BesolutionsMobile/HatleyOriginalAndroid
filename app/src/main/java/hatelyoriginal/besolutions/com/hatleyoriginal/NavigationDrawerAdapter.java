@@ -42,6 +42,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         sDefSystemLanguage = Locale.getDefault().getLanguage();
 
 
+        //CLICK ON ITEM LOISTNER
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                                                    @Override
                                                    public void onClick(View v) {
@@ -56,6 +57,8 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                                                    }
                                                }
         );
+
+        //SET BACKGROUND
         viewHolder.itemView.setBackgroundResource(R.drawable.row_selector);
         return viewHolder;
     }

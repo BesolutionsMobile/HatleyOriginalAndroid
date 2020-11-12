@@ -59,14 +59,17 @@ public class complaint extends DialogFragment implements NetworkInterface {
 
         View rootView = inflater.inflate(R.layout.complaint, container);
 
+        //define all vars
         tinyDB = new TinyDB(getActivity());
 
         unbinder = ButterKnife.bind(this, rootView);
 
         x = 1;
 
+        //call api complaint types
         new Apicalls(getActivity(),complaint.this).Get_complaint_types();
 
+        //set on click save button
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,6 +85,7 @@ public class complaint extends DialogFragment implements NetworkInterface {
 
                     x = 2;
 
+                    //call api set complaint
                     new Apicalls(getActivity(),complaint.this).set_complaint(tinyDB.getString("orderID"),idcomplaint,complaintdesc.getText().toString());
                 }
 
@@ -103,6 +107,7 @@ public class complaint extends DialogFragment implements NetworkInterface {
 
         if(x == 1)
         {
+
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
 
@@ -151,6 +156,7 @@ public class complaint extends DialogFragment implements NetworkInterface {
     @Override
     public void OnError(VolleyError error) {
 
+        //validation on all error response
         if(x == 1)
         {
             Toasty.info(Objects.requireNonNull(getActivity()), "Types Fetching Failed", Toast.LENGTH_SHORT).show();

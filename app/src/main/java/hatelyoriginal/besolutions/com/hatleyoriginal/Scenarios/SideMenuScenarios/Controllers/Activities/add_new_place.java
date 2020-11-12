@@ -38,7 +38,7 @@ public class add_new_place extends AppCompatActivity {
     }
 
 
-    //GET PLACES
+    //GET PLACES BY AUTO COMPLETE
     public void setupPlaceAutoComplete() {
         autoCompleteSupportFragment = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
         autoCompleteSupportFragment.setPlaceFields(fields);

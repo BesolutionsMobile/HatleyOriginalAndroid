@@ -80,19 +80,21 @@ public class personal_info extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.personal_info);
 
+        //DEFINE TINY DB
         tinyDB = new TinyDB(this);
 
+        //DEFINE TOOLBAR
         mToolbar = findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
 
         getActionBarTextView().setVisibility(View.GONE);
 
+        //SET TOOLBAR TITLE
         textView = mToolbar.findViewById(R.id.toolbartext);
-
         textView.setText("Personal Info");
 
+        //SET BACK BUTTON
         back = mToolbar.findViewById(R.id.back);
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,6 +103,7 @@ public class personal_info extends AppCompatActivity {
             }
         });
 
+        //DEFINE ALL VARS
         linearname = findViewById(R.id.linChangeName);
         linearemail = findViewById(R.id.linChangeEmail);
         linearid = findViewById(R.id.linChangeId);
@@ -111,12 +114,13 @@ public class personal_info extends AppCompatActivity {
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
 
-        FirebaseApp.initializeApp(this);
 
+        //INITIALIZE FIREBASE STORAGE
+        FirebaseApp.initializeApp(this);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
-
+         //CHANGE PASSWORD
         linearpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,7 +132,7 @@ public class personal_info extends AppCompatActivity {
             }
         });
 
-
+        //CHANGE PHOTO
         linearphoto.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
@@ -139,7 +143,7 @@ public class personal_info extends AppCompatActivity {
             }
         });
 
-
+        //CHANGE PHONE
         linearphone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,11 +185,13 @@ public class personal_info extends AppCompatActivity {
         });
         pictureDialog.show();
     }
+
+    // Choose Photo From Gallary
     public void choosePhotoFromGallary(Context context) {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         ((AppCompatActivity)context).startActivityForResult(galleryIntent,PICK_IMAGE_REQUEST_GALLERY);
     }
-
+    // Take Photo From Camera
     public void takePhotoFromCamera(Context context) {
 
         //From Camera
@@ -205,6 +211,8 @@ public class personal_info extends AppCompatActivity {
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
+
+    //CHOOSE FILE
     public void onChooseFile (View v){
 
         CropImage.activity()
@@ -253,7 +261,7 @@ public class personal_info extends AppCompatActivity {
         }
     }
 
-
+    // Get ActionBar TextView
     private TextView getActionBarTextView() {
         TextView titleTextView = null;
 

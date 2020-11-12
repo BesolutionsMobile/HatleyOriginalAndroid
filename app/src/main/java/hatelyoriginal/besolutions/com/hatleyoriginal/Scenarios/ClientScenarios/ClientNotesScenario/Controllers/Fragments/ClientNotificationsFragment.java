@@ -1,5 +1,9 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.ClientScenarios.ClientNotesScenario.Controllers.Fragments;
 
+/**
+ * MY NOTIFICATIONS CLASS
+ */
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -61,11 +65,14 @@ public class ClientNotificationsFragment extends Fragment implements NetworkInte
 
         ButterKnife.bind(this, view);
 
+        //CALL NOTIFICATIONS API
         new Apicalls(getActivity(), ClientNotificationsFragment.this).Get_notifcation_data();
 
+        //SWIPE REFRESH
         SwipeRefreshLayout swipNotif = Objects.requireNonNull(getActivity()).findViewById(R.id.swipe);
         swipNotif.setOnRefreshListener(() -> {
 
+            //CALL NOTIFICATIONS API AFTER SWIPE
             new Apicalls(getActivity(), ClientNotificationsFragment.this).Get_notifcation_data();
             swipNotif.setRefreshing(false);
 
@@ -94,8 +101,11 @@ public class ClientNotificationsFragment extends Fragment implements NetworkInte
             try {
 
                 if (model.getJsonObject().getString("notifications").equals("There is no Notifications")) {
+
+                    //SET TEXT NO DATA IF THERE IS NO DATA FOUND
                     String no_data = this.getString(R.string.no_data);
                     nodata.setText(no_data);
+
                     //STOP PROGRESSBAR
                     loading.setVisibility(View.GONE);
                 } else {
@@ -120,6 +130,7 @@ public class ClientNotificationsFragment extends Fragment implements NetworkInte
 
                     }
 
+                    //Recycler view adapter
                     utils_adapter adapter = new utils_adapter();
                     adapter.Adapter(notifcationList, new notifcation_adapter(getActivity(), notifcation_list), getActivity());
 
@@ -135,6 +146,7 @@ public class ClientNotificationsFragment extends Fragment implements NetworkInte
         {
 
             nodata.setText("No Notifications");
+
             //STOP PROGRESSBAR
             loading.setVisibility(View.GONE);
         }

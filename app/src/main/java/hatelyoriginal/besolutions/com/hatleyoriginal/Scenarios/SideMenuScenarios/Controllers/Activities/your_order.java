@@ -57,12 +57,12 @@ public class your_order extends AppCompatActivity implements NetworkInterface {
 
         getActionBarTextView().setVisibility(View.GONE);
 
+        //SET TOOLBAR TITLE
         textView = mToolbar.findViewById(R.id.toolbartext);
-
         textView.setText("Your Orders");
 
+        //SET BACK BUTTON
         back = mToolbar.findViewById(R.id.back);
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,6 +71,7 @@ public class your_order extends AppCompatActivity implements NetworkInterface {
             }
         });
 
+        //CALL GET ORDERS DATA
         new Apicalls(your_order.this, your_order.this).Get_myOrder();
 
 
@@ -101,6 +102,7 @@ public class your_order extends AppCompatActivity implements NetworkInterface {
             utils_adapter utils_adapter = new utils_adapter();
             utils_adapter.Adapter(orderList, new your_order_adapter(your_order.this, your_order_list), your_order.this);
 
+            //SET PLACE HOLDER IF NO DATA
             if(your_order_list.isEmpty())
             {
                 String no_data = this.getString(R.string.no_data);
@@ -109,6 +111,7 @@ public class your_order extends AppCompatActivity implements NetworkInterface {
             }
 
         } catch (JSONException e) {
+
             e.printStackTrace();
             String no_data = this.getString(R.string.no_data);
             nodata.setText(no_data);
@@ -118,12 +121,15 @@ public class your_order extends AppCompatActivity implements NetworkInterface {
 
     @Override
     public void OnError(VolleyError error) {
+
+        //SET PLACE HOLDER AND STOP LOADING
         String no_data = this.getString(R.string.no_data);
         nodata.setText(no_data);
         loading.setVisibility(View.GONE);
     }
 
 
+    //Get ActionBar TextView
     private TextView getActionBarTextView() {
         TextView titleTextView = null;
 

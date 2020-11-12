@@ -19,11 +19,14 @@ public class LoginLoading {
         Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(resource);
+
+        //PROGRESS DIALOG WIDTH HEIGHT
         int width = (int) (context.getResources().getDisplayMetrics().widthPixels * widthh);
         int height = android.view.WindowManager.LayoutParams.WRAP_CONTENT;
         dialog.getWindow().setLayout(width, height);
         dialog.show();
 
+        //CHECK TO KNOW IF ITS CLIENT OR DELIVERY MAN
         Handler handler = new Handler();
         handler.postDelayed(() -> {
             if(type.equals("1"))

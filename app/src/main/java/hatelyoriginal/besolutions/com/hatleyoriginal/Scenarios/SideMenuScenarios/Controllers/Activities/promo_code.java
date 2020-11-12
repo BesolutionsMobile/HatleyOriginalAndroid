@@ -43,17 +43,18 @@ public class promo_code extends AppCompatActivity implements NetworkInterface {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.promo_code);
 
+        //DEFINE TOOLBAR
         mToolbar = findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
 
         getActionBarTextView().setVisibility(View.GONE);
 
+        //SET TOOLBAR TITLE
         textView = mToolbar.findViewById(R.id.toolbartext);
-
         textView.setText("Promo Code");
 
+        //SET BACK BUTTON
         back = mToolbar.findViewById(R.id.back);
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,16 +63,19 @@ public class promo_code extends AppCompatActivity implements NetworkInterface {
             }
         });
 
+        //DEFINE ALL VARS
         editpromo = findViewById(R.id.editPromo);
         txtsend = findViewById(R.id.txtSend);
         txtdiscount = findViewById(R.id.txtDiscount);
         linearpromo = findViewById(R.id.linearAddSuccessfully);
 
 
+        //SEND PROMO BUTTON
         txtsend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                //CALL PROMO CODE API
                 new Apicalls(promo_code.this, promo_code.this).promoCode(editpromo.getText().toString());
             }
         });
@@ -102,6 +106,7 @@ public class promo_code extends AppCompatActivity implements NetworkInterface {
 
     }
 
+    // Get ActionBar TextView
     private TextView getActionBarTextView() {
         TextView titleTextView = null;
 
@@ -120,6 +125,7 @@ public class promo_code extends AppCompatActivity implements NetworkInterface {
     @Override
     public void OnError(VolleyError error) {
 
+        //VALIDATION ON ERROR RESPONSE
         if (error.networkResponse.statusCode == 422) {
             Toast.makeText(this, "Code Already In Use", Toast.LENGTH_SHORT).show();
             linearpromo.setVisibility(View.INVISIBLE);

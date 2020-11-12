@@ -1,5 +1,7 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SideMenuScenarios.Tools;
-
+/**
+ *CHANGE PHONE DIALOG
+ */
 import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
@@ -42,19 +44,21 @@ public class Change_phone implements NetworkInterface {
         dialog.getWindow().setLayout(width, height);
         //dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
+        //DEFINE ALL VARS
+        editphone = dialog.findViewById(R.id.editPhone);
+        btnsave = dialog.findViewById(R.id.phoneSave);
         editphone = dialog.findViewById(R.id.editPhone);
 
-        btnsave = dialog.findViewById(R.id.phoneSave);
-
+        //DEFINE TINY DB
         tinyDB = new TinyDB(context);
 
-        editphone = dialog.findViewById(R.id.editPhone);
-
+        //VALIDATION ON PHONE EDITTEXT
         if (!tinyDB.getString("userPhone").equals("0000") || !tinyDB.getString("userPhone").equals("null") || tinyDB.getString("userPhone") != null)
         {
             editphone.setText(tinyDB.getString("userPhone"));
         }
 
+        //SAVE BUTTON
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,6 +71,7 @@ public class Change_phone implements NetworkInterface {
                     editphone.setError("Phone must be less than 16 digits");
                 }
                 else {
+                    //CALL API CHANGE PHONE
                     new Apicalls(context,Change_phone.this).add_phone(editphone.getText().toString());
                 }
 

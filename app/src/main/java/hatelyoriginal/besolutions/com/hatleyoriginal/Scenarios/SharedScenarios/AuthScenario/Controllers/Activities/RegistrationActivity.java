@@ -87,6 +87,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
 
         tinyDB = new TinyDB(getApplicationContext());
 
+        //GET FIREBASE TOKEN
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
@@ -97,12 +98,14 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
 
 
 
-        //REGIST
+        //REGIST BUTTON
         regist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //VALIDATION
                 if(!coPassword.getText().toString().equals(password.getText().toString()))
                 {
+                    //set text error and yoyo library for animation
                     coPassword.setError("Password Not Match");
                     YoYo.with(Techniques.Shake)
                             .duration(700)
@@ -111,7 +114,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
                 }
                 else if(username.getText().length()<=6)
                 {
-
+                    //set text error and yoyo library for animation
                     username.setError("Username id too short!");
                     YoYo.with(Techniques.Shake)
                             .duration(700)
@@ -120,6 +123,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
                 }
                 else if(email.getText().toString().equals(""))
                 {
+                    //set text error and yoyo library for animation
                     email.setError("Please enter email");
                     YoYo.with(Techniques.Shake)
                             .duration(700)
@@ -129,6 +133,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
                 }
                 else if(password.getText().toString().equals(""))
                 {
+                    //set text error and yoyo library for animation
                     password.setError("Please enter password");
                     YoYo.with(Techniques.Shake)
                             .duration(700)
@@ -138,6 +143,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
                 }
                 else if(coPassword.getText().toString().equals(""))
                 {
+                    //set text error and yoyo library for animation
                     coPassword.setError("Please confirm password");
                     YoYo.with(Techniques.Shake)
                             .duration(700)
@@ -152,6 +158,8 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
                     pd.show();
                     //CALL API
                     imageURL = "image";
+
+                    //CALL SIGN UP API
                     new Apicalls(RegistrationActivity.this,RegistrationActivity.this).insertUser(username.getText().toString()
                             ,email.getText().toString(),password.getText().toString(),coPassword.getText().toString(),token,imageURL);
                 }

@@ -3,6 +3,7 @@ package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SharedScenarios.
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -97,10 +98,12 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
         setContentView(R.layout.login);
         ButterKnife.bind(this);
 
+        //build finger print
         goldfinger= new Goldfinger.Builder(LoginActivity.this).build();
 
         tinyDB = new TinyDB(getApplicationContext());
 
+        //GET FIREBASE TOKEN
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
@@ -110,6 +113,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
         });
 
 
+        //FB LOGIN
         facebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,14 +125,17 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
             }
         });
 
+        //LOGIN BUTTON
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                // USER INPUT VALIDATION
                 if(username.getText().toString().equals(""))
                 {
                     username.setError("Please enter username");
 
+                    //YOYO LIBRARY TO SHAKE INPUTS
                     YoYo.with(Techniques.Shake)
                             .duration(700)
                             .repeat(1)
@@ -148,7 +155,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
                     //Toast.makeText(login.this, "Please enter password", Toast.LENGTH_SHORT).show();
                 }
                 else {
-
+                  //progress bar loading
                     pd = new ProgressDialog(LoginActivity.this);
                     pd.setMessage("Loading...");
                     pd.setCancelable(false);
@@ -157,7 +164,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
                     imageURL = "image";
 
 
-
+                     //CALL LOGIN API
                     new Apicalls(LoginActivity.this, LoginActivity.this).loginUser(username.getText().toString(), password.getText().toString(), token);
                 }
             }
@@ -251,6 +258,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
     protected void onStart() {
         super.onStart();
 
+        //CHECK FOR THE FINGERPRINT IS FOUND IN THE DEVICE OR NOT  IF NOT WE WILL HIDE IT
         if (!goldfinger.hasFingerprintHardware()) {
 
             fingerPrint.setVisibility(View.GONE);
@@ -289,7 +297,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
 
             User user = loginResponse.getUser();
 
-            //Save User Info
+            //Save User Info TO LOCAL
 
             tinyDB.putString("userName",user.getName());
             tinyDB.putString("userEmail",user.getEmail());
@@ -324,10 +332,11 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
                 tinyDB.putString("userImage",imageURL);
             }
 
-            //GO TO MAIN
+            //GO TO MAIN SCREEN
             LoginLoading loading = new LoginLoading();
             loading.dialog(LoginActivity.this,R.layout.loading,.80,String.valueOf(user.getUserTypeId()));
 
+            //CANCEL PROGRESS BAR
             pd.cancel();
 
 
@@ -337,6 +346,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
     @Override
     public void OnError(VolleyError error) {
 
+        Log.e("www_oo",""+error.networkResponse);
         if(error.networkResponse.statusCode == 401)
         {
             Toasty.error(this,"Wrong User Name Or Password", Toast.LENGTH_LONG,true).show();
@@ -405,6 +415,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
 
     }
 
+    //AccessTokenTracker
     AccessTokenTracker tokenTracker = new AccessTokenTracker() {
 
         @Override
@@ -419,6 +430,8 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
         }
     };
 
+
+    //GET DATA FROM FACEBOOK
     private void loadUserProfile(AccessToken newAccessToken)
     {
         GraphRequest request = GraphRequest.newMeRequest(newAccessToken, new GraphRequest.GraphJSONObjectCallback() {

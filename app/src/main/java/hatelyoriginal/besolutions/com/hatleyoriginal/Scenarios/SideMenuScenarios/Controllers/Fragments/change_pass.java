@@ -1,5 +1,8 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SideMenuScenarios.Controllers.Fragments;
 
+/**
+ *CHANGE PASSWORD DIALOG
+ */
 import android.app.Dialog;
 import android.content.Context;
 import android.icu.text.MessagePattern;
@@ -38,12 +41,14 @@ public class change_pass implements NetworkInterface {
         int height = android.view.WindowManager.LayoutParams.WRAP_CONTENT;
         dialog.getWindow().setLayout(width, height);
         //dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+
+        //DEFINE ALL VARS
         btnsave = dialog.findViewById(R.id.passsave);
         editpass = dialog.findViewById(R.id.editPassword);
-
         editconpass = dialog.findViewById(R.id.editConPassword);
 
 
+        //ON CLICK SAVE BUTTON
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +64,7 @@ public class change_pass implements NetworkInterface {
 
                 }
                 else {
+                    //CALL API CHANE PASSWORD
                     new Apicalls(context,change_pass.this).change_password(editpass.getText().toString(),editconpass.getText().toString());
                 }
 

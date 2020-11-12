@@ -72,19 +72,23 @@ public class OrdersFragment extends Fragment implements NetworkInterface {
 
         ButterKnife.bind(this, view);
 
+        //FIREBASE TOKEN
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
                 token = instanceIdResult.getToken();
 
+                //CALL API Get order data
                 new Apicalls(getActivity(), OrdersFragment.this).Get_order_data("30.068558","31.336427",token);
 
                 // send it to server
             }
         });
 
+        //CALL PROGRESS BAR
         pd = new ProgressDialog(getActivity());
         pd.setMessage("Loading...");
+
 
         availableOrderlist = Objects.requireNonNull(getActivity()).findViewById(R.id.available_orderlist);
         nodata = getActivity().findViewById(R.id.nodata);
@@ -137,7 +141,7 @@ public class OrdersFragment extends Fragment implements NetworkInterface {
         {
 
             TextView no_orders = Objects.requireNonNull(getActivity()).findViewById(R.id.nodata);
-
+             //gson library
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
 
@@ -150,6 +154,7 @@ public class OrdersFragment extends Fragment implements NetworkInterface {
                 if(orderss.length()==0)
                 {
 
+                    //set lace holder and stop progress dilaog
                     no_orders.setVisibility(View.VISIBLE);
                     loading.setVisibility(View.GONE);
                 }
@@ -211,6 +216,7 @@ public class OrdersFragment extends Fragment implements NetworkInterface {
 
        try {
 
+           //SET PLACE HOLDER AND GONE LOADING
            loading.setVisibility(View.GONE);
            TextView no_orders = Objects.requireNonNull(getActivity()).findViewById(R.id.nodata);
            no_orders.setVisibility(View.VISIBLE);

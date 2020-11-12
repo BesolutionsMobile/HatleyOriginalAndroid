@@ -94,6 +94,7 @@ public class evaluate_star extends DialogFragment implements NetworkInterface {
 
         unbinder = ButterKnife.bind(this, rootView);
 
+        //define tiny db
         tinyDB = new TinyDB(context);
 
         username = tinyDB.getString("userName");
@@ -102,13 +103,16 @@ public class evaluate_star extends DialogFragment implements NetworkInterface {
 
         //CHANGE TEXT IN EVALUATE
 
+        //ADD IMAGE
         Glide.with(context).load(tinyDB.getString("image")).placeholder(R.drawable.starplaceholder).into(userimg);
+
 
         if (tinyDB.getString("userType").equals("2")) {
 
-            evaluateTxt.setText("Evaluate Client");
+            evaluateTxt.setText("Evaluate Client"); //SET EVALUATE TEXT
 
-            Glide.with(context).load(tinyDB.getString("image")).placeholder(R.drawable.starplaceholder).into(userimg);
+            Glide.with(context).load(tinyDB.getString("image")).placeholder(R.drawable.starplaceholder).into(userimg);   //ADD IMAGE
+
 
             updateChat();
 
@@ -151,6 +155,7 @@ public class evaluate_star extends DialogFragment implements NetworkInterface {
 
                 x = 1;
 
+                //CALL API SET RATE
                 new Apicalls(getActivity(),evaluate_star.this).set_rate(tinyDB.getString("orderID"),String.valueOf(stars_num),"");
 
 
@@ -159,6 +164,8 @@ public class evaluate_star extends DialogFragment implements NetworkInterface {
                     public void onClick(View v) {
 
                         x = 2;
+
+                        //CALL API SET RATE
                         new Apicalls(getActivity(),evaluate_star.this).set_rate(tinyDB.getString("orderID"),String.valueOf(stars_num),String.valueOf(id1));
 
                     }
@@ -170,6 +177,7 @@ public class evaluate_star extends DialogFragment implements NetworkInterface {
                     public void onClick(View v) {
 
                         x = 2;
+                        //CALL API SET RATE
                         new Apicalls(getActivity(),evaluate_star.this).set_rate(tinyDB.getString("orderID"),String.valueOf(stars_num),String.valueOf(id2));
 
 
@@ -182,6 +190,7 @@ public class evaluate_star extends DialogFragment implements NetworkInterface {
                     public void onClick(View v) {
 
                         x = 2;
+                        //CALL API SET RATE
                         new Apicalls(getActivity(),evaluate_star.this).set_rate(tinyDB.getString("orderID"),String.valueOf(stars_num),String.valueOf(id3));
 
                     }
@@ -263,7 +272,7 @@ public class evaluate_star extends DialogFragment implements NetworkInterface {
         Toasty.error(context, "Something Went Wrong", Toast.LENGTH_SHORT).show();
     }
 
-
+   //update chat
     private void updateChat() {
         Map<String, Object> conversation = new HashMap<>();
         conversation.put("name", recivername+"-"+username);

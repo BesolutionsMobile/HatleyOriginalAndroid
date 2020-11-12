@@ -43,12 +43,13 @@ public class faq extends AppCompatActivity {
 
         getActionBarTextView().setVisibility(View.GONE);
 
-        textView = mToolbar.findViewById(R.id.toolbartext);
 
+        //  SET TOOLBAR TITLE
+        textView = mToolbar.findViewById(R.id.toolbartext);
         textView.setText("FAQ");
 
+        //ON CLICK BACK TOOL BAR
         back = mToolbar.findViewById(R.id.back);
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,6 +58,7 @@ public class faq extends AppCompatActivity {
             }
         });
 
+        //FAQ  QUESTIONS AND ANSWERS
 
         RecyclerView recyclerViewexpand= findViewById(R.id.recycle);
 
@@ -110,6 +112,7 @@ public class faq extends AppCompatActivity {
         recyclerViewexpand.setAdapter(adapterr);
     }
 
+    //get ActionBar TextView
     private TextView getActionBarTextView() {
         TextView titleTextView = null;
 

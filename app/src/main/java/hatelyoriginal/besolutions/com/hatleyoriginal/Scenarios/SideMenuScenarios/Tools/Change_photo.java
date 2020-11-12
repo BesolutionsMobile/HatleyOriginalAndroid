@@ -56,16 +56,13 @@ public class Change_photo implements NetworkInterface {
         dialog.getWindow().setLayout(width, height);
         //dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
-
+        //DEFINE ALL VARS
         imageView = dialog.findViewById(R.id.imgUser);
         this.image_uplaod=imageView;
 
 
-
+        //BUTTON SAVE
         btnsave = dialog.findViewById(R.id.btnPhotoSave);
-
-
-
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

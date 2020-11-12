@@ -32,10 +32,11 @@ public class splash_screen extends AppCompatActivity {
         setContentView(R.layout.splash_screen);
         ButterKnife.bind(this);
 
+        //define vars
         tinyDB = new TinyDB(this);
-
         progressBar = findViewById(R.id.progressBar);
 
+        //yoyo library
         YoYo.with(Techniques.BounceInDown).repeat(0).duration(1500).playOn(logo);
 
 
@@ -82,6 +83,7 @@ public class splash_screen extends AppCompatActivity {
     }
 
 
+    //GO TO SECOND CLASS
     public void splash_screen(final Context context, final Class second_class)
     {
         new Thread(new Runnable() {

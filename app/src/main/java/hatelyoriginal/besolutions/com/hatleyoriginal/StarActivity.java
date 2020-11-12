@@ -81,13 +81,15 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
         setContentView(R.layout.activity_star);
         ButterKnife.bind(this);
 
+        //DEFINE VARS
         tinyDB = new TinyDB(this);
-
         sDefSystemLanguage = Locale.getDefault().getLanguage();
 
+        //TOOLBAR
         mToolbar = findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
 
+        //SET LANGUAGE DIRECTIONS
         if(sDefSystemLanguage.equals("ar"))
         {
             mToolbar.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
@@ -96,8 +98,10 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
             mToolbar.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         }
 
+
         getActionBarTextView().setVisibility(View.GONE);
 
+        //SET TOOL TITLES
         textView = mToolbar.findViewById(R.id.toolbartext);
         textView.setText("Available Orders");
 
@@ -107,6 +111,7 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, findViewById(R.id.drawer), mToolbar);
 
 
+        //ADD FRAGMENT MAP
         final OrdersFragment map = new OrdersFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -121,19 +126,25 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
 
     }
 
+    //SET ON CLICK BUTTONS
     public void Buttons() {
 
+        //SET ON CLICK HOME
         homebutton.setOnClickListener(view -> {
 
+            //SET TITLE
             textView.setText("Available Orders");
 
+            //SET HOME ICON AND TEXT COLOR
             homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark), PorterDuff.Mode.SRC_IN);
             hometext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
 
+            //SET NOTIFICATIONS ICON AND TEXT COLOR
             notificationsicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
             notofocationstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
 
+            //ADD MAP FRAGMENT
             final OrdersFragment map = new OrdersFragment();
 
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -144,17 +155,21 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
 
         });
 
+        //SET ON NOTIFICATIONS BUTTON
         notificationsbutton.setOnClickListener(view -> {
 
+            //SET TITLE
             textView.setText("Notifications");
 
+            //SET HOME ICON AND TEXT COLOR
             homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
             hometext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
+            //SET NOTIFICATIONS ICON AND TEXT COLOR
             notificationsicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark), PorterDuff.Mode.SRC_IN);
             notofocationstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
 
-
+            //ADD MAP FRAGMENT
             final ClientNotificationsFragment map = new ClientNotificationsFragment();
 
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -178,15 +193,18 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
 
             if (data != null) {
 
+                //SET TITLE
                 textView.setText("Available Orders");
 
+                //SET HOME ICON AND TEXT COLOR
                 homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark), PorterDuff.Mode.SRC_IN);
                 hometext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
 
+                //SET NOTIFICATIONS ICON AND TEXT COLOR
                 notificationsicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
                 notofocationstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
-
+                //ADD MAP FRAGMENT
                 final OrdersFragment map = new OrdersFragment();
 
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -211,16 +229,19 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
         if(addButtonClick.getEvent().equals("Submitted"))
         {
 
-
+            //SET TITLE
             textView.setText("Available Orders");
 
+            //SET HOME ICON AND TEXT COLOR
             homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark), PorterDuff.Mode.SRC_IN);
             hometext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
 
+            //SET NOTIFICATIONS ICON AND TEXT COLOR
             notificationsicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
             notofocationstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
 
+            //ADD MAP FRAGMENT
             final OrdersFragment map = new OrdersFragment();
 
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -252,6 +273,8 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
 
+
+        //GO TO ACTIVITIES
         switch (position)
         {
             case 0:
@@ -264,19 +287,24 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
                 startActivity(new Intent(this, your_order.class));
                 break;
             case 3:
+                //SHOW DIALOG
                 pd = new ProgressDialog(this);
                 pd.setMessage("Loading...");
                 pd.setCancelable(false);
                 pd.show();
                 x = 1;
+                //CALL API SWITCH USER
                 new Apicalls(this, this).switch_user();
                 break;
             case 4:
+                //SHOW DIALOG
                 pd = new ProgressDialog(this);
                 pd.setMessage("Loading...");
                 pd.setCancelable(false);
                 pd.show();
                 x = 2;
+
+                //CALL API LOGOUT
                 new Apicalls(this,this).Logout();
                 break;
         }
@@ -286,12 +314,15 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
 
     @Override
     public void onBackPressed() {
+
+        //CLOSE DRAWER
         if (mNavigationDrawerFragment.isDrawerOpen())
             mNavigationDrawerFragment.closeDrawer();
         else
             moveTaskToBack(true);
     }
 
+    //Get ActionBar TextView
     private TextView getActionBarTextView() {
         TextView titleTextView = null;
 

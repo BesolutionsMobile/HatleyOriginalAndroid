@@ -98,13 +98,16 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        //DEFINE TINY DB
         tinyDB = new TinyDB(this);
 
         sDefSystemLanguage = Locale.getDefault().getLanguage();
 
+        //DEFINE TOOL BAR
         mToolbar = findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
 
+        //CHECK LANGUAGE ENG OR AR
         if(sDefSystemLanguage.equals("ar"))
         {
             mToolbar.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
@@ -120,11 +123,11 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
 
         mToolbar.setVisibility(View.GONE);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.fragment_drawer);
-
         // Set up the drawer.
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.fragment_drawer);
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, findViewById(R.id.drawer), mToolbar);
 
+        //ADD MAP FRAGMENT
         final MapFragment map = new MapFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -139,28 +142,35 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
     }
 
 
+    //ON CLICK BUTTONS
     public void Buttons() {
 
+        //HOME BUTTON
         homebutton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
 
-                mToolbar.setVisibility(View.GONE);
+                mToolbar.setVisibility(View.GONE);  //SET TOOLBAR GONE
 
+                //SET HOME ICON COLOR AND TEXT
                 homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark), PorterDuff.Mode.SRC_IN);
                 hometext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
 
+                //SET OFFERS ICON COLOR AND TEXT
                 offersicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
                 offerstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
+                //SET NOTIFICATIONS ICON COLOR AND TEXT
                 notificationsicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
                 notofocationstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
+                //SET SETTINGS ICON COLOR AND TEXT
                 settingicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
                 settingtext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
 
+                //ADD MAP FRAGMENT
                 final MapFragment map = new MapFragment();
 
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -171,26 +181,33 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
             }
         });
 
+        //SET ON OFFER BUTTON
         offersbutton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
 
+                //SET TOOLBAR TITLE
                 mToolbar.setVisibility(View.VISIBLE);
                 textView.setText("Available Offers");
 
+                //SET HOME ICON COLOR AND TEXT
                 homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
                 offerstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
+                //SET OFFERS ICON COLOR AND TEXT
                 offersicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark), PorterDuff.Mode.SRC_IN);
                 offerstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
 
+                //SET NOTIFICATIONS ICON COLOR AND TEXT
                 notificationsicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
                 notofocationstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
+                //SET SETTINGS ICON COLOR AND TEXT
                 settingicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
                 settingtext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
+                //ADD MAP FRAGMENT
                 final OffersFragment map = new OffersFragment();
 
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -201,27 +218,34 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
             }
         });
 
+        //SET ON NOTIFICATION LISTNER
         notificationsbutton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
 
+                //SET TOOLBAR TITLE
                 mToolbar.setVisibility(View.VISIBLE);
                 textView.setText("Notifications");
 
+                //SET HOME ICON COLOR AND TEXT
                 homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
                 hometext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
+                //SET OFFERS ICON COLOR AND TEXT
                 offersicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
                 offerstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
+                //SET NOTIFICATIONS ICON COLOR AND TEXT
                 notificationsicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark), PorterDuff.Mode.SRC_IN);
                 notofocationstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
 
+                //SET SETTINGS ICON COLOR AND TEXT
                 settingicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
                 settingtext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
 
+                //ADD MAP FRAGMENT
                 final ClientNotificationsFragment map = new ClientNotificationsFragment();
 
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -232,26 +256,33 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
         });
 
 
+        //SET ON SETTING BUTTON LISTNER
         settingbutton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
 
+                //SET TOOLBAR TITLE
                 mToolbar.setVisibility(View.VISIBLE);
                 textView.setText("Settings");
 
+                //SET HOME ICON COLOR AND TEXT
                 homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
                 hometext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
+                //SET OFFERS ICON COLOR AND TEXT
                 offersicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
                 offerstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
+                //SET NOTIFICATIONS ICON COLOR AND TEXT
                 notificationsicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
                 notofocationstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
+                //SET SETTINGS ICON COLOR AND TEXT
                 settingicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark), PorterDuff.Mode.SRC_IN);
                 settingtext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
 
+                //ADD MAP FRAGMENT
                 final SettingsFragment map = new SettingsFragment();
 
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -270,21 +301,27 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
         if (addButtonClick.getEvent().equals("Rejected")) {
 
 
+            //SET TOOLBAR TITLE
             mToolbar.setVisibility(View.VISIBLE);
             textView.setText("Available Offers");
 
+            //SET HOME ICON COLOR AND TEXT
             homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
             offerstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
+            //SET OFFERS ICON COLOR AND TEXT
             offersicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark), PorterDuff.Mode.SRC_IN);
             offerstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
 
+            //SET NOTIFICATIONS ICON COLOR AND TEXT
             notificationsicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
             notofocationstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
+            //SET SETTINGS ICON COLOR AND TEXT
             settingicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
             settingtext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
+            //ADD MAP FRAGMENT
             final OffersFragment map = new OffersFragment();
 
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -315,6 +352,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
 
+        //GO TO ACTIVITIES
         switch (position) {
             case 0:
                 startActivity(new Intent(this, personal_info.class));
@@ -338,19 +376,23 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
                 startActivity(new Intent(this, your_places.class));
                 break;
             case 7:
+                //STOP DIALOG
                 pd = new ProgressDialog(this);
                 pd.setMessage("Loading...");
                 pd.setCancelable(false);
                 pd.show();
                 x = 1;
+                //CALL API SWITCH USER
                 new Apicalls(this, this).switch_user();
                 break;
             case 8:
+                //STOP DIALOG
                 pd = new ProgressDialog(this);
                 pd.setMessage("Loading...");
                 pd.setCancelable(false);
                 pd.show();
                 x = 2;
+                //CALL API LOGOUT
                 new Apicalls(this, this).Logout();
                 break;
         }
@@ -367,18 +409,24 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
             if (data != null) {
 
                 if (data.equals("submit_offer")) {
+                    //SET TOOLBAR TITLE
                     mToolbar.setVisibility(View.VISIBLE);
                     textView.setText("Available Offers");
 
+                    //SET HOME ICON COLOR AND TEXT
                     homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
                     offerstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
+                    //SET OFFERS ICON COLOR AND TEXT
                     offersicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark), PorterDuff.Mode.SRC_IN);
                     offerstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
 
+                    //SET NOTIFICATIONS ICON COLOR AND TEXT
                     notificationsicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
                     notofocationstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
+
+                    //ADD MAP FRAGMENT
                     final OffersFragment map = new OffersFragment();
 
                     FragmentManager fragmentManager = getSupportFragmentManager();
@@ -388,18 +436,22 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
 
                 } else if (data.equals("finish_order")) {
 
-                    mToolbar.setVisibility(View.GONE);
+                    mToolbar.setVisibility(View.GONE); //TOOL BAR GONE
 
+                    //SET HOME ICON COLOR AND TEXT
                     homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark), PorterDuff.Mode.SRC_IN);
                     hometext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
 
+                    //SET OFFERS ICON COLOR AND TEXT
                     offersicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
                     offerstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
+                    //SET NOTIFICATIONS ICON COLOR AND TEXT
                     notificationsicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
                     notofocationstext.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray));
 
 
+                    //ADD MAP FRAGMENT
                     final MapFragment map = new MapFragment();
 
                     FragmentManager fragmentManager = getSupportFragmentManager();
@@ -420,12 +472,15 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
 
     @Override
     public void onBackPressed() {
+
+        //CLOSE DRAWER
         if (mNavigationDrawerFragment.isDrawerOpen())
             mNavigationDrawerFragment.closeDrawer();
         else
             moveTaskToBack(true);
     }
 
+    //Get ActionBar TextView
     private TextView getActionBarTextView() {
         TextView titleTextView = null;
 

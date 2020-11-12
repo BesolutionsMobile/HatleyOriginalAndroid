@@ -22,14 +22,17 @@ public class fingerprint extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fingerprint);
 
+        //define tiny db
         tinyDB = new TinyDB(this);
 
+        //build finger print
         goldfinger= new Goldfinger.Builder(fingerprint.this).build();
     }
     @Override
     protected void onStart() {
         super.onStart();
 
+        //check device contain finger print hardware
         if (goldfinger.hasFingerprintHardware() && goldfinger.hasEnrolledFingerprint()) {
 
             authenticateUserFingerprint();
@@ -37,8 +40,10 @@ public class fingerprint extends AppCompatActivity {
         }
     }
 
+    //authenticate User Fingerprint
     private void authenticateUserFingerprint() {
 
+        //FINGER PRINT DIDNT MATCH
         goldfinger.authenticate(new Goldfinger.Callback() {
             @Override
             public void onError(Error error) {

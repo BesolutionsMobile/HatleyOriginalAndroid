@@ -77,10 +77,12 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
 
         unbinder = ButterKnife.bind(this, rootView);
 
+        //DEFINE VAR
         tinyDB = new TinyDB(getActivity());
 
         context = getActivity();
 
+        //GET TOKEN
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
@@ -89,17 +91,21 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
             }
         });
 
+        //SUPPORT MAP
         SupportMapFragment supportMapFragment  = (SupportMapFragment) Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.map);
         assert supportMapFragment != null;
         supportMapFragment.getMapAsync(this);
 
+        //SET ON CLICK FINISH
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //STOP PROGRESS DIALOG
                 pd = new ProgressDialog(context);
                 pd.setMessage("Loading...");
                 pd.setCancelable(false);
                 pd.show();
+
                 if (editPrice.getText().toString().equals("") || editPrice.getText().toString().isEmpty()) {
 
                     Toasty.error(context, "You Must Enter a Price", Toast.LENGTH_SHORT).show();
@@ -112,20 +118,23 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
                     Log.i("FirebaseToken" , token);
                     Log.i("UserToken" , tinyDB.getString("userToken"));
 
-
+                    //CALL API BILL AMOUNT
                     new Apicalls(context, Bill_Amount.this).bill_amount(tinyDB.getString("orderID"), editPrice.getText().toString(),token);
                 }
 
             }
         });
 
+        //SET ON CLICK CALL
         btnCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                //VALIDATION ON CALL BUTTON
                 if (tinyDB.getString("chatPhone").equals("0000") || tinyDB.getString("chatPhone").isEmpty()) {
                     Toasty.error(context, "This Client Not Having a Number ", Toast.LENGTH_LONG).show();
                 } else {
+                    //GO TO CALL
                     Intent intent = new Intent(Intent.ACTION_DIAL);
                     intent.setData(Uri.parse("tel:" + tinyDB.getString("chatPhone")));
                     context.startActivity(intent);

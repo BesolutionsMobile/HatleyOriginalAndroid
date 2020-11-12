@@ -126,6 +126,7 @@ public class ContinueChatActivity extends AppCompatActivity {
         });
 
 
+        //SET ON TOUCH RECYCLER VIEW
         recyclerView.setOnTouchListener(new OnSwipeTouchListener(ContinueChatActivity.this) {
             public void onSwipeTop() {
 
@@ -135,6 +136,7 @@ public class ContinueChatActivity extends AppCompatActivity {
 
             }
 
+            //SWIPE LEFT OPEN FRAGMENT BILL AMOUNT
             public void onSwipeLeft() {
 
                 FragmentManager fm = getSupportFragmentManager();
@@ -150,6 +152,7 @@ public class ContinueChatActivity extends AppCompatActivity {
 
     }
 
+    //SEND MESSAGE
     public void sendMessage(final String message)
     {
         if(!message.isEmpty())
@@ -165,6 +168,7 @@ public class ContinueChatActivity extends AppCompatActivity {
             messages.put("message", message);
             messages.put("timeStamp", FieldValue.serverTimestamp());
 
+            //SEND MESSAGE TO FIREBASE
             db.collection("Conversations").document(conversationname).collection("Messages").document().set(messages).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
@@ -190,6 +194,7 @@ public class ContinueChatActivity extends AppCompatActivity {
 
 
 
+    //UPDATE CHAT FIREBASE
     public void updateChat(String last)
     {
 
@@ -260,6 +265,7 @@ public class ContinueChatActivity extends AppCompatActivity {
     }
 
 
+    //setUp RecyclerView
     private void setUpRecyclerView() {
 
         Query query3 = db.collection("Conversations").document(conversationname).collection("Messages").orderBy("timeStamp", Query.Direction.ASCENDING);

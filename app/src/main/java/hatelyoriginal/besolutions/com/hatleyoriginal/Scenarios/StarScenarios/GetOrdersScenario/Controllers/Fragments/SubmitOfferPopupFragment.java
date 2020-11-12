@@ -100,6 +100,7 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
 
             tinyDB = new TinyDB(getActivity());
 
+            //GET FIREBASE TOKEN
             FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
                 @Override
                 public void onSuccess(InstanceIdResult instanceIdResult) {
@@ -111,6 +112,7 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
             unbinder = ButterKnife.bind(this, rootView);
 
 
+            //SUPPORT MAP IN FRAGMENT
             SupportMapFragment supportMapFragment = (SupportMapFragment) Objects.requireNonNull(getActivity()).getSupportFragmentManager().findFragmentById(R.id.map2);
             assert supportMapFragment != null;
             supportMapFragment.getMapAsync(this);
@@ -160,7 +162,6 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
             });
 
             //CLOSE OFFER
-
             cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -173,7 +174,7 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
                 @Override
                 public void onClick(View view) {
 
-
+                    //Calendar
                     Calendar mcurrentDate = Calendar.getInstance();
                     int mYear = mcurrentDate.get(Calendar.YEAR);
                     int mMonth = mcurrentDate.get(Calendar.MONTH);
@@ -191,6 +192,7 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
         }
 
 
+        //DIALOG COLOR
         getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
         if (getDialog() != null && getDialog().getWindow() != null) {
@@ -255,6 +257,7 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
 
     }
 
+    //format Date From Date
     private static String formatDateFromDateString(String inputDateFormat, String outputDateFormat, String inputDate) throws ParseException {
 
         Date mParsedDate;
@@ -329,6 +332,7 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
 
         try
         {
+            //REMOVE FRAGMENT
             assert getFragmentManager() != null;
             Fragment fragment = (getFragmentManager().findFragmentById(R.id.map2));
             FragmentTransaction ft = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();

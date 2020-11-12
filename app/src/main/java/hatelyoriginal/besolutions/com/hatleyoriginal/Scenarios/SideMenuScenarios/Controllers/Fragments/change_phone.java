@@ -1,6 +1,8 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SideMenuScenarios.Controllers.Fragments;
 
-
+/**
+ *CHANGE PHONE DIALOG
+ */
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Window;
@@ -43,10 +45,13 @@ public class change_phone implements NetworkInterface {
         dialog.getWindow().setLayout(width, height);
         //dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
+        //define tiny db
         tinyDB = new TinyDB(context);
 
+        //DEFINE VARS
         editphone = dialog.findViewById(R.id.editPhone);
 
+        //VALIDATION ON PHONE EDITTEXT
         if (!tinyDB.getString("userPhone").equals("0000") || !tinyDB.getString("userPhone").isEmpty())
         {
             editphone.setText(tinyDB.getString("userPhone"));
@@ -54,10 +59,8 @@ public class change_phone implements NetworkInterface {
 
         Toasty.success(context, tinyDB.getString("userPhone"), Toast.LENGTH_SHORT).show();
 
-
-
+        //SAVE BUTTON
         Button btnsave = dialog.findViewById(R.id.phoneSave);
-
         btnsave.setOnClickListener(v -> {
              if(editphone.getText().toString().length()<=9)
              {
@@ -69,6 +72,7 @@ public class change_phone implements NetworkInterface {
                  editphone.setError("Phone must be less than 16 digits");
              }
              else {
+                 //CALL API CHANGE PHONE
                  new Apicalls(context,change_phone.this).add_phone(editphone.getText().toString());
              }
 

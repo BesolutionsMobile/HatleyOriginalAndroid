@@ -86,12 +86,17 @@ public class NavigationDrawerFragmentStar extends Fragment implements Navigation
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        //define all vars
         tinyDB = new TinyDB(getActivity());
         mDrawerList = view.findViewById(R.id.drawerList);
         username = view.findViewById(R.id.username);
         username.setText(tinyDB.getString("userName"));
         userimage = view.findViewById(R.id.imgUser);
+
+        //add image
         Glide.with(getActivity()).load(tinyDB.getString("userImage")).placeholder(R.drawable.sidemenuuser).into(userimage);
+
+        //SET LAYOUT MANAGER
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mDrawerList.setLayoutManager(layoutManager);
@@ -131,6 +136,7 @@ public class NavigationDrawerFragmentStar extends Fragment implements Navigation
     }
 
     public List<NavigationItem> getMenu() {
+        //ADD ITEMS
         List<NavigationItem> items = new ArrayList<>();
         items.add(new NavigationItem("Personal Info", getResources().getDrawable(R.drawable.personalnav)));
         items.add(new NavigationItem("Payments", getResources().getDrawable(R.drawable.money1)));

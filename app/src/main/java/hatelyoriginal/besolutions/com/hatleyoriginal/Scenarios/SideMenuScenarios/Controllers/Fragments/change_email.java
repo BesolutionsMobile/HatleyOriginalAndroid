@@ -1,5 +1,9 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SideMenuScenarios.Controllers.Fragments;
 
+/**
+ *CHANGE MAIL DIALOG
+ */
+
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Window;

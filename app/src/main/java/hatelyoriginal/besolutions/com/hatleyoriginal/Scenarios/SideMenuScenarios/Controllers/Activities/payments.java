@@ -42,17 +42,18 @@ public class payments extends AppCompatActivity implements NetworkInterface {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.payments);
 
+        //DEFINE TOOLBAR
         mToolbar = findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
 
         getActionBarTextView().setVisibility(View.GONE);
 
+        //SET TOOL BAR TITLE
         textView = mToolbar.findViewById(R.id.toolbartext);
-
         textView.setText("Payment");
 
+        //BACK ON CLICK BUTTON
         back = mToolbar.findViewById(R.id.back);
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,13 +63,13 @@ public class payments extends AppCompatActivity implements NetworkInterface {
         });
 
 
+        //DEFINE ALL DATA
         linearpay = findViewById(R.id.linearPayment);
         txtcredit = findViewById(R.id.txtCredit);
         txtearned = findViewById(R.id.txtEarned);
         txtpromoted = findViewById(R.id.txtPromoted);
 
-
-
+        //CALL GET BALANCE API
         new Apicalls(payments.this,payments.this).get_balance();
 
 
@@ -86,6 +87,7 @@ public class payments extends AppCompatActivity implements NetworkInterface {
 
         try {
 
+            //SET DATA FROM SERVER
             JSONObject jsonObject = model.getJsonObject().getJSONObject("data");
 
             txtpromoted.setText(jsonObject.getString("promoted_value"));
@@ -101,6 +103,7 @@ public class payments extends AppCompatActivity implements NetworkInterface {
     @Override
     public void OnError(VolleyError error) {
 
+        //VALIDATION ERROR RESPONSE
         if (error.networkResponse.statusCode == 500)
         {
             linearpay.setVisibility(View.INVISIBLE);
@@ -115,6 +118,7 @@ public class payments extends AppCompatActivity implements NetworkInterface {
     }
 
 
+    //get ActionBar TextView
     private TextView getActionBarTextView() {
         TextView titleTextView = null;
 

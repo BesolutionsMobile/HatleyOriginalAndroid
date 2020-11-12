@@ -38,17 +38,18 @@ public class share_earn extends AppCompatActivity {
 
         tinyDB = new TinyDB(this);
 
+        //DEFINE TOOLBAR
         mToolbar = findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
 
         getActionBarTextView().setVisibility(View.GONE);
 
+        //SET TOOLBAR TITLE
         textView = mToolbar.findViewById(R.id.toolbartext);
-
         textView.setText("Share & Earn");
 
+        //SET BACK BUTTON
         back = mToolbar.findViewById(R.id.back);
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,11 +58,12 @@ public class share_earn extends AppCompatActivity {
             }
         });
 
+        //SET CODE
         code = findViewById(R.id.txtshare);
         code.setText(tinyDB.getString("userCode"));
 
+        //COPY CODE
         txtcopy = findViewById(R.id.txtcopy);
-
         txtcopy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +78,7 @@ public class share_earn extends AppCompatActivity {
     }
 
 
+    //Get ActionBar TextView
     private TextView getActionBarTextView() {
         TextView titleTextView = null;
 

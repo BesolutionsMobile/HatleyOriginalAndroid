@@ -44,10 +44,13 @@ public class your_order_adapter extends RecyclerView.Adapter<your_order_adapter.
 
     @Override
     public void onBindViewHolder(@NonNull your_order holder, int position) {
+
           holder.name.setText(mylist.get(position).getOrder_name());
           holder.date.setText(mylist.get(position).getDate());
           holder.ratings.setRating(mylist.get(position).getstars());
           holder.location.setText(mylist.get(position).getLocation());
+
+          //SET ON ITEM CLICK
           holder.order_item.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View v) {

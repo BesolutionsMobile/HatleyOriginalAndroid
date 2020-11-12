@@ -19,6 +19,7 @@ public class slider_pages extends AppIntro {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //ADD SLIDES
         tinyDB =  new TinyDB(this);
 
         tinyDB.putString("slider","1");
@@ -35,6 +36,7 @@ public class slider_pages extends AppIntro {
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
+        //WHEN DONE GO TO LOGIN
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
     }
@@ -42,6 +44,7 @@ public class slider_pages extends AppIntro {
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
+        //WHEN SKIP GO TO LOGIN
         Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
         startActivity(intent);
 

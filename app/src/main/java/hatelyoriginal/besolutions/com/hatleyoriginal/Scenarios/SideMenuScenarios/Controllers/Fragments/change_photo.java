@@ -1,5 +1,9 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SideMenuScenarios.Controllers.Fragments;
 
+/**
+ *CHANGE PHOTO DIALOG
+ */
+
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -61,13 +65,13 @@ public class change_photo implements NetworkInterface {
         //dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
 
+        //DEFINE ALL VARS
         imageView = dialog.findViewById(R.id.imgUser);
         image_uplaod = imageView;
 
 
-
+        //BUTTON SAVE
         btnsave = dialog.findViewById(R.id.btnPhotoSave);
-
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +81,7 @@ public class change_photo implements NetworkInterface {
 
               }
               else {
+                  //CALL CHANGE PHOTO API
                   new Apicalls(context,change_photo.this).change_photo(tinyDB.getString("imageURL"));
 
               }
