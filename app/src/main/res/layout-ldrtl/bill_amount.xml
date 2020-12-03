@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="4dp"
+    android:layoutDirection="ltr"
+    app:cardCornerRadius="12dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".4"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/reduis0"
+            android:layout_marginTop="10dp">
+
+            <fragment
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp"
+                tools:context=".MapsActivity" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".6"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp"
+                android:gravity="center_horizontal">
+
+
+                <EditText
+                    android:id="@+id/editPrice"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/editbg3"
+                    android:layout_marginStart="40dp"
+                    android:maxLines="1"
+                    android:inputType="numberDecimal"
+                    android:hint="Price"
+                    android:gravity="center"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:textColor="@color/colorDarkerGray2"
+                    android:textColorHint="@color/colorDarkerGray2"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set Bill Amount"
+                    android:layout_marginLeft="35dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:textSize="15dp"/>
+
+
+
+
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btnCall"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/redus"
+                android:text="Call The Client"
+                android:textAllCaps="false"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="17dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/colorPrimaryDark"/>
+
+
+            <Button
+                android:id="@+id/btnFinish"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/redus"
+                android:text="Finish Order"
+                android:textAllCaps="false"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="17dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10ssp"
+                android:backgroundTint="@color/colorRed"/>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

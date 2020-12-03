@@ -1,0 +1,81 @@
+<resources>
+    <string name="app_name">Hatley</string>
+    <string name="drawer_open">Menu opened</string>
+    <string name="drawer_close">Menu closed</string>
+
+
+    <string name="username">الاسم</string>
+    <string name="password">كلمة السر</string>
+    <string name="rememberme">ذكرنى</string>
+    <string name="fingerprint">أو باستخدام بصمة الإصبع لتسجيل الدخول كل مرة</string>
+    <string name="signin">تسجيل الدخول</string>
+    <string name="loginwith">أو تسجيل الدخول باستخدام</string>
+    <string name="createaccount">انشاء حساب جديد</string>
+    <string name="signup">التسجيل</string>
+    <string name="email">البريد الالكترونى</string>
+    <string name="confirmpass">تأكيد كلمة المرور</string>
+    <string name="termsdesc">شراء بالنقر إنشاء حساب أنت توافق على</string>
+    <string name="terms">شروط</string>
+    <string name="confirmthat">وتأكيد ذلك.</string>
+    <string name="createacc">انشئ حساب</string>
+    <string name="privacy_policy">سياسة خاصة</string>
+    <string name="termsser">شروط الخدمة</string>
+    <string name="finger">بصمة</string>
+    <string name="loginfing">تسجيل الدخول باستخدام بصمة الإصبعt</string>
+    <string name="orderdesc">وصف الطلب</string>
+    <string name="productimg">صورة المنتج</string>
+    <string name="deliverytime">موعد التسليم</string>
+    <string name="copouncode">رمز الكوبون</string>
+    <string name="createorder">انشاء طلب</string>
+    <string name="promocode">رمز ترويجي</string>
+    <string name="changepass">تغيير كلمة السر</string>
+    <string name="addphone">أضف هاتفك</string>
+    <string name="nationalid">إلحاق الرقم القومي الخاص بك</string>
+    <string name="addphoto">أضف صورتك</string>
+    <string name="offer_price">سعر العرض</string>
+    <string name="offer_time">عرض الوقت</string>
+    <string name="starinfo">معلومات الطيار</string>
+    <string name="approveopenchat">تمت الموافقة وفتح الدردشة</string>
+    <string name="reject">رفض</string>
+    <string name="from">من</string>
+    <string name="to">الى</string>
+    <string name="rating">تقييم</string>
+    <string name="order_info">معلومات الطلب</string>
+    <string name="before_order">قبل الطلب</string>
+    <string name="expected_arrival_time">وقت الوصول المتوقع</string>
+    <string name="expected_price">السعر المتوقع</string>
+    <string name="create_offer_to_customer">إنشاء عرض للعملاء</string>
+    <string name="evaluate_star">تقييم الطيار</string>
+    <string name="make_a_complaint">تقديم شكوى</string>
+    <string name="complaint_type">نوع الشكوى</string>
+    <string name="save">حفظ</string>
+    <string name="copy_and_share_your_promo_code">انسخ وشارك ملفات</string>
+    <string name="promo_code">رمز ترويجي</string>
+    <string name="to_your_friend_to_earn_money">لصديقك لكسب المال</string>
+    <string name="copy">نسخ</string>
+    <string name="promo_code_here">الرمز الترويجي هنا</string>
+    <string name="when_adding_the_code">عند إضافة الكود</string>
+    <string name="you_will_enjoy_a">سوف تستمتع ب</string>
+    <string name="discount">خصم</string>
+    <string name="credit">ائتمان</string>
+    <string name="egp">جنيه</string>
+    <string name="reminder_amount_after_purchasing">مبلغ التذكير بعد الشراء</string>
+    <string name="from_earned">من المكتسبة</string>
+    <string name="promoted">ترقية</string>
+    <string name="add_new_place">أضف مكان جديد</string>
+    <string name="enter_info">الرجاء إدخال كافة المعلومات</string>
+    <string name="choose_from_delivery_places">اختر من أماكن التوصيل</string>
+    <string name="added_success">اضيف بنجاح</string>
+    <string name="not_added">غير مضافة</string>
+    <string name="no_data">لاتوجد بيانات</string>
+    <string name="no_item">لا يوجد عنصر</string>
+    <string name="search">بحث</string>
+    <string name="recent_locations">المواقع الأخيرة</string>
+
+
+    <string name="facebook_app_id">1773872226252815</string>
+    <string name="fb_login_protocol_scheme">fb1773872226252815</string>
+
+
+
+</resources>

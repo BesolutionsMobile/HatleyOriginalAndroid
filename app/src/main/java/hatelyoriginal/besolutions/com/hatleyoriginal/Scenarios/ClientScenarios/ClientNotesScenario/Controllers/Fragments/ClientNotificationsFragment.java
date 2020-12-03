@@ -151,15 +151,13 @@ public class ClientNotificationsFragment extends Fragment implements NetworkInte
             loading.setVisibility(View.GONE);
         }
 
-
-
-        //STOP PROGRESSBAR
         loading.setVisibility(View.GONE);
 
     }
 
     @Override
     public void OnError(VolleyError error) {
+
 
     }
 
