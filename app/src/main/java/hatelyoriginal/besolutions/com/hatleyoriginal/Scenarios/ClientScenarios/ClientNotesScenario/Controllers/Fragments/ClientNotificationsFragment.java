@@ -145,7 +145,7 @@ public class ClientNotificationsFragment extends Fragment implements NetworkInte
         }catch (Exception e)
         {
 
-            nodata.setText("No Notifications");
+            nodata.setText(getString(R.string.no_notifications));
 
             //STOP PROGRESSBAR
             loading.setVisibility(View.GONE);

@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Logged in Successfully..."
+            android:text="@string/logged_in_successfully"
             android:textSize="@dimen/_16ssp"
             android:id="@+id/popup_msg"
             android:textStyle="bold"

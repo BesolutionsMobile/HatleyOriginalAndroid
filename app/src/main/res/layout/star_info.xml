@@ -152,7 +152,7 @@
                         android:layout_height="@dimen/_20sdp"
                         android:textColor="@color/fcolor"
                         android:textStyle="bold"
-                        android:text="EGP"
+                        android:text="@string/egp"
                         android:gravity="center"
                         android:textSize="@dimen/_10sdp"/>
                 </LinearLayout>
@@ -267,7 +267,7 @@
                         android:textAllCaps="false"
                         android:id="@+id/dismiss"
                         android:layout_weight="1"
-                        android:text="Dismiss"
+                        android:text="@string/dismiss"
                         android:textColor="@android:color/white"/>
 
                 </LinearLayout>

@@ -71,7 +71,7 @@
                       android:layout_height="match_parent"
                       android:drawablePadding="@dimen/_10sdp"
                       android:gravity="center"
-                      android:text="EGP"
+                      android:text="@string/egp"
                       android:layout_marginLeft="@dimen/_3sdp"
                       android:textColor="@color/fcolor"
                       android:textSize="@dimen/_8sdp"

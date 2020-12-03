@@ -71,11 +71,33 @@
     <string name="no_item">no item</string>
     <string name="search">Search</string>
         <string name="recent_locations">Recent Locations</string>
+        <string name="no_notifications">No Notifications</string>
+        <string name="no_saved_places">No Saved Places</string>
 
 
     <string name="facebook_app_id">1773872226252815</string>
     <string name="fb_login_protocol_scheme">fb1773872226252815</string>
-
+    <string name="call_the_client">Call The Client</string>
+    <string name="finish_order">Finish Order</string>
+    <string name="change_your_password">Change Your Password</string>
+    <string name="confirm_your_password">Confirm Your Password</string>
+    <string name="add_your_phone_number">Add Your Phone Number</string>
+    <string name="your_phone_number">Your Phone Number</string>
+    <string name="change_your_photo">Change Your Photo</string>
+    <string name="component_message">Component Message</string>
+    <string name="common_questions">common questions</string>
+    <string name="logged_in_successfully">Logged in Successfully...</string>
+    <string name="sign_in_with_facebook">Sign in with Facebook</string>
+    <string name="confirm_order_place">Confirm Order Place</string>
+    <string name="cancel_order">Cancel Order</string>
+    <string name="offers_accepted">Offers Accepted:</string>
+    <string name="delivery_time">Delivery time:</string>
+    <string name="request_page">Request Page</string>
+    <string name="enter_your_message">Enter your Message...</string>
+    <string name="price">Price</string>
+    <string name="set_bill_amount">Set Bill Amount</string>
+    <string name="your_password">Your Password</string>
+    <string name="dismiss">Dismiss</string>
 
 
 </resources>

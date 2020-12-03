@@ -156,7 +156,7 @@
                 android:layout_marginTop="@dimen/_10ssp"
                 android:layout_marginLeft="@dimen/_25sdp"
                 android:layout_marginRight="@dimen/_25sdp"
-                android:text="Sign in with Facebook"
+                android:text="@string/sign_in_with_facebook"
                 android:textAllCaps="false"
                 android:textSize="@dimen/_13ssp"
                 android:textColor="@android:color/white"

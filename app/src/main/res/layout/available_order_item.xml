@@ -39,7 +39,7 @@
               android:textColor="@color/fcolor"
               android:gravity="center"
               android:textStyle="bold"
-              android:text="EGP"/>
+              android:text="@string/egp"/>
           <TextView
               android:layout_width="match_parent"
               android:layout_height="wrap_content"

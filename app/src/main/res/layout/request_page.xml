@@ -32,7 +32,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/fcolor"
                 android:textStyle="bold"
-                android:text="Request Page"
+                android:text="@string/request_page"
                 android:textSize="@dimen/_13ssp"
                 android:textColor="@android:color/white"
                 android:gravity="center|left"/>

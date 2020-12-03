@@ -23,7 +23,7 @@
         android:gravity="right"
         android:paddingRight="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:text="common questions"/>
+        android:text="@string/common_questions"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle"
         android:layout_width="match_parent"

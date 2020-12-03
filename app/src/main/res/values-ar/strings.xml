@@ -72,10 +72,33 @@
     <string name="search">بحث</string>
     <string name="recent_locations">المواقع الأخيرة</string>
 
+    <string name="no_notifications">لاتوجد اشعارات</string>
+    <string name="no_saved_places">لاتوجد اماكن محفوظه</string>
+
 
     <string name="facebook_app_id">1773872226252815</string>
     <string name="fb_login_protocol_scheme">fb1773872226252815</string>
-
+    <string name="call_the_client">اتصل بالعميل</string>
+    <string name="finish_order">ترتيب الإنهاء</string>
+    <string name="change_your_password">غير كلمة المرور الخاصة بك</string>
+    <string name="confirm_your_password">أكد رقمك السري</string>
+    <string name="add_your_phone_number">أضف رقم هاتفك</string>
+    <string name="your_phone_number">رقم تليفونك</string>
+    <string name="change_your_photo">غير صورتك</string>
+    <string name="component_message">الرسالة</string>
+    <string name="common_questions">الأسئلة الشائعة</string>
+    <string name="logged_in_successfully">تم تسجيل الدخول بنجاح ...</string>
+    <string name="sign_in_with_facebook">قم بتسجيل الدخول باستخدام الفيسبوك</string>
+    <string name="confirm_order_place">تأكيد مكان الطلب</string>
+    <string name="cancel_order">الغاء الطلب</string>
+    <string name="offers_accepted">العروض المقبولة:</string>
+    <string name="delivery_time">موعد التسليم:</string>
+    <string name="request_page">صفحة الطلب</string>
+    <string name="enter_your_message">أدخل رسالتك...</string>
+    <string name="price">Price</string>
+    <string name="set_bill_amount">Set Bill Amount</string>
+    <string name="your_password">Your Password</string>
+    <string name="dismiss">Dismiss</string>
 
 
 </resources>

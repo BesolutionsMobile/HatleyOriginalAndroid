@@ -68,7 +68,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Delivery time:"
+                    android:text="@string/delivery_time"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:paddingTop="@dimen/_2sdp"
                     android:textSize="@dimen/_10ssp"/>
@@ -98,7 +98,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Offers Accepted:"
+                    android:text="@string/offers_accepted"
                     android:textSize="@dimen/_10ssp"/>
 
                 <TextView
@@ -117,7 +117,7 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:background="@drawable/buttons_bg"
-            android:text="Cancel Order"
+            android:text="@string/cancel_order"
             android:textColor="@android:color/white"
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold"

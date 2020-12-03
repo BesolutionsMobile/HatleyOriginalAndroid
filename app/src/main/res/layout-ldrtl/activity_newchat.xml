@@ -147,8 +147,9 @@
                 android:textSize="@dimen/_10sdp"
                 android:maxHeight="@dimen/_70sdp"
                 android:layout_margin="5dp"
+                android:gravity="right|center"
                 android:layout_gravity="center"
-                android:hint="Enter your Message..."
+                android:hint="@string/enter_your_message"
                 android:background="@drawable/redus"
                 android:layout_weight="1"/>
 

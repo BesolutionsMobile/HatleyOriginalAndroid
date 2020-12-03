@@ -158,7 +158,7 @@ public class DeliveryPlaceFragment extends Fragment {
 
         if (local_data.RetreiveAllData().size() == 0) {
             TextView nodata = Objects.requireNonNull(getActivity()).findViewById(R.id.nodata);
-            nodata.setText("No Saved Places");
+            nodata.setText(getString(R.string.no_saved_places));
         }
 
     }
