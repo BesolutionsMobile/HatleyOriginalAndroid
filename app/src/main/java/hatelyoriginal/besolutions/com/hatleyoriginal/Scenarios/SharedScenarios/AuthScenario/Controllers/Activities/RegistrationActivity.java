@@ -106,7 +106,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
                 if(!coPassword.getText().toString().equals(password.getText().toString()))
                 {
                     //set text error and yoyo library for animation
-                    coPassword.setError("Password Not Match");
+                    coPassword.setError(getString(R.string.pass_not_match));
                     YoYo.with(Techniques.Shake)
                             .duration(700)
                             .repeat(1)
@@ -115,7 +115,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
                 else if(username.getText().length()<=6)
                 {
                     //set text error and yoyo library for animation
-                    username.setError("Username id too short!");
+                    username.setError(getString(R.string.user_short));
                     YoYo.with(Techniques.Shake)
                             .duration(700)
                             .repeat(1)
@@ -124,7 +124,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
                 else if(email.getText().toString().equals(""))
                 {
                     //set text error and yoyo library for animation
-                    email.setError("Please enter email");
+                    email.setError(getString(R.string.enter_mail));
                     YoYo.with(Techniques.Shake)
                             .duration(700)
                             .repeat(1)
@@ -134,7 +134,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
                 else if(password.getText().toString().equals(""))
                 {
                     //set text error and yoyo library for animation
-                    password.setError("Please enter password");
+                    password.setError(getString(R.string.please_enter_password));
                     YoYo.with(Techniques.Shake)
                             .duration(700)
                             .repeat(1)
@@ -144,7 +144,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
                 else if(coPassword.getText().toString().equals(""))
                 {
                     //set text error and yoyo library for animation
-                    coPassword.setError("Please confirm password");
+                    coPassword.setError(getString(R.string.pls_co_pass));
                     YoYo.with(Techniques.Shake)
                             .duration(700)
                             .repeat(1)
@@ -154,7 +154,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
 
                     //DIALOG PROGRESS
                     pd = new ProgressDialog(RegistrationActivity.this);
-                    pd.setMessage("Loading...");
+                    pd.setMessage(getString(R.string.loading));
                     pd.show();
                     //CALL API
                     imageURL = "image";
@@ -229,7 +229,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
     @Override
     public void OnError(VolleyError error) {
 
-        Toasty.error(this,"Email already exist",Toast.LENGTH_LONG).show();
+        Toasty.error(this,getString(R.string.email_exist),Toast.LENGTH_LONG).show();
         pd.cancel();
     }
 }

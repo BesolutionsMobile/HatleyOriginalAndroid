@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
 
                 //SET TOOLBAR TITLE
                 mToolbar.setVisibility(View.VISIBLE);
-                textView.setText("Available Offers");
+                textView.setText(getString(R.string.available_offers));
 
                 //SET HOME ICON COLOR AND TEXT
                 homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
 
                 //SET TOOLBAR TITLE
                 mToolbar.setVisibility(View.VISIBLE);
-                textView.setText("Notifications");
+                textView.setText(getString(R.string.notifications));
 
                 //SET HOME ICON COLOR AND TEXT
                 homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
@@ -264,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
 
                 //SET TOOLBAR TITLE
                 mToolbar.setVisibility(View.VISIBLE);
-                textView.setText("Settings");
+                textView.setText(getString(R.string.settings));
 
                 //SET HOME ICON COLOR AND TEXT
                 homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
@@ -303,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
 
             //SET TOOLBAR TITLE
             mToolbar.setVisibility(View.VISIBLE);
-            textView.setText("Available Offers");
+            textView.setText(getString(R.string.available_offers));
 
             //SET HOME ICON COLOR AND TEXT
             homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
@@ -378,7 +378,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
             case 7:
                 //STOP DIALOG
                 pd = new ProgressDialog(this);
-                pd.setMessage("Loading...");
+                pd.setMessage(getString(R.string.loading));
                 pd.setCancelable(false);
                 pd.show();
                 x = 1;
@@ -388,7 +388,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
             case 8:
                 //STOP DIALOG
                 pd = new ProgressDialog(this);
-                pd.setMessage("Loading...");
+                pd.setMessage(getString(R.string.loading));
                 pd.setCancelable(false);
                 pd.show();
                 x = 2;
@@ -411,7 +411,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
                 if (data.equals("submit_offer")) {
                     //SET TOOLBAR TITLE
                     mToolbar.setVisibility(View.VISIBLE);
-                    textView.setText("Available Offers");
+                    textView.setText(getString(R.string.available_offers));
 
                     //SET HOME ICON COLOR AND TEXT
                     homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);

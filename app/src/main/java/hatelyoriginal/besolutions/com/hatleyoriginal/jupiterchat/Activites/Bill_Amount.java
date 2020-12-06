@@ -108,7 +108,7 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
 
                 if (editPrice.getText().toString().equals("") || editPrice.getText().toString().isEmpty()) {
 
-                    Toasty.error(context, "You Must Enter a Price", Toast.LENGTH_SHORT).show();
+                    Toasty.error(context, getString(R.string.enter_price), Toast.LENGTH_SHORT).show();
                     pd.cancel();
 
                 } else {
@@ -132,7 +132,7 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
 
                 //VALIDATION ON CALL BUTTON
                 if (tinyDB.getString("chatPhone").equals("0000") || tinyDB.getString("chatPhone").isEmpty()) {
-                    Toasty.error(context, "This Client Not Having a Number ", Toast.LENGTH_LONG).show();
+                    Toasty.error(context, getString(R.string.havent_number), Toast.LENGTH_LONG).show();
                 } else {
                     //GO TO CALL
                     Intent intent = new Intent(Intent.ACTION_DIAL);
@@ -166,7 +166,7 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
 
         pd.cancel();
 
-        Toasty.success(context, "Order has Finished Successfully", Toast.LENGTH_LONG).show();
+        Toasty.success(context, getString(R.string.order_finished), Toast.LENGTH_LONG).show();
 
         //Toasty.success(context, model.getJsonObject().toString(), Toast.LENGTH_LONG).show();
 
@@ -182,7 +182,7 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
 
         if (error.networkResponse.statusCode == 400) {
 
-            Toasty.error(context, "Order Already Finished", Toast.LENGTH_SHORT).show();
+            Toasty.error(context, getString(R.string.order_finished_already), Toast.LENGTH_SHORT).show();
 
         } else if ((error.networkResponse.statusCode == 500)) {
 
@@ -191,7 +191,7 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
             pd.cancel();
 
             //Toasty.success(context, "Order has Finished Successfully with 500", Toast.LENGTH_LONG).show();
-            Toasty.success(context, "Order has Finished Successfully", Toast.LENGTH_LONG).show();
+            Toasty.success(context, getString(R.string.order_finished), Toast.LENGTH_LONG).show();
 
             EventBus.getDefault().post(new AddButtonClick("Finished"));
             dismiss();
@@ -208,7 +208,7 @@ public class Bill_Amount extends DialogFragment implements NetworkInterface, OnM
         // and move the map's camera to the same location.
         LatLng sydney = new LatLng(30.077899, 31.342715);
         googleMap.addMarker(new MarkerOptions().position(sydney)
-                .title("order location"));
+                .title(getString(R.string.order_finished)));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12.0f));
     }

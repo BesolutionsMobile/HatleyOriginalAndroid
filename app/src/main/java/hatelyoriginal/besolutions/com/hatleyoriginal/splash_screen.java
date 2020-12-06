@@ -13,8 +13,10 @@ import com.daimajia.androidanimations.library.YoYo;
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import hatelyoriginal.besolutions.com.hatleyoriginal.LocalData.SavedData;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SharedScenarios.AuthScenario.Controllers.Activities.LoginActivity;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.TinyDB;
+import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.utils;
 
 public class splash_screen extends AppCompatActivity {
 
@@ -31,6 +33,10 @@ public class splash_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
         ButterKnife.bind(this);
+
+
+        //CHANGE LANGUAGE
+        new utils(this).set_language(new SavedData().get_lan(splash_screen.this), splash_screen.this);
 
         //define vars
         tinyDB = new TinyDB(this);

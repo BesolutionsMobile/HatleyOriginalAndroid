@@ -48,7 +48,7 @@ public class fingerprint extends AppCompatActivity {
             @Override
             public void onError(Error error) {
 
-                Toasty.error(fingerprint.this, "Not Match", Toast.LENGTH_LONG).show();
+                Toasty.error(fingerprint.this, getString(R.string.not__matched), Toast.LENGTH_LONG).show();
 
             }
 
@@ -60,7 +60,8 @@ public class fingerprint extends AppCompatActivity {
                 if(tinyDB.getString("userType").equals("1"))
                 {
                     startActivity(new Intent(fingerprint.this, MainActivity.class));
-                }else
+                }
+                else
                     {
                         startActivity(new Intent(fingerprint.this, StarActivity.class));
                     }

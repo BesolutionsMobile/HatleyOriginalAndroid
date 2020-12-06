@@ -54,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
-                    android:text="Home"/>
+                    android:text="@string/home"/>
 
             </LinearLayout>
 
@@ -77,7 +77,7 @@
                     android:id="@+id/offerstext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Offers"/>
+                    android:text="@string/offers"/>
 
             </LinearLayout>
 
@@ -100,7 +100,7 @@
                     android:id="@+id/notofocationstext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Notifications"/>
+                    android:text="@string/notifications"/>
 
             </LinearLayout>
 
@@ -123,7 +123,7 @@
                     android:id="@+id/settingtext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Settings"/>
+                    android:text="@string/settings"/>
 
             </LinearLayout>
 

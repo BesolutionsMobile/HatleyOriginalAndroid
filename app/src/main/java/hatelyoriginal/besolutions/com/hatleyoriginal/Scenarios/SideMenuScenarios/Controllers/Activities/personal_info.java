@@ -33,7 +33,12 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import es.dmoral.toasty.Toasty;
+import hatelyoriginal.besolutions.com.hatleyoriginal.LocalData.SavedData;
+import hatelyoriginal.besolutions.com.hatleyoriginal.LocalData.SendData;
 import hatelyoriginal.besolutions.com.hatleyoriginal.R;
+import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SharedScenarios.AuthScenario.Controllers.Activities.LoginActivity;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SideMenuScenarios.Controllers.Fragments.change_pass;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SideMenuScenarios.Tools.Change_phone;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SideMenuScenarios.Tools.Change_photo;
@@ -43,7 +48,7 @@ import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.firebase_storage;
 
 public class personal_info extends AppCompatActivity {
 
-    LinearLayout linearname,linearemail,linearpass,linearid,linearphoto,linearphone;
+    LinearLayout linearname,linearemail,linearpass,linearid,linearphoto,linearphone,language;
 
     TextView name,email;
 
@@ -91,7 +96,7 @@ public class personal_info extends AppCompatActivity {
 
         //SET TOOLBAR TITLE
         textView = mToolbar.findViewById(R.id.toolbartext);
-        textView.setText("Personal Info");
+        textView.setText(getString(R.string.personal_info));
 
         //SET BACK BUTTON
         back = mToolbar.findViewById(R.id.back);
@@ -110,9 +115,12 @@ public class personal_info extends AppCompatActivity {
         linearphone = findViewById(R.id.linChangePhone);
         linearphoto = findViewById(R.id.linChangePhoto);
         linearpass = findViewById(R.id.linChangePass);
+        language = findViewById(R.id.language);
         userimage = findViewById(R.id.imgUser);
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
+
+        Toast.makeText(this, "sdsdsdds", Toast.LENGTH_SHORT).show();
 
 
         //INITIALIZE FIREBASE STORAGE
@@ -150,6 +158,25 @@ public class personal_info extends AppCompatActivity {
 
                 Change_phone change_phone = new Change_phone();
                 change_phone.dialog(personal_info.this,R.layout.change_phone,.90);
+
+            }
+        });
+
+        //CHANGE LANGUAGE
+        language.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(new SavedData().get_lan(personal_info.this).equals("en"))
+                {
+                    SendData.send_lan(personal_info.this,"ar");
+                }
+                else {
+                    SendData.send_lan(personal_info.this,"en");
+                }
+                Intent i =new Intent(personal_info.this, LoginActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
+
 
             }
         });

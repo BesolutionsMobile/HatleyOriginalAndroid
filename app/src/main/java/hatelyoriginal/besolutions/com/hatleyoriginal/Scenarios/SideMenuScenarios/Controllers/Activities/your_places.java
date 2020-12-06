@@ -56,7 +56,7 @@ public class your_places extends AppCompatActivity {
 
         //SET TOOLBAR TITLE
         textView = mToolbar.findViewById(R.id.toolbartext);
-        textView.setText("Saved Places");
+        textView.setText(getString(R.string.saved_places));
 
         //SET BACK BUTTON
         back = mToolbar.findViewById(R.id.back);
@@ -77,7 +77,7 @@ public class your_places extends AppCompatActivity {
 
         //SET PLACE HOLDER IF NO DATA
         if (local_data.RetreiveAllData().size() == 0) {
-            nodata.setText("No Data Found");
+            nodata.setText(getString(R.string.no_data));
         }
 
 

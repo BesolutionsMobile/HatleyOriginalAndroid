@@ -127,7 +127,7 @@ public class ReactOfferPopUpFragment extends DialogFragment implements NetworkIn
             public void onClick(View view) {
                 x = 1;
                 pd = new ProgressDialog(getActivity());
-                pd.setMessage("Loading...");
+                pd.setMessage(getString(R.string.loading));
                 pd.setCancelable(false);
                 pd.show();
                 new Apicalls(getActivity(), ReactOfferPopUpFragment.this).AcceptOffer(String.valueOf(tinyDB.getInt("offerID")),token);
@@ -197,7 +197,7 @@ public class ReactOfferPopUpFragment extends DialogFragment implements NetworkIn
 
         if (x == 1) {
 
-            Toasty.success(Objects.requireNonNull(getActivity()), "Offer Accepted Successfully", Toast.LENGTH_LONG).show();
+            Toasty.success(Objects.requireNonNull(getActivity()), getString(R.string.offer_accepted), Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(getActivity(), NewChatActivity.class);
 
@@ -208,7 +208,7 @@ public class ReactOfferPopUpFragment extends DialogFragment implements NetworkIn
 
         } else if (x == 2) {
 
-            Toasty.success(context, "Offer Rejected Successfully", Toast.LENGTH_LONG).show();
+            Toasty.success(context, getString(R.string.offer_rejected), Toast.LENGTH_LONG).show();
 
             //Rejected
             EventBus.getDefault().post(new AddButtonClick("Rejected"));
@@ -232,7 +232,7 @@ public class ReactOfferPopUpFragment extends DialogFragment implements NetworkIn
 
         pd.cancel();
 
-        Toasty.success(context, "Offer AlReady Accepted", Toast.LENGTH_LONG).show();
+        Toasty.success(context, getString(R.string.offer_already_acc), Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -55,12 +55,12 @@ public class change_pass implements NetworkInterface {
 
                 if(!editpass.getText().toString().equals(editconpass.getText().toString()))
                 {
-                    editconpass.setError("not matched!");
+                    editconpass.setError(context.getString(R.string.pass_not_match));
 
                 }
                 else if(editpass.getText().toString().length()<=5)
                 {
-                    editpass.setError("password is too short!");
+                    editpass.setError(context.getString(R.string.short_pass));
 
                 }
                 else {

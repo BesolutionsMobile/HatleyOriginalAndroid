@@ -149,4 +149,28 @@
             android:paddingEnd="@dimen/_3sdp"
             />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/language"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:orientation="horizontal"
+        android:paddingRight="@dimen/_10sdp"
+        android:gravity="center|right"
+        >
+        <ImageView
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/ic_baseline_language_24"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right|center"
+            android:text="@string/language"
+            android:paddingLeft="@dimen/_3sdp"
+            />
+
+
+    </LinearLayout>
 </LinearLayout>

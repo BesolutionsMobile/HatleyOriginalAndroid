@@ -207,7 +207,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                         });
                     } else {
 
-                        Toasty.error(Objects.requireNonNull(getActivity()), "Unable to get Current Location", Toast.LENGTH_LONG).show();
+                        Toasty.error(Objects.requireNonNull(getActivity()), getString(R.string.unable_get_current), Toast.LENGTH_LONG).show();
 
                     }
                 });
@@ -299,11 +299,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 fragmentTransaction.replace(R.id.container ,card);
                 fragmentTransaction.commit();
 
-                Toasty.success(getActivity(),"Added Successfully",Toast.LENGTH_LONG).show();
+                Toasty.success(getActivity(),getString(R.string.added_success),Toast.LENGTH_LONG).show();
 
             }catch (Exception e)
             {
-                Toasty.error(getActivity(),"Select Order Place First",Toast.LENGTH_LONG).show();
+                Toasty.error(getActivity(),getString(R.string.select_order_place),Toast.LENGTH_LONG).show();
 
             }
 
@@ -348,10 +348,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     //CHECK IF GBS OPEND OR NOT
     private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("You Must Open GPS To Get Delivery place")
+        builder.setMessage(getString(R.string.you_must_open_gbs))
                 .setCancelable(false)
-                .setPositiveButton("Yes", (dialog, id) -> startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), 1))
-                .setNegativeButton("No", (dialog, id) -> dialog.cancel());
+                .setPositiveButton(getString(R.string.yes), (dialog, id) -> startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), 1))
+                .setNegativeButton(getString(R.string.no), (dialog, id) -> dialog.cancel());
         final AlertDialog alert = builder.create();
         alert.show();
     }

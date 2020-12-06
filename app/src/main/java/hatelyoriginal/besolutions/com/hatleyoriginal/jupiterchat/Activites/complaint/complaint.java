@@ -75,11 +75,12 @@ public class complaint extends DialogFragment implements NetworkInterface {
             public void onClick(View view) {
                 if (complaintdesc.getText().toString().length() <= 5) {
 
-                    Toasty.error(Objects.requireNonNull(getActivity()), "Description is Too Short!", Toast.LENGTH_SHORT).show();
+
+                    Toasty.error(Objects.requireNonNull(getActivity()), getString(R.string.short_desc), Toast.LENGTH_SHORT).show();
 
                 } else if (complaintdesc.getText().toString().equals("")) {
 
-                    Toasty.error(Objects.requireNonNull(getActivity()), "Please Write Your problem!", Toast.LENGTH_SHORT).show();
+                    Toasty.error(Objects.requireNonNull(getActivity()), getString(R.string.write_ur_problem), Toast.LENGTH_SHORT).show();
 
                 } else {
 
@@ -139,7 +140,7 @@ public class complaint extends DialogFragment implements NetworkInterface {
 
         }else
             {
-                Toasty.success(Objects.requireNonNull(getActivity()), "Complaint Added Successfully", Toast.LENGTH_SHORT).show();
+                Toasty.success(Objects.requireNonNull(getActivity()), getString(R.string.complaint_added), Toast.LENGTH_SHORT).show();
 
                 if(tinyDB.getString("userType").equals("1"))
                 {
@@ -159,19 +160,19 @@ public class complaint extends DialogFragment implements NetworkInterface {
         //validation on all error response
         if(x == 1)
         {
-            Toasty.info(Objects.requireNonNull(getActivity()), "Types Fetching Failed", Toast.LENGTH_SHORT).show();
+            Toasty.info(Objects.requireNonNull(getActivity()), getString(R.string.types_failed), Toast.LENGTH_SHORT).show();
         }else
             {
                 if (error.networkResponse.statusCode == 401) {
-                    Toasty.error(Objects.requireNonNull(getActivity()), "Please Enter your Complaint.... ", Toast.LENGTH_SHORT).show();
+                    Toasty.error(Objects.requireNonNull(getActivity()), getString(R.string.write_ur_problem), Toast.LENGTH_SHORT).show();
                 } else if (error.networkResponse.statusCode == 422)
 
                 {
 
-                    Toasty.error(Objects.requireNonNull(getActivity()), "Sorry....You Cant Complaint In this Order.", Toast.LENGTH_SHORT).show();
+                    Toasty.error(Objects.requireNonNull(getActivity()), getString(R.string.sorry_cant_complaint), Toast.LENGTH_SHORT).show();
                 } else {
 
-                    Toasty.error(Objects.requireNonNull(getActivity()), "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                    Toasty.error(Objects.requireNonNull(getActivity()), getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
                 }
             }
 

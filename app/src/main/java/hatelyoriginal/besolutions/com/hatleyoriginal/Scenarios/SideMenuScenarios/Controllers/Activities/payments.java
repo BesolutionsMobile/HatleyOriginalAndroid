@@ -50,7 +50,7 @@ public class payments extends AppCompatActivity implements NetworkInterface {
 
         //SET TOOL BAR TITLE
         textView = mToolbar.findViewById(R.id.toolbartext);
-        textView.setText("Payment");
+        textView.setText(getString(R.string.payment));
 
         //BACK ON CLICK BUTTON
         back = mToolbar.findViewById(R.id.back);
@@ -107,7 +107,7 @@ public class payments extends AppCompatActivity implements NetworkInterface {
         if (error.networkResponse.statusCode == 500)
         {
             linearpay.setVisibility(View.INVISIBLE);
-            Toasty.error(this,"Sorry There Is Nothing To Show ",Toast.LENGTH_LONG).show();
+            Toasty.error(this,getString(R.string.nothing_show),Toast.LENGTH_LONG).show();
 
 
         }else {

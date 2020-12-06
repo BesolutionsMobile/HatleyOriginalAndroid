@@ -166,12 +166,12 @@ public class RequestOrderFragment extends Fragment implements NetworkInterface {
                 Toasty.error(getActivity(), enter_info, Toast.LENGTH_LONG).show();
 
             } else if (descripition.getText().toString().length() <= 10) {
-                Toasty.error(Objects.requireNonNull(getActivity()), "Description is too short", Toast.LENGTH_LONG).show();
+                Toasty.error(Objects.requireNonNull(getActivity()), getString(R.string.short_desc), Toast.LENGTH_LONG).show();
 
             } else {
 
                 pd = new ProgressDialog(getActivity());
-                pd.setMessage("Loading...");
+                pd.setMessage(getString(R.string.loading));
                 pd.setCancelable(false);
                 pd.show();
 
@@ -391,9 +391,9 @@ public class RequestOrderFragment extends Fragment implements NetworkInterface {
 
         pd.cancel();
         if (error.networkResponse.statusCode == 404) {
-            Toasty.error(Objects.requireNonNull(getActivity()), "Code Not Found", Toast.LENGTH_LONG).show();
+            Toasty.error(Objects.requireNonNull(getActivity()), getString(R.string.code_not_found), Toast.LENGTH_LONG).show();
         } else if (error.networkResponse.statusCode == 422) {
-            Toasty.error(Objects.requireNonNull(getActivity()), "Expired Code", Toast.LENGTH_LONG).show();
+            Toasty.error(Objects.requireNonNull(getActivity()), getString(R.string.expired_code), Toast.LENGTH_LONG).show();
 
 
         }

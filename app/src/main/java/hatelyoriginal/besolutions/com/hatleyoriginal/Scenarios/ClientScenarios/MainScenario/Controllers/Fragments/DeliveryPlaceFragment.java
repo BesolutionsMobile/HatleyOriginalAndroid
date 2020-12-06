@@ -174,7 +174,7 @@ public class DeliveryPlaceFragment extends Fragment {
 
         if (local_data.RetreiveAllData().size() == 0) {
             TextView nodata_recent = Objects.requireNonNull(getActivity()).findViewById(R.id.nodata_recent);
-            nodata_recent.setText("No Recent Places");
+            nodata_recent.setText(getString(R.string.no_recent_place));
         }
     }
 

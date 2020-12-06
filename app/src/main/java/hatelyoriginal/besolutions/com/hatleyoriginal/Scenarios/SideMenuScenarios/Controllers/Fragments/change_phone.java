@@ -64,12 +64,12 @@ public class change_phone implements NetworkInterface {
         btnsave.setOnClickListener(v -> {
              if(editphone.getText().toString().length()<=9)
              {
-                 editphone.setError("Phone is too short!");
+                 editphone.setError(context.getString(R.string.short_phone));
 
              }
              else if(editphone.getText().toString().length()>=16){
 
-                 editphone.setError("Phone must be less than 16 digits");
+                 editphone.setError(context.getString(R.string.phone_must_less_16));
              }
              else {
                  //CALL API CHANGE PHONE

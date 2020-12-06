@@ -51,7 +51,7 @@ public class promo_code extends AppCompatActivity implements NetworkInterface {
 
         //SET TOOLBAR TITLE
         textView = mToolbar.findViewById(R.id.toolbartext);
-        textView.setText("Promo Code");
+        textView.setText(getString(R.string.pls_upload_img));
 
         //SET BACK BUTTON
         back = mToolbar.findViewById(R.id.back);
@@ -127,29 +127,29 @@ public class promo_code extends AppCompatActivity implements NetworkInterface {
 
         //VALIDATION ON ERROR RESPONSE
         if (error.networkResponse.statusCode == 422) {
-            Toast.makeText(this, "Code Already In Use", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.code_already_used), Toast.LENGTH_SHORT).show();
             linearpromo.setVisibility(View.INVISIBLE);
 
         } else if (error.networkResponse.statusCode == 423) {
 
-            Toasty.error(this, "Promo Code Still Not Started", Toast.LENGTH_LONG).show();
+            Toasty.error(this, getString(R.string.promo_not_started), Toast.LENGTH_LONG).show();
 
             linearpromo.setVisibility(View.INVISIBLE);
 
 
         } else if (error.networkResponse.statusCode == 424) {
-            Toasty.error(this, "Promo Code Has Been Expired", Toast.LENGTH_LONG).show();
+            Toasty.error(this, getString(R.string.promo_expired), Toast.LENGTH_LONG).show();
 
             linearpromo.setVisibility(View.INVISIBLE);
 
         } else if (error.networkResponse.statusCode == 425) {
 
-            Toasty.error(this, "Promo Code Not Valid", Toast.LENGTH_LONG).show();
+            Toasty.error(this, getString(R.string.promo_not_valid), Toast.LENGTH_LONG).show();
             linearpromo.setVisibility(View.INVISIBLE);
 
         } else if (error.networkResponse.statusCode == 404) {
 
-            Toasty.error(this, "Promo Code Not Found", Toast.LENGTH_LONG).show();
+            Toasty.error(this, getString(R.string.promo_not_found), Toast.LENGTH_LONG).show();
             linearpromo.setVisibility(View.INVISIBLE);
 
         } else {

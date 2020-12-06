@@ -137,15 +137,15 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     public List<NavigationItem> getMenu() {
         //ADD ITEMS
         List<NavigationItem> items = new ArrayList<>();
-        items.add(new NavigationItem("Personal Info", getResources().getDrawable(R.drawable.personalnav)));
-        items.add(new NavigationItem("Share and info", getResources().getDrawable(R.drawable.shareprofit)));
-        items.add(new NavigationItem("Promo Code", getResources().getDrawable(R.drawable.promocode)));
-        items.add(new NavigationItem("Payments", getResources().getDrawable(R.drawable.money1)));
-        items.add(new NavigationItem("FAQ", getResources().getDrawable(R.drawable.question)));
-        items.add(new NavigationItem("Your Orders", getResources().getDrawable(R.drawable.yourorders)));
-        items.add(new NavigationItem("Saved Places", getResources().getDrawable(R.drawable.savedplaces)));
-        items.add(new NavigationItem("Display Application as Star", getResources().getDrawable(R.drawable.displayapp)));
-        items.add(new NavigationItem("Logout", getResources().getDrawable(R.drawable.logout)));
+        items.add(new NavigationItem(getString(R.string.personal_info), getResources().getDrawable(R.drawable.personalnav)));
+        items.add(new NavigationItem(getString(R.string.share_info), getResources().getDrawable(R.drawable.shareprofit)));
+        items.add(new NavigationItem(getString(R.string.promo_code), getResources().getDrawable(R.drawable.promocode)));
+        items.add(new NavigationItem(getString(R.string.payment), getResources().getDrawable(R.drawable.money1)));
+        items.add(new NavigationItem(getString(R.string.faq), getResources().getDrawable(R.drawable.question)));
+        items.add(new NavigationItem(getString(R.string.your_orders), getResources().getDrawable(R.drawable.yourorders)));
+        items.add(new NavigationItem(getString(R.string.saved_places), getResources().getDrawable(R.drawable.savedplaces)));
+        items.add(new NavigationItem(getString(R.string.display_as_star), getResources().getDrawable(R.drawable.displayapp)));
+        items.add(new NavigationItem(getString(R.string.logout), getResources().getDrawable(R.drawable.logout)));
         return items;
     }
 

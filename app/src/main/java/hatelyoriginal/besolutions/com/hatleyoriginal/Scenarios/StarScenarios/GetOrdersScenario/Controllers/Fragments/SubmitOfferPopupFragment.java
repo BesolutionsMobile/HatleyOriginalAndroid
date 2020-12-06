@@ -143,11 +143,11 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
 
                 if (expectedArrivalTime.getText().toString().equals("")) {
 
-                    Toasty.error(getActivity(), "Please enter delivery time", Toast.LENGTH_LONG).show();
+                    Toasty.error(getActivity(), getString(R.string.pls_enter_delivery_time), Toast.LENGTH_LONG).show();
 
                 } else if (expectedPrice.getText().toString().equals("")) {
 
-                    Toasty.error(getActivity(), "Please enter expected price", Toast.LENGTH_LONG).show();
+                    Toasty.error(getActivity(), getString(R.string.pls_enter_delivery_time), Toast.LENGTH_LONG).show();
 
                 } else {
 
@@ -224,7 +224,7 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
 
         pd.cancel();
 
-        Toasty.success(getActivity(), "Offer Submitted Successfully", Toast.LENGTH_LONG).show();
+        Toasty.success(getActivity(), getString(R.string.offer_sunmitted_success), Toast.LENGTH_LONG).show();
 
        // Toasty.success(getActivity(), model.getJsonObject().toString(), Toast.LENGTH_LONG).show();
 
@@ -246,7 +246,7 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
 
             //Toasty.error(getActivity(), "Offer Not Sent." + " with " + "500", Toast.LENGTH_LONG).show();
 
-            Toasty.error(getActivity(), "Connection Error, Offer not Sent", Toast.LENGTH_LONG).show();
+            Toasty.error(getActivity(), getString(R.string.error_connection), Toast.LENGTH_LONG).show();
 
         }else if(error.networkResponse.statusCode == 400)
         {
@@ -277,7 +277,7 @@ public class SubmitOfferPopupFragment extends DialogFragment implements NetworkI
         // and move the map's camera to the same location.
         LatLng sydney = new LatLng(tinyDB.getDouble("orderLat", 30.077899), tinyDB.getDouble("orderLong", 31.342715));
         googleMap.addMarker(new MarkerOptions().position(sydney)
-                .title("order location"));
+                .title(getString(R.string.order_location)));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12.0f));
 

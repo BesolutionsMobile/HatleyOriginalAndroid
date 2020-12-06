@@ -4,14 +4,18 @@ import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -79,6 +83,20 @@ public class utils extends SQLiteOpenHelper {
      */
     public Bitmap convertToBitmap(byte[] b){
         return BitmapFactory.decodeByteArray(b, 0, b.length);
+    }
+
+
+
+    /**
+     * SET LANGUAGE
+     */
+    public static void set_language(String Lan, Context context) {
+        Resources resources = context.getResources();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        Configuration configuration = resources.getConfiguration();
+        configuration.setLocale(new Locale(Lan.toLowerCase()));
+        resources.updateConfiguration(configuration, displayMetrics);
+
     }
 
 

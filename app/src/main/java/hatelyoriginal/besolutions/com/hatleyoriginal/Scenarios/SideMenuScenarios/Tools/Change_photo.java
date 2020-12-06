@@ -68,7 +68,7 @@ public class Change_photo implements NetworkInterface {
             public void onClick(View v) {
                 if(tinyDB.getString("imageURL").equals("0"))
                 {
-                    Toasty.success(context,"please upload image",Toast.LENGTH_LONG).show();
+                    Toasty.success(context,context.getString(R.string.pls_upload_img),Toast.LENGTH_LONG).show();
 
                 }
                 else {
@@ -91,7 +91,7 @@ public class Change_photo implements NetworkInterface {
 
     @Override
     public void OnResponse(ResponseModel model) {
-        Toasty.success(context,"Image Added Successfully",Toast.LENGTH_LONG).show();
+        Toasty.success(context,context.getString(R.string.added_success),Toast.LENGTH_LONG).show();
 
         tinyDB.putString("userImage",tinyDB.getString("imageURL"));
 

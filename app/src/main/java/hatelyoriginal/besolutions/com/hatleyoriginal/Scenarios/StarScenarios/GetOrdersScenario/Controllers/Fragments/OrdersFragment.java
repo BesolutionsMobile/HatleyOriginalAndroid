@@ -87,7 +87,7 @@ public class OrdersFragment extends Fragment implements NetworkInterface {
 
         //CALL PROGRESS BAR
         pd = new ProgressDialog(getActivity());
-        pd.setMessage("Loading...");
+        pd.setMessage(getString(R.string.loading));
 
 
         availableOrderlist = Objects.requireNonNull(getActivity()).findViewById(R.id.available_orderlist);

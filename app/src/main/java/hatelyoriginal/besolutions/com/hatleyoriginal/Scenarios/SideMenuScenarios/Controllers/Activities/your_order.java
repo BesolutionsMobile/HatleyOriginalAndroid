@@ -59,7 +59,7 @@ public class your_order extends AppCompatActivity implements NetworkInterface {
 
         //SET TOOLBAR TITLE
         textView = mToolbar.findViewById(R.id.toolbartext);
-        textView.setText("Your Orders");
+        textView.setText(getString(R.string.your_orders));
 
         //SET BACK BUTTON
         back = mToolbar.findViewById(R.id.back);

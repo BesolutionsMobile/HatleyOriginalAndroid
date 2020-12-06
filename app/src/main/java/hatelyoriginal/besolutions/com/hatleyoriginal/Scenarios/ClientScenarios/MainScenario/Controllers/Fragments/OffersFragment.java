@@ -95,7 +95,7 @@ public class OffersFragment extends Fragment implements NetworkInterface {
         //CANCEL ORDER
         cancel.setOnClickListener(view1 -> {
 
-            pd.setMessage("Loading...");
+            pd.setMessage(getString(R.string.loading));
             pd.setCancelable(false);
             pd.show();
             cancel_order_num = 2;

@@ -109,7 +109,7 @@ public class evaluate_star extends DialogFragment implements NetworkInterface {
 
         if (tinyDB.getString("userType").equals("2")) {
 
-            evaluateTxt.setText("Evaluate Client"); //SET EVALUATE TEXT
+            evaluateTxt.setText(getString(R.string.evaluate_client)); //SET EVALUATE TEXT
 
             Glide.with(context).load(tinyDB.getString("image")).placeholder(R.drawable.starplaceholder).into(userimg);   //ADD IMAGE
 
@@ -223,7 +223,7 @@ public class evaluate_star extends DialogFragment implements NetworkInterface {
             {
                 // More than 1 star pressed
 
-                Toasty.success(context, "Ratted Successfully", Toast.LENGTH_LONG).show();
+                Toasty.success(context, getString(R.string.ratted_success), Toast.LENGTH_LONG).show();
 
                 if(tinyDB.getString("userType").equals("1"))
                 {
@@ -253,7 +253,7 @@ public class evaluate_star extends DialogFragment implements NetworkInterface {
 
         }else
             {
-                Toasty.success(context, "Evaluated", Toast.LENGTH_LONG).show();
+                Toasty.success(context, getString(R.string.evaluated), Toast.LENGTH_LONG).show();
 
                 if(tinyDB.getString("userType").equals("1"))
                 {
@@ -269,7 +269,7 @@ public class evaluate_star extends DialogFragment implements NetworkInterface {
     @Override
     public void OnError(VolleyError error) {
 
-        Toasty.error(context, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+        Toasty.error(context, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
     }
 
    //update chat

@@ -46,6 +46,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.infinum.goldfinger.Goldfinger;
 import es.dmoral.toasty.Toasty;
+import hatelyoriginal.besolutions.com.hatleyoriginal.LocalData.SavedData;
 import hatelyoriginal.besolutions.com.hatleyoriginal.MainActivity;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.Apicalls;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.NetworkInterface;
@@ -57,7 +58,9 @@ import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SharedScenarios.A
 import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SharedScenarios.AuthScenario.Tools.RegistrationLoading;
 import hatelyoriginal.besolutions.com.hatleyoriginal.StarActivity;
 import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.TinyDB;
+import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.utils;
 import hatelyoriginal.besolutions.com.hatleyoriginal.fingerprint;
+import hatelyoriginal.besolutions.com.hatleyoriginal.splash_screen;
 
 public class LoginActivity extends AppCompatActivity implements NetworkInterface {
 
@@ -98,6 +101,11 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
         setContentView(R.layout.login);
         ButterKnife.bind(this);
 
+        //CHANGE LANGUAGE
+        new utils(this).set_language(new SavedData().get_lan(this), LoginActivity
+
+                .this);
+
         //build finger print
         goldfinger= new Goldfinger.Builder(LoginActivity.this).build();
 
@@ -133,7 +141,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
                 // USER INPUT VALIDATION
                 if(username.getText().toString().equals(""))
                 {
-                    username.setError("Please enter username");
+                    username.setError(getString(R.string.please_enter_username));
 
                     //YOYO LIBRARY TO SHAKE INPUTS
                     YoYo.with(Techniques.Shake)
@@ -146,7 +154,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
                 else if(password.getText().toString().equals(""))
                 {
 
-                    password.setError("Please enter your password");
+                    password.setError(getString(R.string.please_enter_password));
                     YoYo.with(Techniques.Shake)
                             .duration(700)
                             .repeat(1)
@@ -157,7 +165,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
                 else {
                   //progress bar loading
                     pd = new ProgressDialog(LoginActivity.this);
-                    pd.setMessage("Loading...");
+                    pd.setMessage(getString(R.string.please_enter_password));
                     pd.setCancelable(false);
                     pd.show();
 
@@ -204,7 +212,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
     private void registration(String username,String email,String password,String userImage)
     {
         pd = new ProgressDialog(LoginActivity.this);
-        pd.setMessage("Loading...");
+        pd.setMessage(getString(R.string.loading));
         pd.setCancelable(false);
         pd.show();
 

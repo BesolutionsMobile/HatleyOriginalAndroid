@@ -28,11 +28,11 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_60sdp"
+                android:layout_height="wrap_content"
                 android:text="@string/username"
                 android:id="@+id/username"
                 android:paddingEnd="@dimen/_20sdp"
-                android:gravity="center|left"
+                android:gravity="center|right"
                 android:textSize="@dimen/_10ssp"
                 android:textColor="@android:color/white"
                 android:paddingStart="@dimen/_10sdp"
