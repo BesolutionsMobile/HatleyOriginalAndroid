@@ -103,7 +103,7 @@ public class NavigationDrawerFragmentStar extends Fragment implements Navigation
         mDrawerList.setHasFixedSize(true);
 
         final List<NavigationItem> navigationItems = getMenu();
-        NavigationDrawerAdapter adapter = new NavigationDrawerAdapter(navigationItems);
+        NavigationDrawerAdapter adapter = new NavigationDrawerAdapter(navigationItems,getContext());
         adapter.setNavigationDrawerCallbacks(this);
         mDrawerList.setAdapter(adapter);
         //selectItem(mCurrentSelectedPosition);

@@ -78,10 +78,11 @@
                     android:layout_height="match_parent"
                     android:paddingTop="@dimen/_2sdp"
                     android:text="3"
+
                     android:ellipsize="end"
                     android:lines="1"
                     android:textColor="@color/fcolor"
-                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
                     android:textSize="@dimen/_10ssp"
                     android:id="@+id/delivery_time"/>
 
@@ -104,9 +105,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="No"
+                    android:text="@string/no"
                     android:textColor="@color/fcolor"
-                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
                     android:textSize="@dimen/_10ssp"/>
 
             </LinearLayout>

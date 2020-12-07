@@ -120,7 +120,6 @@ public class personal_info extends AppCompatActivity {
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
 
-        Toast.makeText(this, "sdsdsdds", Toast.LENGTH_SHORT).show();
 
 
         //INITIALIZE FIREBASE STORAGE

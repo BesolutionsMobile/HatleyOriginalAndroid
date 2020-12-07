@@ -32,7 +32,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/_20sdp"
-        android:hint="Component Message"
+        android:hint="@string/component_message"
         android:textSize="@dimen/_12ssp"
         android:gravity="right|center"
         android:layout_marginTop="@dimen/_5sdp"

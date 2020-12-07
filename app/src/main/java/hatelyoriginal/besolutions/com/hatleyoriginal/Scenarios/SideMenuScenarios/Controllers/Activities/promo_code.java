@@ -51,7 +51,7 @@ public class promo_code extends AppCompatActivity implements NetworkInterface {
 
         //SET TOOLBAR TITLE
         textView = mToolbar.findViewById(R.id.toolbartext);
-        textView.setText(getString(R.string.pls_upload_img));
+        textView.setText(getString(R.string.promo_code));
 
         //SET BACK BUTTON
         back = mToolbar.findViewById(R.id.back);

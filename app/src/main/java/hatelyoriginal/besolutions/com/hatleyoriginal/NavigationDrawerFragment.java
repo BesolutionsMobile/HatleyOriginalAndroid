@@ -5,8 +5,11 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -88,6 +91,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         Glide.with(getActivity()).load(tinyDB.getString("userImage")).placeholder(R.drawable.sidemenuuser).into(userimage);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("WrongConstant")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -110,7 +114,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         mDrawerList.setHasFixedSize(true);
 
         final List<NavigationItem> navigationItems = getMenu();
-        NavigationDrawerAdapter adapter = new NavigationDrawerAdapter(navigationItems);
+        NavigationDrawerAdapter adapter = new NavigationDrawerAdapter(navigationItems,getContext());
         adapter.setNavigationDrawerCallbacks(this);
         mDrawerList.setAdapter(adapter);
         //selectItem(mCurrentSelectedPosition);

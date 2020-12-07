@@ -2,6 +2,7 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer"
+    android:layoutDirection="rtl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -54,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
-                    android:text="Home"/>
+                    android:text="@string/home"/>
 
             </LinearLayout>
 
@@ -77,7 +78,7 @@
                     android:id="@+id/offerstext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Offers"/>
+                    android:text="@string/offers"/>
 
             </LinearLayout>
 
@@ -100,7 +101,7 @@
                     android:id="@+id/notofocationstext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Notifications"/>
+                    android:text="@string/notifications"/>
 
             </LinearLayout>
 
@@ -123,7 +124,7 @@
                     android:id="@+id/settingtext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Settings"/>
+                    android:text="@string/settings"/>
 
             </LinearLayout>
 

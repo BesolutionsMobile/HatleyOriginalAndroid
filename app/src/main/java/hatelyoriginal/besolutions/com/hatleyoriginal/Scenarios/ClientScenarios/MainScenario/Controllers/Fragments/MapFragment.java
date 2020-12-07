@@ -123,7 +123,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         assert getFragmentManager() != null;
         autoCompleteSupportFragment = (AutocompleteSupportFragment) getChildFragmentManager().findFragmentById(R.id.autocomplete_fragment);
         assert autoCompleteSupportFragment != null;
-        autoCompleteSupportFragment.setHint("Delivery place");
+        autoCompleteSupportFragment.setHint(getString(R.string.delivery_place));
         // autoCompleteSupportFragment.setText(address_name);
         autoCompleteSupportFragment.setPlaceFields(fields);
         autoCompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {

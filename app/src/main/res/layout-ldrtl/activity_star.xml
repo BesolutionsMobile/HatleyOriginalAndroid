@@ -54,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
-                    android:text="Home"/>
+                    android:text="@string/home"/>
 
             </LinearLayout>
 
@@ -78,7 +78,7 @@
                     android:id="@+id/notofocationstext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Notifications"/>
+                    android:text="@string/notifications"/>
 
             </LinearLayout>
 

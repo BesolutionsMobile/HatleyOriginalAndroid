@@ -46,7 +46,7 @@ public class faq extends AppCompatActivity {
 
         //  SET TOOLBAR TITLE
         textView = mToolbar.findViewById(R.id.toolbartext);
-        textView.setText("FAQ");
+        textView.setText(getString(R.string.faq));
 
         //ON CLICK BACK TOOL BAR
         back = mToolbar.findViewById(R.id.back);

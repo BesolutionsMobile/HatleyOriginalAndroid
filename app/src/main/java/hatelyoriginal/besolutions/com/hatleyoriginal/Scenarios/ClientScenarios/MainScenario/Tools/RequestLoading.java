@@ -31,7 +31,7 @@ public class RequestLoading {
         dialog.show();
 
         TextView txt_msg = dialog.findViewById(R.id.popup_msg);
-        txt_msg.setText("Order Submitted Successfully...");
+        txt_msg.setText(context.getString(R.string.order_submitted));
 
 
         Handler handler = new Handler();

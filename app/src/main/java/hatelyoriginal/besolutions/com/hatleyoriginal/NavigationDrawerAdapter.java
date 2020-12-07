@@ -3,6 +3,8 @@ package hatelyoriginal.besolutions.com.hatleyoriginal;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +13,21 @@ import android.widget.TextView;
 import java.util.List;
 import java.util.Locale;
 
+import hatelyoriginal.besolutions.com.hatleyoriginal.LocalData.SavedData;
+
 
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.ViewHolder> {
 
     private List<NavigationItem> mData;
     private NavigationDrawerCallbacks mNavigationDrawerCallbacks;
     private View mSelectedView;
+    Context context;
 
     public static String sDefSystemLanguage;
 
-    NavigationDrawerAdapter(List<NavigationItem> data) {
+    NavigationDrawerAdapter(List<NavigationItem> data, Context context) {
         mData = data;
+        this.context = context;
     }
 
     public NavigationDrawerCallbacks getNavigationDrawerCallbacks() {
@@ -67,7 +73,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     public void onBindViewHolder(NavigationDrawerAdapter.ViewHolder viewHolder, int i) {
         viewHolder.textView.setText(mData.get(i).getText());
 
-        if(sDefSystemLanguage.equals("ar"))
+        if(new SavedData().get_lan(context).equals("ar"))
         {
             viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(null, null, mData.get(i).getDrawable(), null);
 

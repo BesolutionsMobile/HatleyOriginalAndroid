@@ -33,6 +33,7 @@
                 android:layout_weight=".85"
                 android:id="@+id/autocomplete_fragment"
                 android:layout_width="0dp"
+                android:layout_gravity="right"
                 android:layout_height="50dp"
                 android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"/>
 

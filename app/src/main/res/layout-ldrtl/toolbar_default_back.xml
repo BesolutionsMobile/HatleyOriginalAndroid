@@ -7,14 +7,6 @@
     android:layoutDirection="rtl"
     android:minHeight="@dimen/abc_action_bar_default_height_material">
 
-
-    <ImageView
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:rotation="180"
-        android:src="@drawable/ic_arrow_back_black_24dp"/>
-
     <TextView
         android:id="@+id/toolbartext"
         android:layout_width="wrap_content"
@@ -23,5 +15,14 @@
         android:textColor="@color/quantum_white_text"
         android:layout_marginStart="24dp"
         android:textSize="16sp"/>
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="180"
+        android:src="@drawable/ic_arrow_back_black_24dp"/>
+
+
 
 </androidx.appcompat.widget.Toolbar>

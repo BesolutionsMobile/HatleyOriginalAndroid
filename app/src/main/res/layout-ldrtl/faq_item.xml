@@ -23,12 +23,13 @@
         <TextView
             android:layout_weight=".95"
             android:layout_width="0dp"
-            android:gravity="left|center"
+            android:gravity="right|center"
             android:id="@+id/parent"
             android:text="kanflanflknalkfnlkanflaknflanfklakfnlanflwkajdwkjadwjbjwkabdkjwbddbkwjbdjwbkdb"
             android:singleLine="true"
             android:textSize="@dimen/_8ssp"
             android:paddingStart="@dimen/_10sdp"
+            android:layout_gravity="right"
             android:paddingLeft="@dimen/_5sdp"
             android:layout_height="match_parent"
             tools:ignore="RtlHardcoded,RtlSymmetry" />

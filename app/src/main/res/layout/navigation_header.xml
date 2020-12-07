@@ -51,7 +51,7 @@
                 android:layout_height="@dimen/_60sdp"
                 android:text="@string/username"
                 android:id="@+id/username"
-                android:paddingEnd="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_5sdp"
                 android:gravity="center|left"
                 android:textSize="@dimen/_10ssp"
                 android:textColor="@android:color/white"

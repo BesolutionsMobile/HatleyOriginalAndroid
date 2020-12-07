@@ -46,7 +46,7 @@ public class share_earn extends AppCompatActivity {
 
         //SET TOOLBAR TITLE
         textView = mToolbar.findViewById(R.id.toolbartext);
-        textView.setText("Share & Earn");
+        textView.setText(getString(R.string.share_earn));
 
         //SET BACK BUTTON
         back = mToolbar.findViewById(R.id.back);

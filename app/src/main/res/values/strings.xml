@@ -14,7 +14,7 @@
         <string name="signup">Sign Up</string>
         <string name="email">Email</string>
         <string name="confirmpass">Confirm Password</string>
-        <string name="termsdesc">Buy clicking create an account you agree to our</string>
+        <string name="termsdesc">By clicking create an account you agree to our</string>
         <string name="terms">terms</string>
         <string name="confirmthat">and confirm that.</string>
         <string name="createacc">create an account</string>
@@ -181,6 +181,10 @@
     <string name="logout">Logout</string>
     <string name="offers">Offers</string>
     <string name="home">Home</string>
+    <string name="delivery_place">Delivery place</string>
+    <string name="share_earn">Share &amp; Earn</string>
+    <string name="order_submitted">Order Submitted Successfully...</string>
+    <string name="swipe_left_to_show_map_and_set_bill_amount">Swipe Left To Show Map and Set Bill Amount</string>
 
 
 </resources>

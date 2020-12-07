@@ -29,6 +29,7 @@ import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
+import hatelyoriginal.besolutions.com.hatleyoriginal.LocalData.SavedData;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.Apicalls;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.NetworkInterface;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.ResponseModel;
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
         setSupportActionBar(mToolbar);
 
         //CHECK LANGUAGE ENG OR AR
-        if(sDefSystemLanguage.equals("ar"))
+        if(new SavedData().get_lan(MainActivity.this).equals("ar"))
         {
             mToolbar.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         }else

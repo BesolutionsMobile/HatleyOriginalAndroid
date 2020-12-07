@@ -39,6 +39,7 @@
      android:layout_marginTop="@dimen/_15sdp"
      android:weightSum="1"
      android:orientation="horizontal">
+
      <ImageView
          android:layout_weight=".12"
          android:layout_width="0dp"
@@ -49,6 +50,16 @@
          android:background="@color/fcolor"
          android:layout_height="match_parent"
          />
-
+     <EditText
+         android:layout_weight=".88"
+         android:layout_width="0dp"
+         android:layout_height="match_parent"
+         android:id="@+id/add_new_place"
+         android:editable="false"
+         android:gravity="right|center"
+         android:hint="@string/add_new_place"
+         android:background="@drawable/edit_bg3"
+         android:paddingRight="@dimen/_10sdp"
+         />
  </LinearLayout>
 </LinearLayout>
