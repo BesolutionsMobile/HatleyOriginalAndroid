@@ -187,6 +187,10 @@
     <string name="share_earn">شارك واربح</string>
     <string name="order_submitted">تم إرسال الطلب بنجاح ...</string>
     <string name="swipe_left_to_show_map_and_set_bill_amount">اسحب لليسار لعرض الخريطة وتعيين مبلغ الفاتورة</string>
+    <string name="invalid_email"> البريد الإلكتروني غير صالح</string>
+    <string name="phone">رقم الهاتف</string>
+    <string name="please_enter_phone">رقم الهاتف قصير جدا</string>
+
 
 
 </resources>

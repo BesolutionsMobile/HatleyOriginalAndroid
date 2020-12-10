@@ -165,7 +165,7 @@ public class LoginActivity extends AppCompatActivity implements NetworkInterface
                 else {
                   //progress bar loading
                     pd = new ProgressDialog(LoginActivity.this);
-                    pd.setMessage(getString(R.string.please_enter_password));
+                    pd.setMessage(getString(R.string.loading));
                     pd.setCancelable(false);
                     pd.show();
 

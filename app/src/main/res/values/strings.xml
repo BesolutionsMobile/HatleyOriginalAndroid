@@ -185,6 +185,10 @@
     <string name="share_earn">Share &amp; Earn</string>
     <string name="order_submitted">Order Submitted Successfully...</string>
     <string name="swipe_left_to_show_map_and_set_bill_amount">Swipe Left To Show Map and Set Bill Amount</string>
+    <string name="invalid_email">Invalid Email Address</string>
+    <string name="phone">Phone</string>
+    <string name="please_enter_phone">Your phone is too short</string>
+
 
 
 </resources>

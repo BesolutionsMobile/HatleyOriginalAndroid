@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/language/baseline_language_24.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/phone_android/baseline_phone_android_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -34,7 +34,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="1a7956" />
-                            <entry key="outputName" value="ic_baseline_language_24" />
+                            <entry key="outputName" value="ic_baseline_phone_android_24" />
                             <entry key="sourceFile" value="C:\Users\Be Group-web-0" />
                           </map>
                         </option>
