@@ -88,7 +88,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
 
                 Change_photo change_photo = new Change_photo();
-                change_photo.dialog(getActivity(),R.layout.change_photo,.90);
+                change_photo.dialog(getActivity(),R.layout.change_photo,.90,0);
 
 
 

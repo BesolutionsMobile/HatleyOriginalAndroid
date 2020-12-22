@@ -36,6 +36,7 @@ public enum Apiclient {
     ADD_PHONE("add-phone", Collections.singletonList("phone")),
     CHANGE_PASS("change-password", Arrays.asList("password","password_confirmation")),
     CHANGE_PHOTO("update-personal-image", Collections.singletonList("image_url")),
+    UPLOAD_ID("update-national-image", Collections.singletonList("image_url")),
     ADD_PROMO_CODE("add-promocode", Collections.singletonList("promo_code")),
     BILL_AMOUNT("finish-order", Arrays.asList("order_id","bill_amount","mobile_token")),
     LOGOUT("logout",null);

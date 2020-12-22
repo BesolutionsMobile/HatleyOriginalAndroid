@@ -331,6 +331,21 @@ public class Apicalls {
         }
 
     }
+
+    /**
+     *
+     * @func Reject Offer
+     */
+
+    public void uploadId (final String image) {
+
+        try {
+            apiRouter.makeAdvancedRequest(Apiclient.UPLOAD_ID.getURL(),Request.Method.PATCH,Apiclient.UPLOAD_ID.getParams(),Collections.singletonList(image),null);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
     //----------------------------------------------------------------------------------------------
 
     /**

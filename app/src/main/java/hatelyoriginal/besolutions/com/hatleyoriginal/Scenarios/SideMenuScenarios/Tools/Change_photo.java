@@ -44,7 +44,7 @@ public class Change_photo implements NetworkInterface {
         this.imageView=imageView;
     }
 
-    public void dialog(final Context context, int resource, double widthh) {
+    public void dialog(final Context context, int resource, double widthh ,int type) {
         this.context = context;
         tinyDB = new TinyDB(this.context);
         dialog = new Dialog(context);
@@ -71,9 +71,13 @@ public class Change_photo implements NetworkInterface {
                     Toasty.success(context,context.getString(R.string.pls_upload_img),Toast.LENGTH_LONG).show();
 
                 }
-                else {
-                    new Apicalls(context,Change_photo.this).change_photo(tinyDB.getString("imageURL"));
+                else if (type == 0) {
 
+                    new Apicalls(context,Change_photo.this).change_photo(tinyDB.getString("imageURL"));
+                }
+                else if(type == 1)
+                {
+                    new Apicalls(context,Change_photo.this).uploadId(tinyDB.getString("imageURL"));
                 }
 
             }

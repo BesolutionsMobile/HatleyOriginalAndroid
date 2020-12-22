@@ -146,7 +146,18 @@ public class personal_info extends AppCompatActivity {
             public void onClick(View v) {
 
                 Change_photo change_photo = new Change_photo();
-                change_photo.dialog(personal_info.this,R.layout.change_photo,.90);
+                change_photo.dialog(personal_info.this,R.layout.change_photo,.90,0);
+            }
+        });
+
+        //UPLOAD ID
+        linearid.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View v) {
+
+                Change_photo change_photo = new Change_photo();
+                change_photo.dialog(personal_info.this,R.layout.change_photo,.90,1);
             }
         });
 
