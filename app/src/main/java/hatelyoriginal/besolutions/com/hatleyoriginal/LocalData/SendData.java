@@ -14,4 +14,13 @@ public class SendData {
         editor.putString("lan", lan);
         editor.commit();
     }
+
+    public static void sendCurrentPass(Context context, String pass)
+    {
+        SharedPreferences sharedPreferences=context.getSharedPreferences("info",MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.putString("pass", pass);
+        editor.commit();
+    }
+
 }

@@ -83,6 +83,7 @@
     <string name="add_your_phone_number">Add Your Phone Number</string>
     <string name="your_phone_number">Your Phone Number</string>
     <string name="change_your_photo">Change Your Photo</string>
+    <string name="change_your_id">Add Your National Id</string>
     <string name="component_message">Component Message</string>
     <string name="common_questions">common questions</string>
     <string name="logged_in_successfully">Logged in Successfully...</string>
@@ -126,10 +127,11 @@
     <string name="please_enter_username">Please enter username</string>
     <string name="please_enter_password">Please enter your password</string>
     <string name="pass_not_match">Password Not Match</string>
+    <string name="wrong_current_pass">Current Password Is Wrong</string>
     <string name="user_short">Username id too short!</string>
     <string name="enter_mail">Please enter email</string>
     <string name="pls_co_pass">Please confirm password</string>
-    <string name="email_exist">Email already exist</string>
+    <string name="email_exist">Email or phone already exist</string>
     <string name="ques_1">HOW CAN I CHANGE MY SHIPPING ADDRESS?</string>
     <string name="ans_1">By default, the last used shipping address will be saved into to your Sample Store account. When you are checking out your order, the default shipping address will be displayed and you have the option to amend it if you need to.</string>
     <string name="ques_2">HOW CAN I USE MY REMAINING ACCOUNT CREDITS?</string>
@@ -173,11 +175,13 @@
     <string name="not__matched">Not Match</string>
     <string name="language">العربيه</string>
     <string name="available_offers">Available Offers</string>
+    <string name="available_orders">Available Orders</string>
     <string name="settings">Settings</string>
     <string name="notifications">Notifications</string>
     <string name="share_info">Share And Info</string>
     <string name="faq">FAQ</string>
     <string name="display_as_star">Display Application as Star</string>
+    <string name="display_as_client">Display Application as Client</string>
     <string name="logout">Logout</string>
     <string name="offers">Offers</string>
     <string name="home">Home</string>
@@ -188,7 +192,9 @@
     <string name="invalid_email">Invalid Email Address</string>
     <string name="phone">Phone</string>
     <string name="please_enter_phone">Your phone is too short</string>
-
+    <string name="current_password">Current Password</string>
+    <string name="worng_password">Wrong User Name Or Password</string>
+    <string name="no_orders">No Orders..</string>
 
 
 </resources>

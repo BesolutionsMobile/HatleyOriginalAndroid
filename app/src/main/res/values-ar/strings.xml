@@ -131,7 +131,7 @@
     <string name="user_short"> اسم المستخدم قصير جدا!</string>
     <string name="enter_mail">الرجاء إدخال البريد الإلكتروني</string>
     <string name="pls_co_pass">الرجاء تأكيد كلمة المرور</string>
-    <string name="email_exist">البريد الالكتروني موجود مسبقا</string>
+    <string name="email_exist">البريد الالكتروني او الهاتف موجود مسبقا</string>
     <string name="ques_1">كيف يمكنني تغيير عنوان الشحن الخاص بي؟</string>
     <string name="ans_1">بشكل افتراضي ، سيتم حفظ آخر عنوان شحن مستخدم في حساب Sample Store الخاص بك. عندما تقوم بسحب طلبك ، سيتم عرض عنوان الشحن الافتراضي وسيكون لديك خيار تعديله إذا كنت بحاجة إلى ذلك.</string>
     <string name="ques_2">كيف يمكنني استخدام رصيد الحساب المتبقي؟</string>
@@ -190,7 +190,13 @@
     <string name="invalid_email"> البريد الإلكتروني غير صالح</string>
     <string name="phone">رقم الهاتف</string>
     <string name="please_enter_phone">رقم الهاتف قصير جدا</string>
-
+    <string name="change_your_id">اضف رقمك القومى</string>
+    <string name="current_password">كلمة السر الحالية</string>
+    <string name="worng_password">خطا فى الاسم او كلمة السر</string>
+    <string name="wrong_current_pass">خطا فى كلمة السر الحالية</string>
+    <string name="display_as_client">عرض التطبيق كعميل</string>
+    <string name="available_orders">الطلبات المتاحة</string>
+    <string name="no_orders">لا يوجد طلبات..</string>
 
 
 </resources>

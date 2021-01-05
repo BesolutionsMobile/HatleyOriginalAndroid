@@ -138,11 +138,11 @@ public class NavigationDrawerFragmentStar extends Fragment implements Navigation
     public List<NavigationItem> getMenu() {
         //ADD ITEMS
         List<NavigationItem> items = new ArrayList<>();
-        items.add(new NavigationItem("Personal Info", getResources().getDrawable(R.drawable.personalnav)));
-        items.add(new NavigationItem("Payments", getResources().getDrawable(R.drawable.money1)));
-        items.add(new NavigationItem("Your Orders", getResources().getDrawable(R.drawable.yourorders)));
-        items.add(new NavigationItem("Display Application as Client", getResources().getDrawable(R.drawable.displayapp)));
-        items.add(new NavigationItem("Logout", getResources().getDrawable(R.drawable.logout)));
+        items.add(new NavigationItem(getString(R.string.personal_info), getResources().getDrawable(R.drawable.personalnav)));
+        items.add(new NavigationItem(getString(R.string.payment), getResources().getDrawable(R.drawable.money1)));
+        items.add(new NavigationItem(getString(R.string.your_orders), getResources().getDrawable(R.drawable.yourorders)));
+        items.add(new NavigationItem(getString(R.string.display_as_client), getResources().getDrawable(R.drawable.displayapp)));
+        items.add(new NavigationItem(getString(R.string.logout), getResources().getDrawable(R.drawable.logout)));
 
         return items;
     }

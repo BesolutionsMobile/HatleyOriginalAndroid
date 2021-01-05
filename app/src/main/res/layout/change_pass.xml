@@ -31,6 +31,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:text="@string/current_password"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            />
+
+        <EditText
+            android:id="@+id/currentPass"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingTop="@dimen/_3sdp"
+            android:textSize="@dimen/_11ssp"
+            android:backgroundTint="#dedfde"
+            android:inputType="textPassword"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:background="@drawable/change_pass_bg"
+            android:hint="************"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:text="@string/your_password"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"

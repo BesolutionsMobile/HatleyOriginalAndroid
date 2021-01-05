@@ -1,6 +1,7 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SharedScenarios.AuthScenario.Controllers.Activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.google.gson.Gson;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
+import hatelyoriginal.besolutions.com.hatleyoriginal.LocalData.SendData;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.Apicalls;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.NetworkInterface;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.ResponseModel;
@@ -95,7 +97,13 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
             @Override
             public void onClick(View view) {
                 //VALIDATION
-                if (!coPassword.getText().toString().equals(password.getText().toString())) {
+                if (username.getText().toString().equals("")) {
+                    username.setError(getString(R.string.please_enter_username));
+                    YoYo.with(Techniques.Shake)
+                            .duration(700)
+                            .repeat(1)
+                            .playOn(findViewById(R.id.username));
+                } else if (!coPassword.getText().toString().equals(password.getText().toString())) {
                     //set text error and yoyo library for animation
                     coPassword.setError(getString(R.string.pass_not_match));
                     YoYo.with(Techniques.Shake)
@@ -111,7 +119,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
                             .repeat(1)
                             .playOn(findViewById(R.id.email));
 
-                } else if (phone.getText().toString().length() <= 11) {
+                } else if (phone.getText().toString().length() <= 10) {
                     //set text error and yoyo library for animation
                     phone.setError(getString(R.string.please_enter_phone));
                     YoYo.with(Techniques.Shake)
@@ -145,7 +153,8 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
 
                     //CALL SIGN UP API
                     new Apicalls(RegistrationActivity.this, RegistrationActivity.this).insertUser(username.getText().toString()
-                            , email.getText().toString(), password.getText().toString(), coPassword.getText().toString(), token, imageURL);
+                            , email.getText().toString(), password.getText().toString(), coPassword.getText().toString(),
+                            token, imageURL, phone.getText().toString());
                 }
 
             }
@@ -155,9 +164,9 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-
+        startActivity(new Intent(this, LoginActivity.class));
     }
+
 
     @Override
     public void OnStart() {
@@ -186,6 +195,7 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
         tinyDB.putString("userID", String.valueOf(user.getId()));
         tinyDB.putString("userType", String.valueOf(user.getUserTypeId()));
         tinyDB.putString("userCode", user.getCode());
+        SendData.sendCurrentPass(RegistrationActivity.this, password.getText().toString()); //SAVE PASS
 
         //send to save image
         try {
@@ -211,4 +221,5 @@ public class RegistrationActivity extends AppCompatActivity implements NetworkIn
         Toasty.error(this, getString(R.string.email_exist), Toast.LENGTH_LONG).show();
         pd.cancel();
     }
+
 }

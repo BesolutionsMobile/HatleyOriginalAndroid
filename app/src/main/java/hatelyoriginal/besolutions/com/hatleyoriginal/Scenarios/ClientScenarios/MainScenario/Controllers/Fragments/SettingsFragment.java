@@ -35,12 +35,11 @@ import hatelyoriginal.besolutions.com.hatleyoriginal.Utils.TinyDB;
 
 public class SettingsFragment extends Fragment {
 
-    LinearLayout linearname,linearemail,linearpass,linearid,linearphoto,linearphone,language;
+    LinearLayout linearname, linearemail, linearpass, linearid, linearphoto, linearphone, language;
 
-    TextView name,email;
+    TextView name, email;
 
     TinyDB tinyDB;
-
 
 
     @Nullable
@@ -60,14 +59,14 @@ public class SettingsFragment extends Fragment {
         tinyDB = new TinyDB(getActivity());
 
         linearname = view.findViewById(R.id.linChangeName);
-        linearemail =  view.findViewById(R.id.linChangeEmail);
-        linearid =  view.findViewById(R.id.linChangeId);
-        linearphone =  view.findViewById(R.id.linChangePhone);
-        linearphoto =  view.findViewById(R.id.linChangePhoto);
-        linearpass =  view.findViewById(R.id.linChangePass);
-        language =  view.findViewById(R.id.language);
-        name =  view.findViewById(R.id.name);
-        email =  view.findViewById(R.id.email);
+        linearemail = view.findViewById(R.id.linChangeEmail);
+        linearid = view.findViewById(R.id.linChangeId);
+        linearphone = view.findViewById(R.id.linChangePhone);
+        linearphoto = view.findViewById(R.id.linChangePhoto);
+        linearpass = view.findViewById(R.id.linChangePass);
+        language = view.findViewById(R.id.language);
+        name = view.findViewById(R.id.name);
+        email = view.findViewById(R.id.email);
 
 
         linearpass.setOnClickListener(new View.OnClickListener() {
@@ -75,12 +74,22 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
 
                 change_pass change_pass = new change_pass();
-                change_pass.dialog(getActivity(),R.layout.change_pass,.90);
+                change_pass.dialog(getActivity(), R.layout.change_pass, .90);
 
 
             }
         });
 
+        //UPLOAD ID
+        linearid.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View v) {
+
+                Change_photo change_photo = new Change_photo();
+                change_photo.dialog(getContext(), R.layout.change_id, .90, 1);
+            }
+        });
 
         linearphoto.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -88,8 +97,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
 
                 Change_photo change_photo = new Change_photo();
-                change_photo.dialog(getActivity(),R.layout.change_photo,.90,0);
-
+                change_photo.dialog(getActivity(), R.layout.change_photo, .90, 0);
 
 
             }
@@ -101,7 +109,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
 
                 Change_phone change_phone = new Change_phone();
-                change_phone.dialog(getActivity(),R.layout.change_phone,.90);
+                change_phone.dialog(getActivity(), R.layout.change_phone, .90);
 
             }
         });
@@ -110,14 +118,12 @@ public class SettingsFragment extends Fragment {
         language.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(new SavedData().get_lan(getContext()).equals("en"))
-                {
-                    SendData.send_lan(getContext(),"ar");
+                if (new SavedData().get_lan(getContext()).equals("en")) {
+                    SendData.send_lan(getContext(), "ar");
+                } else {
+                    SendData.send_lan(getContext(), "en");
                 }
-                else {
-                    SendData.send_lan(getContext(),"en");
-                }
-                Intent i =new Intent(getContext(), LoginActivity.class);
+                Intent i = new Intent(getContext(), LoginActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
 

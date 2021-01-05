@@ -131,7 +131,6 @@ public class personal_info extends AppCompatActivity {
         linearpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 change_pass change_pass = new change_pass();
                 change_pass.dialog(personal_info.this,R.layout.change_pass,.90);
 
@@ -157,7 +156,7 @@ public class personal_info extends AppCompatActivity {
             public void onClick(View v) {
 
                 Change_photo change_photo = new Change_photo();
-                change_photo.dialog(personal_info.this,R.layout.change_photo,.90,1);
+                change_photo.dialog(personal_info.this,R.layout.change_id,.90,1);
             }
         });
 

@@ -89,21 +89,14 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
         mToolbar = findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
 
-        //SET LANGUAGE DIRECTIONS
-        if(sDefSystemLanguage.equals("ar"))
-        {
-            mToolbar.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-        }else
-        {
-            mToolbar.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
-        }
+
 
 
         getActionBarTextView().setVisibility(View.GONE);
 
         //SET TOOL TITLES
         textView = mToolbar.findViewById(R.id.toolbartext);
-        textView.setText("Available Orders");
+        textView.setText(getString(R.string.available_orders));
 
         mNavigationDrawerFragment = (NavigationDrawerFragmentStar) getFragmentManager().findFragmentById(R.id.fragment_drawer);
 
@@ -133,7 +126,7 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
         homebutton.setOnClickListener(view -> {
 
             //SET TITLE
-            textView.setText("Available Orders");
+            textView.setText(R.string.available_orders);
 
             //SET HOME ICON AND TEXT COLOR
             homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark), PorterDuff.Mode.SRC_IN);
@@ -159,7 +152,7 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
         notificationsbutton.setOnClickListener(view -> {
 
             //SET TITLE
-            textView.setText("Notifications");
+            textView.setText(getString(R.string.notifications));
 
             //SET HOME ICON AND TEXT COLOR
             homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorDarkerGray), PorterDuff.Mode.SRC_IN);
@@ -194,7 +187,7 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
             if (data != null) {
 
                 //SET TITLE
-                textView.setText("Available Orders");
+                textView.setText(getString(R.string.available_orders));
 
                 //SET HOME ICON AND TEXT COLOR
                 homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark), PorterDuff.Mode.SRC_IN);
@@ -230,7 +223,7 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
         {
 
             //SET TITLE
-            textView.setText("Available Orders");
+            textView.setText(getString(R.string.available_orders));
 
             //SET HOME ICON AND TEXT COLOR
             homeicon.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark), PorterDuff.Mode.SRC_IN);
@@ -289,7 +282,7 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
             case 3:
                 //SHOW DIALOG
                 pd = new ProgressDialog(this);
-                pd.setMessage("Loading...");
+                pd.setMessage(getString(R.string.loading));
                 pd.setCancelable(false);
                 pd.show();
                 x = 1;
@@ -299,7 +292,7 @@ public class StarActivity extends AppCompatActivity implements NavigationDrawerC
             case 4:
                 //SHOW DIALOG
                 pd = new ProgressDialog(this);
-                pd.setMessage("Loading...");
+                pd.setMessage(getString(R.string.loading));
                 pd.setCancelable(false);
                 pd.show();
                 x = 2;

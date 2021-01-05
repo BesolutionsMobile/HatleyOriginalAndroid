@@ -1,6 +1,7 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.SharedPreferences;
@@ -33,6 +34,7 @@ import java.util.List;
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
  */
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class NavigationDrawerFragment extends Fragment implements NavigationDrawerCallbacks {
 
     /**

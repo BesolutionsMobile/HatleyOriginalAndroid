@@ -50,8 +50,6 @@ public class fcmlistner extends FirebaseMessagingService {
         //remoteMessage.getData().get("click_action");
 
 
-
-
         Intent intent = new Intent(remoteMessage.getData().get("type"));
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_ONE_SHOT);

@@ -17,7 +17,7 @@ public enum Apiclient {
      */
 
     LOGIN_USER("auth/login", Arrays.asList("email", "password","mobile_token")),
-    INSERT_USER("auth/register", Arrays.asList("name","email","password","password_confirmation","mobile_token","image_id")),
+    INSERT_USER("auth/register", Arrays.asList("name","email","password","password_confirmation","mobile_token","image_id","phone")),
     INSERT_ORDER("store-order", Arrays.asList("order_description","image","distance","duration","promo_code","delivery_time","order_from_location"
             ,"order_to_location","client_location_lat","client_location_long","order_location_lat", "order_location_long","mobile_token")),
     ACCEPT_OFFER("accept-offer", Arrays.asList("offer_id","mobile_token")),

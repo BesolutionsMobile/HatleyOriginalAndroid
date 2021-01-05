@@ -1,11 +1,13 @@
 package hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SideMenuScenarios.Controllers.Fragments;
 
 /**
- *CHANGE PASSWORD DIALOG
+ * CHANGE PASSWORD DIALOG
  */
+
 import android.app.Dialog;
 import android.content.Context;
 import android.icu.text.MessagePattern;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -17,10 +19,13 @@ import com.android.volley.VolleyError;
 import org.json.JSONException;
 
 import es.dmoral.toasty.Toasty;
+import hatelyoriginal.besolutions.com.hatleyoriginal.LocalData.SavedData;
+import hatelyoriginal.besolutions.com.hatleyoriginal.LocalData.SendData;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.Apicalls;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.NetworkInterface;
 import hatelyoriginal.besolutions.com.hatleyoriginal.NetworkLayer.ResponseModel;
 import hatelyoriginal.besolutions.com.hatleyoriginal.R;
+import hatelyoriginal.besolutions.com.hatleyoriginal.Scenarios.SideMenuScenarios.Controllers.Activities.personal_info;
 
 
 public class change_pass implements NetworkInterface {
@@ -29,7 +34,7 @@ public class change_pass implements NetworkInterface {
     Button btnsave;
     Dialog dialog;
 
-    EditText editpass,editconpass;
+    EditText editpass, editconpass, currentPass;
 
     public void dialog(final Context context, int resource, double widthh) {
         this.context = context;
@@ -46,6 +51,7 @@ public class change_pass implements NetworkInterface {
         btnsave = dialog.findViewById(R.id.passsave);
         editpass = dialog.findViewById(R.id.editPassword);
         editconpass = dialog.findViewById(R.id.editConPassword);
+        currentPass = dialog.findViewById(R.id.currentPass);
 
 
         //ON CLICK SAVE BUTTON
@@ -53,19 +59,19 @@ public class change_pass implements NetworkInterface {
             @Override
             public void onClick(View v) {
 
-                if(!editpass.getText().toString().equals(editconpass.getText().toString()))
-                {
+                if (!currentPass.getText().toString().equals(new SavedData().getCurrentPass(context))) {
+                    currentPass.setError(context.getString(R.string.wrong_current_pass));
+                    Log.e("current_pass", new SavedData().get_lan(context));
+
+                } else if (!editpass.getText().toString().equals(editconpass.getText().toString())) {
                     editconpass.setError(context.getString(R.string.pass_not_match));
 
-                }
-                else if(editpass.getText().toString().length()<=5)
-                {
+                } else if (editpass.getText().toString().length() <= 5) {
                     editpass.setError(context.getString(R.string.short_pass));
 
-                }
-                else {
+                } else {
                     //CALL API CHANE PASSWORD
-                    new Apicalls(context,change_pass.this).change_password(editpass.getText().toString(),editconpass.getText().toString());
+                    new Apicalls(context, change_pass.this).change_password(editpass.getText().toString(), editconpass.getText().toString());
                 }
 
             }
@@ -83,7 +89,9 @@ public class change_pass implements NetworkInterface {
     public void OnResponse(ResponseModel model) {
 
         try {
-            Toasty.success(context,""+model.getJsonObject().getString("message"),Toast.LENGTH_LONG).show();
+            SendData.sendCurrentPass(context, editpass.getText().toString());
+
+            Toasty.success(context, "" + model.getJsonObject().getString("message"), Toast.LENGTH_LONG).show();
 
             dialog.dismiss();
         } catch (JSONException e) {
@@ -96,7 +104,7 @@ public class change_pass implements NetworkInterface {
 
     @Override
     public void OnError(VolleyError error) {
-        Toasty.error(context,""+error.toString(),Toast.LENGTH_LONG).show();
+        Toasty.error(context, "" + error.toString(), Toast.LENGTH_LONG).show();
 
 
     }
